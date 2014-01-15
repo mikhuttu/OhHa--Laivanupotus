@@ -1,0 +1,4 @@
+git add [tiedosto]
+git commit -m "mitä tein?"
+
+git push [copy paste ssh-linkki]

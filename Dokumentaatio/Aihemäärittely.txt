@@ -1,0 +1,26 @@
+Aihe: Laivanupotus
+------------------
+Vuoropohjainen peli, jossa kaksi pelaajaa - k‰ytt‰j‰ ja tietokone.
+Pelin alussa k‰ytt‰j‰lle annetaan mahdollisuus asettaa omalle pelialueelleen 4 erikokoista laivaa. Laivat voivat
+olla joko pysty- tai vaakasuunnassa. (Sama operaatio tehd‰‰n tietokoneen laivoille sattumanvaraisesti.)
+Pelaajan laivat tulevat pelikent‰lle n‰kyviin mustina neliˆin‰ ja nemuuttuvat punaisiksi mik‰li tietokone osuu niihin.
+
+Peli menee eteenp‰in siten ett‰ pelaaja valitsee hiirell‰ / kirjoittamalla tekstikentt‰‰n koordinaatit, johon haluaa
+ampua. Paikkaan ilmestyy joko musta ympyr‰ (ei osunut) tai punainen ympyr‰ (osui). T‰m‰n j‰lkeen tulee tietokoneen
+vuoro, joka ei ammu t‰ysin sattumanvaraisesti vaan tietyn algoritmin mukaan. Tietokone voisi esimerkiksi osata laskea
+halutun ampumispaikan sen perusteella, mihin ei ole ammuttu paljon, tai jos on jo osunut pelaajan laivaan, etsii sen
+pohjalta minne suuntaan laiva "jatkuu".
+
+Peli jatkuu n‰in eteenp‰in siihen saakka, kunnes toisen laivat on t‰ysin tuhottu. *koska laivoja aina saman verran ja
+ne ovat aina samankokoisia, yksi int-muuttuja riitt‰‰ m‰‰ritt‰m‰‰n onko laivat tuhottu vai ei.
+Kun peli p‰‰ttyy, kysyt‰‰n pelaajalta haluaako h‰n aloittaa uuden pelin.
+
+
+
+K‰ytt‰j‰t: Pelaaja, tietokone <actor>
+
+K‰ytt‰jien toiminnot:
+1. Aseta laiva
+	-Laivaa ei voi asettaa toisen p‰‰lle tai siten ett‰ se menee ulos pelikent‰lt‰
+2. Ammu
+3. 
