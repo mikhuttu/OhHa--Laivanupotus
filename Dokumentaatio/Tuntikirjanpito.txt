@@ -1,4 +1,12 @@
 15.1.2014
--4h
+-6h
 -Githubin ja Git Bashin kanssa sekoilu
 -Alustavan projektin toiminnalisuuden suunnitteleminen
+-Luokkien Laiva, Sijainti ja enum Suunta ohjelmointi
+
+16.1.2014
+-5h
+-Alustava m‰‰rittelyvaiheen luokkakaavio
+-Luokat Pelilauta, Ruutu ja Pelaaja lis‰tty Sovelluslogiikkaan
+--Varsinkin Pelaajan osalta toiminnallisuudet viel‰ kesken.
+-"Ohjaus-pakkaus" luotu ja sinne on lis‰tty luokat Tulostaja ja Peli.
