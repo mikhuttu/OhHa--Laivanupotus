@@ -9,19 +9,19 @@ public class Sijainti {
         this.y = y;
     }
     
-    public int getX() {
+    public int get_X() {
         return this.x;
     }
     
-    public int getY() {
+    public int get_Y() {
         return this.y;
     }
     
-    public void kasvataX(int maara) {
+    public void kasvata_X(int maara) {
         this.x += maara;
     }   
     
-    public void kasvataY(int maara) {
+    public void kasvata_Y(int maara) {
         this.y += maara;
     }
     
@@ -31,8 +31,8 @@ public class Sijainti {
             return false;
         }
         Sijainti verrattava = (Sijainti) olio;
-        if (this.getX() == verrattava.getX()) {
-            if (this.getY() == verrattava.getY()) {
+        if (this.get_X() == verrattava.get_X()) {
+            if (this.get_Y() == verrattava.get_Y()) {
                 return true;
             }
         }
@@ -41,6 +41,6 @@ public class Sijainti {
     
     @Override
     public int hashCode() {
-        return this.getX();
+        return this.get_X();
     }
 }

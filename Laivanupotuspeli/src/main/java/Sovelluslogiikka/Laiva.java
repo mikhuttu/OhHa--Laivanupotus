@@ -11,15 +11,15 @@ public class Laiva {
         this.koko = koko;
     }
     
-    public Sijainti getSijainti() {
+    public Sijainti get_Sijainti() {
         return this.sijainti;
     }
     
-    public Suunta getSuunta() {
+    public Suunta get_Suunta() {
         return this.suunta;
     }
     
-    public int getKoko() {
+    public int get_Koko() {
         return this.koko;
     }
     
@@ -35,13 +35,13 @@ public class Laiva {
     }
     
     private Sijainti hae_laivan_osan_sijainti(int i) {
-        Sijainti laivan_osa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
+        Sijainti laivan_osa = new Sijainti (this.sijainti.get_X(), this.sijainti.get_Y());
         
         if (this.suunta == Suunta.ALAS) {
-            laivan_osa.kasvataY(i);
+            laivan_osa.kasvata_Y(i);
         }
         else {
-            laivan_osa.kasvataX(i);
+            laivan_osa.kasvata_X(i);
         }
         return laivan_osa;            
     }
