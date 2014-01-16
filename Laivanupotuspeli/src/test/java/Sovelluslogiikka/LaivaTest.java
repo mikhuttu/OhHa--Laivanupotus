@@ -5,72 +5,72 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LaivaTest {
-    Laiva laiva_alas;
-    Laiva laiva_oikealle;
+    Laiva laivaAlas;
+    Laiva laivaOikealle;
     
     @Before
     public void setUp() {
-        laiva_alas      = new Laiva(new Sijainti(1,3), Suunta.ALAS, 3);
-        laiva_oikealle  = new Laiva (new Sijainti(5,5), Suunta.OIKEALLE, 4);
+        laivaAlas      = new Laiva(new Sijainti(1,3), Suunta.ALAS, 3);
+        laivaOikealle  = new Laiva (new Sijainti(5,5), Suunta.OIKEALLE, 4);
     }
     
     @Test
-    public void konstruktori_toimii() {
-        get_Sijainti_toimii();
-        get_Suunta_toimii();
-        get_Koko_toimii();
+    public void konstruktoriToimii() {
+        getSijaintiToimii();
+        getSuuntaToimii();
+        getKokoToimii();
     }
     
     @Test
-    public void get_Sijainti_toimii() {
-        assertEquals(new Sijainti(1,3), laiva_alas.get_Sijainti());
-        assertEquals(new Sijainti(5,5), laiva_oikealle.get_Sijainti());
+    public void getSijaintiToimii() {
+        assertEquals(new Sijainti(1,3), laivaAlas.getSijainti());
+        assertEquals(new Sijainti(5,5), laivaOikealle.getSijainti());
     }
     
     @Test
-    public void get_Suunta_toimii() {
-        assertEquals(Suunta.ALAS, laiva_alas.get_Suunta());
-        assertEquals(Suunta.OIKEALLE, laiva_oikealle.get_Suunta()); 
+    public void getSuuntaToimii() {
+        assertEquals(Suunta.ALAS, laivaAlas.getSuunta());
+        assertEquals(Suunta.OIKEALLE, laivaOikealle.getSuunta()); 
     }
     
     @Test
-    public void get_Koko_toimii() {
-        assertEquals(3, laiva_alas.get_Koko());
+    public void getKokoToimii() {
+        assertEquals(3, laivaAlas.getKoko());
     }
     
     @Test
-    public void laivaan_osuu_Suunta_OIKEALLE() {
+    public void laivaanOsuuSuuntaOIKEALLE() {
         Sijainti kohde = new Sijainti (5,5);
-        for (int i = 0; i < laiva_oikealle.get_Koko(); i++) {
-            assertTrue(laiva_oikealle.osuiko(kohde));
-            kohde.kasvata_X(1);
+        for (int i = 0; i < laivaOikealle.getKoko(); i++) {
+            assertTrue(laivaOikealle.osuiko(kohde));
+            kohde.kasvataX(1);
         }
     }
             
     @Test
-    public void laivaan_ei_osu_Suunta_OIKEALLE() {
+    public void laivaanEiOsuSuuntaOIKEALLE() {
         Sijainti kohde = new Sijainti (1,5);
-        for (int i = 0; i < laiva_oikealle.get_Koko(); i++) {
-            assertFalse(laiva_oikealle.osuiko(kohde));
-            kohde.kasvata_X(1);
+        for (int i = 0; i < laivaOikealle.getKoko(); i++) {
+            assertFalse(laivaOikealle.osuiko(kohde));
+            kohde.kasvataX(1);
         }
     }
     
     @Test
-    public void laivaan_osuu_Suunta_ALAS() {
+    public void laivaanOsuuSuuntaALAS() {
         Sijainti kohde = new Sijainti (1,3);
-        for (int i = 0; i < laiva_alas.get_Koko(); i++) {
-            assertTrue(laiva_alas.osuiko(kohde));
-            kohde.kasvata_Y(1);
+        for (int i = 0; i < laivaAlas.getKoko(); i++) {
+            assertTrue(laivaAlas.osuiko(kohde));
+            kohde.kasvataY(1);
         }  
     }
             
     @Test
-    public void laivaan_ei_osu_Suunta_ALAS() {
+    public void laivaanEiOsuSuuntaALAS() {
         Sijainti kohde = new Sijainti(1,0);
-        for (int i = 0; i < laiva_alas.get_Koko(); i++) {
-            assertFalse(laiva_alas.osuiko(kohde));
-            kohde.kasvata_Y(1);
+        for (int i = 0; i < laivaAlas.getKoko(); i++) {
+            assertFalse(laivaAlas.osuiko(kohde));
+            kohde.kasvataY(1);
         }
     }
 }

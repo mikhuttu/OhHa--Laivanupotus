@@ -7,33 +7,26 @@ import static org.junit.Assert.*;
 public class PelaajaTest {
     Pelaaja pelaaja;
     Pelilauta pelilauta;
-    Laiva laiva;
     
     @Before
     public void setUp(){
         pelaaja = new Pelaaja();
         pelilauta = new Pelilauta();
-        laiva = new Laiva(new Sijainti(0,0), Suunta.ALAS, 3);
     }
     
     @Test
-    public void pelaajan_konstruktori_toimii() {
-        pelaajalla_ei_ole_alussa_laivoja();
-        pelaajalla_on_pelilauta();
+    public void pelaajanKonstruktoriToimii() {
+        pelaajallaOnPelilauta();
     }
     
-    private void pelaajalla_ei_ole_alussa_laivoja(){
-        assertTrue(pelaaja.get_Laivat().isEmpty());
-    }
-    
-    private void pelaajalla_on_pelilauta() {
-        assertFalse(pelaaja.get_Pelilauta() == null);
+    private void pelaajallaOnPelilauta() {
+        assertFalse(pelaaja.getPelilauta() == null);
     }
     
     @Test
-    public void lisaa_laiva_toimii() {
-        pelaaja.lisaa_Laiva(laiva);
-        assertEquals(1, pelaaja.get_Laivat().size());
+    public void laivanLisaysPelilaudalleToimii() {
+        Laiva laiva = new Laiva(new Sijainti (0,0), Suunta.ALAS, 3);
+        pelaaja.lisaaLaivaPelilaudalle(laiva);       
+        assertEquals(1, pelaaja.getPelilauta().getLaivat().size());
     }
-    
 }

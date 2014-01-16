@@ -11,21 +11,21 @@ public class Laiva {
         this.koko = koko;
     }
     
-    public Sijainti get_Sijainti() {
+    public Sijainti getSijainti() {
         return this.sijainti;
     }
     
-    public Suunta get_Suunta() {
+    public Suunta getSuunta() {
         return this.suunta;
     }
     
-    public int get_Koko() {
+    public int getKoko() {
         return this.koko;
     }
     
     public boolean osuiko(Sijainti verrattava) {
         for (int i = 0; i < this.koko; i++) {
-            Sijainti laivan_osa = hae_laivan_osan_sijainti (i);
+            Sijainti laivan_osa = haeLaivanOsanSijainti (i);
             
             if (laivan_osa.equals(verrattava)) {
                 return true;
@@ -34,14 +34,14 @@ public class Laiva {
         return false;
     }
     
-    private Sijainti hae_laivan_osan_sijainti(int i) {
-        Sijainti laivan_osa = new Sijainti (this.sijainti.get_X(), this.sijainti.get_Y());
+    private Sijainti haeLaivanOsanSijainti(int i) {
+        Sijainti laivan_osa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
         
         if (this.suunta == Suunta.ALAS) {
-            laivan_osa.kasvata_Y(i);
+            laivan_osa.kasvataY(i);
         }
         else {
-            laivan_osa.kasvata_X(i);
+            laivan_osa.kasvataX(i);
         }
         return laivan_osa;            
     }
