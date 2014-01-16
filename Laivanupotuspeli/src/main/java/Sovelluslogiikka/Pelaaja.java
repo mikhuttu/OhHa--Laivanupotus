@@ -1,4 +1,5 @@
 package Sovelluslogiikka;
+import Ohjaus.Tulostaja;
 
 public class Pelaaja {
     private Pelilauta pelilauta;
@@ -15,6 +16,16 @@ public class Pelaaja {
         pelilauta.lisaaLaiva(laiva);
     }
     
-    public void ammu(Pelilauta vastustajanLauta, Sijainti sijainti) {
+    public boolean ammu(Pelilauta vastustajanLauta, Ruutu ruutu) {  // palautetaan eteenpäin tieto siitä onnistuiko ampuminen. Jos onnistui, tuhoa osa laivaa, soita äänet tms. Jos laivaan osuu, inkrementoi "osumamääriä".
+        if(vastustajanLauta.onkoRuutuunAmmuttu(ruutu)) {
+            ruutuunOnJoAmmuttu();
+            return false;
+        }
+        ruutu.muutaAmmutuksi();
+        return true;
+    }
+    
+    void ruutuunOnJoAmmuttu() {
+        new Tulostaja().tulostaVirheIlmoitus(1);
     }
 }

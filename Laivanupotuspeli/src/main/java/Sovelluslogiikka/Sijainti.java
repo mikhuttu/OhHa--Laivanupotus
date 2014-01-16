@@ -30,7 +30,13 @@ public class Sijainti {
         if (olio == null || olio.getClass() != this.getClass()) {
             return false;
         }
+        
         Sijainti verrattava = (Sijainti) olio;
+        return vertaaSijainteja(verrattava);
+
+    }
+    
+    public boolean vertaaSijainteja(Sijainti verrattava) {
         if (this.getX() == verrattava.getX()) {
             if (this.getY() == verrattava.getY()) {
                 return true;

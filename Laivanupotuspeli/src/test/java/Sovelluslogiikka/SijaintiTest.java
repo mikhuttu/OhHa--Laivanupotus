@@ -61,10 +61,4 @@ public class SijaintiTest {
         sijainti2 = new Sijainti(0,1);
         assertFalse(sijainti.equals(sijainti2));
     }
-    
-    @Test
-    public void hashCodePalauttaaJonkinArvon() {
-        int palautusArvo = sijainti.hashCode();
-        assertEquals(palautusArvo, sijainti.hashCode());
-    }
 }

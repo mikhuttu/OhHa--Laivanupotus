@@ -25,9 +25,9 @@ public class Laiva {
     
     public boolean osuiko(Sijainti verrattava) {
         for (int i = 0; i < this.koko; i++) {
-            Sijainti laivan_osa = haeLaivanOsanSijainti (i);
+            Sijainti laivanOsa = haeLaivanOsanSijainti (i);
             
-            if (laivan_osa.equals(verrattava)) {
+            if (laivanOsa.equals(verrattava)) {
                 return true;
             }
         }
@@ -35,14 +35,14 @@ public class Laiva {
     }
     
     private Sijainti haeLaivanOsanSijainti(int i) {
-        Sijainti laivan_osa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
+        Sijainti laivanOsa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
         
         if (this.suunta == Suunta.ALAS) {
-            laivan_osa.kasvataY(i);
+            laivanOsa.kasvataY(i);
         }
         else {
-            laivan_osa.kasvataX(i);
+            laivanOsa.kasvataX(i);
         }
-        return laivan_osa;            
+        return laivanOsa;            
     }
 }
