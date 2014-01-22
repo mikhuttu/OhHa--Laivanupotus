@@ -1,6 +1,5 @@
 package Sovelluslogiikka;
 
-import Ohjaus.Tulostaja;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,22 +36,31 @@ public class Pelilauta {
         return this.laivat;
     }
     
-    public boolean onkoRuutuunAmmuttu(Ruutu verrattava) {
-        for (Ruutu ruutu : this.ruudut) {
-            if (ruutu.equals(verrattava)) {
-                return ruutu.onkoAmmuttu();
-            }
-        }
-        
-        ruutuEiKoordinaatistossa();
-        return true;    // palautetaan true koska silloin ruutuun ei voi ampua.
-    }
-    
-    private void ruutuEiKoordinaatistossa() {
-        new Tulostaja().tulostaVirheIlmoitus(0);
-    }
-    
     public void lisaaLaiva(Laiva laiva) {
         this.laivat.add(laiva);
     }
+    
+    public void muutaAmmutuksi(Sijainti sijainti) {
+        haeRuutu(sijainti).muutaAmmutuksi();
+    }
+ 
+    public boolean onkoRuutuunAmmuttu(Sijainti verrattava) throws IllegalArgumentException {
+        Ruutu ruutu = haeRuutu(verrattava);
+        return ruutu.onkoAmmuttu();
+    }
+    
+    public boolean onkoRuudussaJoLaiva(Sijainti verrattava) {
+        return true;
+    }
+    
+    private Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
+        for (Ruutu ruutu: this.ruudut) {
+            if (ruutu.getSijainti().equals(sijainti)) {
+                return ruutu;
+            }
+        }
+        
+        throw new IllegalArgumentException("Virhe: Valitsemasi ruutu ei ole koordinaatistossa!");
+    }
+    
 }

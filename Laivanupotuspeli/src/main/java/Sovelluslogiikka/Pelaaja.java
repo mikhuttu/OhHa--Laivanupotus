@@ -1,5 +1,4 @@
 package Sovelluslogiikka;
-import Ohjaus.Tulostaja;
 
 public class Pelaaja {
     private Pelilauta pelilauta;
@@ -12,20 +11,19 @@ public class Pelaaja {
         return this.pelilauta;
     }
     
-    public void lisaaLaivaPelilaudalle(Laiva laiva) {
-        pelilauta.lisaaLaiva(laiva);
-    }
-    
-    public boolean ammu(Pelilauta vastustajanLauta, Ruutu ruutu) {  // palautetaan eteenpäin tieto siitä onnistuiko ampuminen. Jos onnistui, tuhoa osa laivaa, soita äänet tms. Jos laivaan osuu, inkrementoi "osumamääriä".
-        if(vastustajanLauta.onkoRuutuunAmmuttu(ruutu)) {
-            ruutuunOnJoAmmuttu();
-            return false;
+    public void lisaaLaivaPelilaudalle(Sijainti sijainti) throws IllegalArgumentException {
+        if (this.pelilauta.onkoRuudussaJoLaiva(sijainti)) {
+            throw new IllegalArgumentException("Ruudussa on jo laiva.\nValitse toinen ruutu.");
         }
-        ruutu.muutaAmmutuksi();
-        return true;
     }
     
-    void ruutuunOnJoAmmuttu() {
-        new Tulostaja().tulostaVirheIlmoitus(1);
+    public void ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+        // palautetaan eteenpäin tieto siitä onnistuiko ampuminen. Jos onnistui, tuhoa osa laivaa, soita äänet tms. 
+        // Jos laivaan osuu, inkrementoi "osumamääriä".
+        
+        if(vastustajanLauta.onkoRuutuunAmmuttu(sijainti)) {
+            throw new IllegalArgumentException("Ruutuun on jo ammuttu.\nValitse toinen ruutu.");
+        }
+        vastustajanLauta.muutaAmmutuksi(sijainti);
     }
 }

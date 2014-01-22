@@ -41,14 +41,12 @@ public class PelilautaTest {
     
     @Test
     public void ruutuihinEiOleAlussaAmmuttu() {
-        Ruutu ruutu = new Ruutu(new Sijainti(3,5));
-        assertFalse(pelilauta.onkoRuutuunAmmuttu(ruutu));
+        assertFalse(pelilauta.onkoRuutuunAmmuttu(new Sijainti(3,5)));
     }
     
-    @Test
-    public void palauttaaFalseKunRuutuEiPelilaudalla() {
-        Ruutu ruutu = new Ruutu(new Sijainti(5, 20));
-        assertFalse(pelilauta.onkoRuutuunAmmuttu(ruutu));
+    @Test (expected = IllegalArgumentException.class)
+    public void virheIlmoitusKunRuutuEiPelilaudalla() {
+        pelilauta.onkoRuutuunAmmuttu(new Sijainti(5, 20));
     }
     
 }

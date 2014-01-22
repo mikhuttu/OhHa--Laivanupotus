@@ -7,13 +7,11 @@ import static org.junit.Assert.*;
 public class PelaajaTest {
     Pelaaja pelaaja;
     Pelilauta pelilauta;
-    Ruutu ruutu;
     
     @Before
     public void setUp(){
         pelaaja = new Pelaaja();
         pelilauta = new Pelilauta();
-        ruutu = new Ruutu(new Sijainti(0,0));
     }
     
     @Test
@@ -34,12 +32,15 @@ public class PelaajaTest {
     
     @Test
     public void ampuminenEiAmmuttuunRuutuun() {
-        assertTrue(pelaaja.ammu(pelilauta, ruutu));
+        pelaaja.ammu(pelilauta, new Sijainti(0,3));
+        assertTrue(pelilauta.onkoRuutuunAmmuttu(new Sijainti(0,3)));
     }
     
-    @Test
-    public void ampuminenAmmuttuunRuutuun() {
-        ruutu.muutaAmmutuksi();
-        assertFalse(pelaaja.ammu(pelilauta, ruutu));
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void ampuminenJoAmmuttuunRuutuun() {
+        Sijainti sijainti = new Sijainti(0,3);
+        pelilauta.muutaAmmutuksi(sijainti);
+        pelaaja.ammu(pelilauta, sijainti);
     }
 }
