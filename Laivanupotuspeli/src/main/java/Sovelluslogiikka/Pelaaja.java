@@ -11,12 +11,6 @@ public class Pelaaja {
         return this.pelilauta;
     }
     
-    public void lisaaLaivaPelilaudalle(Sijainti sijainti) throws IllegalArgumentException {
-        if (this.pelilauta.onkoRuudussaJoLaiva(sijainti)) {
-            throw new IllegalArgumentException("Ruudussa on jo laiva.\nValitse toinen ruutu.");
-        }
-    }
-    
     public void ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
         // palautetaan eteenpäin tieto siitä onnistuiko ampuminen. Jos onnistui, tuhoa osa laivaa, soita äänet tms. 
         // Jos laivaan osuu, inkrementoi "osumamääriä".

@@ -1,4 +1,5 @@
 package Sovelluslogiikka;
+import Ohjaus.Suunta;
 
 public class Laiva {
     private Sijainti sijainti;
@@ -22,6 +23,18 @@ public class Laiva {
     public int getKoko() {
         return this.koko;
     }
+    
+    public boolean menevatkoPaallekain(Laiva verrattava) {
+        for (int i = 0; i < this.getKoko(); i++) {
+            Sijainti thisSij = haeLaivanOsanSijainti(i);
+            if (verrattava.osuiko(thisSij)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     
     public boolean osuiko(Sijainti verrattava) {
         for (int i = 0; i < this.koko; i++) {

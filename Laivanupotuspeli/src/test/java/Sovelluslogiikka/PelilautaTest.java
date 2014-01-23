@@ -1,4 +1,5 @@
 package Sovelluslogiikka;
+import Ohjaus.Suunta;
 
 import org.junit.Before;
 import org.junit.Test;

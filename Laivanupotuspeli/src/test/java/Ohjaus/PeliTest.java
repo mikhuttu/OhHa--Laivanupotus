@@ -8,7 +8,6 @@ public class PeliTest {
     
     @Before
     public void setUp() {
-        this.peli = new Peli();
     }
     
     @Test

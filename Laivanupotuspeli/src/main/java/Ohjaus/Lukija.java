@@ -11,4 +11,8 @@ public class Lukija {
     public String seuraavaRivi() {
         return this.lukija.nextLine();
     }
+    
+    public int seuraavaRiviKokonaislukuna() throws IllegalArgumentException {
+        return Integer.parseInt(seuraavaRivi());
+    }
 }

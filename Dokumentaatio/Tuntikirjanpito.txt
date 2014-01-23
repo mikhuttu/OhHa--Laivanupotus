@@ -16,3 +16,8 @@
 -Tulostaja-luokka poistettu
 -Uusia toiminnallisuuksia sovelluslogiikkaan
 -Tekstikäyttöliittymän suunnittelu ja aloitus
+
+23.1.2014
+-3h
+-Laivojen lisääminen pelilaudalle toteutettu
+-Luokkien toiminnallisuuksia muutettu jonkin verran

@@ -1,10 +1,7 @@
-import Sovelluslogiikka.*;
+import Kayttoliittyma.Kayttoliittyma;
 
 public class Main {
     public static void main(String[] args) {
-        Pelilauta lauta = new Pelilauta();
-        
-        lauta.onkoRuutuunAmmuttu(new Sijainti(2,7));
-
+        new Kayttoliittyma().run();
     }
 }

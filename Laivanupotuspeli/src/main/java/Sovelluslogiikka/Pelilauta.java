@@ -2,6 +2,7 @@ package Sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.List;
+import Ohjaus.Suunta;
 
 public class Pelilauta {
     private int koko;
@@ -36,21 +37,64 @@ public class Pelilauta {
         return this.laivat;
     }
     
-    public void lisaaLaiva(Laiva laiva) {
-        this.laivat.add(laiva);
+    
+    public void asetaLaiva(Laiva laiva) throws IllegalArgumentException {
+        if (voidaankoAsettaa(laiva)) {
+            lisaaLaiva(laiva);
+        }
+        else {
+            throw new IllegalArgumentException ();
+        } 
     }
     
-    public void muutaAmmutuksi(Sijainti sijainti) {
-        haeRuutu(sijainti).muutaAmmutuksi();
+    private void lisaaLaiva(Laiva laiva) {
+        this.laivat.add(laiva);
+    }    
+    
+    private boolean voidaankoAsettaa(Laiva laiva) {
+        if (!laivatMenevatPaallekain(laiva) && !laivaMeneeRuudukonYli(laiva)) {
+            return true;
+        }
+        return false;
     }
+    
+    private boolean laivatMenevatPaallekain(Laiva verrattava) {
+        for (Laiva laiva : this.laivat) {
+            if (laiva.menevatkoPaallekain(verrattava)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean laivaMeneeRuudukonYli(Laiva laiva) {
+        Suunta suunta = laiva.getSuunta();
+        Sijainti sijainti = new Sijainti(laiva.getSijainti().getX(), laiva.getSijainti().getY());
+        
+        for (int i = 0; i < laiva.getKoko(); i++) {
+            if (sijainti.getX() >= this.koko || sijainti.getY() >= this.koko) {
+                return true;
+            }
+            
+            if (suunta == Suunta.ALAS) {
+                sijainti.kasvataY(1);
+            }
+            else {
+                sijainti.kasvataX(1);
+            }
+        }
+        return false;
+        
+    }
+    
  
     public boolean onkoRuutuunAmmuttu(Sijainti verrattava) throws IllegalArgumentException {
         Ruutu ruutu = haeRuutu(verrattava);
         return ruutu.onkoAmmuttu();
     }
     
-    public boolean onkoRuudussaJoLaiva(Sijainti verrattava) {
-        return true;
+    public void muutaAmmutuksi(Sijainti sijainti) {
+        haeRuutu(sijainti).muutaAmmutuksi();
     }
     
     private Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
