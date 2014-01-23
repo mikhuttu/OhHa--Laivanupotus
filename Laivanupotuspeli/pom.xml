@@ -41,7 +41,8 @@
             <configuration>
                 <instrumentation>
                     <includes>
-                        <include></include>
+                        <include>Ohjaus/*.class</include>
+                        <include>Sovelluslogiikka/*.class</include>
                     </includes>
                 </instrumentation>
             </configuration>
@@ -54,9 +55,11 @@
             <version>0.30</version>
             <configuration>
                 <targetClasses>
+                    <param>Ohjaus*</param>
                     <param>Sovelluslogiikka*</param>
                 </targetClasses>
                 <targetTests>
+                    <param>Ohjaus*</param>
                     <param>Sovelluslogiikka*</param>
                 </targetTests>
             </configuration>

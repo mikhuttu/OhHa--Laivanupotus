@@ -18,6 +18,7 @@
 -Tekstikäyttöliittymän suunnittelu ja aloitus
 
 23.1.2014
--3h
+-5h
 -Laivojen lisääminen pelilaudalle toteutettu
 -Luokkien toiminnallisuuksia muutettu jonkin verran
+-Testit korjattu toimimaan uusien toiminnallisuuksien mukaan

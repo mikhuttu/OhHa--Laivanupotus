@@ -11,7 +11,7 @@ public class LaivaTest {
     
     @Before
     public void setUp() {
-        laivaAlas      = new Laiva(new Sijainti(1,3), Suunta.ALAS, 3);
+        laivaAlas = new Laiva(new Sijainti(1,3), Suunta.ALAS, 3);
         laivaOikealle  = new Laiva (new Sijainti(5,5), Suunta.OIKEALLE, 4);
     }
     
@@ -38,6 +38,34 @@ public class LaivaTest {
     public void getKokoToimii() {
         assertEquals(3, laivaAlas.getKoko());
     }
+    
+    @Test
+    public void laivatMenevatPaallekainSuuntaALAS() {
+        Laiva laivaAlas2 = new Laiva(new Sijainti(1,5), Suunta.ALAS, 2);
+        assertTrue(laivaAlas.menevatkoPaallekain(laivaAlas2));
+        assertTrue(laivaAlas2.menevatkoPaallekain(laivaAlas));
+    }
+    
+    @Test
+    public void laivatMenevatPaallekainSuuntaOIKEALLE() {
+        Laiva laivaOikealle2 = new Laiva(new Sijainti(4,5), Suunta.OIKEALLE, 2);
+        assertTrue(laivaOikealle.menevatkoPaallekain(laivaOikealle2));
+        assertTrue(laivaOikealle2.menevatkoPaallekain(laivaOikealle));
+    }    
+    
+    @Test
+    public void laivatMenevatPaallekainEriSuunnat() {
+        Laiva laivaAlas2 = new Laiva(new Sijainti(7,4), Suunta.ALAS, 3);
+        assertTrue(laivaOikealle.menevatkoPaallekain(laivaAlas2));
+        assertTrue(laivaAlas2.menevatkoPaallekain(laivaOikealle));
+    }
+
+    @Test
+    public void laivatEivatMenePaallekain() {
+        assertFalse(laivaAlas.menevatkoPaallekain(laivaOikealle));
+        assertFalse(laivaOikealle.menevatkoPaallekain(laivaAlas));
+    }
+    
     
     @Test
     public void laivaanOsuuSuuntaOIKEALLE() {

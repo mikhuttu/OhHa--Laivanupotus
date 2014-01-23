@@ -9,6 +9,10 @@ public class Lukija {
         this.lukija = new Scanner(System.in);
     }
     
+    public Lukija(String teksti) {
+        this.lukija = new Scanner(teksti);
+    }
+    
     public String seuraavaRivi() {
         return this.lukija.nextLine();
     }
