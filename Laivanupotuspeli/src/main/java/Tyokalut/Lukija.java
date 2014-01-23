@@ -1,4 +1,5 @@
-package Ohjaus;
+package Tyokalut;
+
 import java.util.Scanner;
 
 public class Lukija {

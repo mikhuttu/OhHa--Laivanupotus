@@ -1,5 +1,5 @@
 package Sovelluslogiikka;
-import Ohjaus.Suunta;
+import Tyokalut.Suunta;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +36,7 @@ public class PelilautaTest {
     
     @Test
     public void lisaaLaivaToimii() {
-        pelilauta.lisaaLaiva(laiva);
-        assertEquals(1, pelilauta.getLaivat().size());
+
     }
     
     @Test

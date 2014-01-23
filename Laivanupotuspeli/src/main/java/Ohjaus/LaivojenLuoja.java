@@ -3,6 +3,7 @@ import Sovelluslogiikka.Laiva;
 import Sovelluslogiikka.Pelaaja;
 import Sovelluslogiikka.Pelilauta;
 import Sovelluslogiikka.Sijainti;
+import Tyokalut.Suunta;
 
 public class LaivojenLuoja {
     private Peli peli;

@@ -1,6 +1,8 @@
 package Kayttoliittyma;
-import Ohjaus.*;
- 
+import Ohjaus.LaivojenLuoja;
+import Ohjaus.Peli;
+import Tyokalut.Lukija;
+import Tyokalut.Suunta;
 
 public class Kayttoliittyma  {
     private Peli peli;

@@ -1,4 +1,4 @@
-package Ohjaus;
+package Tyokalut;
 
 public enum Suunta {
     ALAS, OIKEALLE;

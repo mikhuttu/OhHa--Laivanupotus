@@ -1,5 +1,5 @@
 package Sovelluslogiikka;
-import Ohjaus.Suunta;
+import Tyokalut.Suunta;
 
 public class Laiva {
     private Sijainti sijainti;

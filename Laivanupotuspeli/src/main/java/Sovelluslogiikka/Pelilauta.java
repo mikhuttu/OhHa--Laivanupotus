@@ -2,7 +2,7 @@ package Sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.List;
-import Ohjaus.Suunta;
+import Tyokalut.Suunta;
 
 public class Pelilauta {
     private int koko;
