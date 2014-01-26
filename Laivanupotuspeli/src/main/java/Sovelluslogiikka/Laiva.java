@@ -47,7 +47,7 @@ public class Laiva {
         return false;
     }
     
-    private Sijainti haeLaivanOsanSijainti(int i) {
+    public Sijainti haeLaivanOsanSijainti(int i) {
         Sijainti laivanOsa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
         
         if (this.suunta == Suunta.ALAS) {

@@ -1,5 +1,7 @@
 package Ohjaus;
 import Sovelluslogiikka.Pelaaja;
+import Sovelluslogiikka.Pelilauta;
+import Sovelluslogiikka.Sijainti;
 import Tyokalut.Lukija;
 
 public class Peli {
@@ -21,5 +23,35 @@ public class Peli {
     
     public Pelaaja getKayttaja() {
         return this.kayttaja;
+    }
+    
+    public Pelaaja getTietokone() {
+        return this.tietokone;
+    }
+    
+    public void suoritaPelaajanVuoro() throws IllegalArgumentException {
+        System.out.println("Valitse ammuttava koordinaatti.");
+        Pelilauta pelilauta = this.kayttaja.getPelilauta(); // ampuu alkuun omaansa
+        KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, pelilauta);
+        
+        int x = valitsin.valitseKoordinaatti('X');
+        System.out.println();
+        int y = valitsin.valitseKoordinaatti('Y');
+        System.out.println();
+        
+        if(this.kayttaja.ammu(pelilauta, new Sijainti(x,y))) {
+            kasvataKayttajaanOsuneita();
+        }
+    }
+    
+    public boolean jatketaanko() {
+        if (this.kayttajaanOsuneet == 12 || this.tietokoneeseenOsuneet == 12) {
+            return false;
+        }
+        return true;
+    }
+    
+    public void kasvataKayttajaanOsuneita() {
+        this.kayttajaanOsuneet++;
     }
 }

@@ -37,7 +37,6 @@ public class Pelilauta {
         return this.laivat;
     }
     
-    
     public void asetaLaiva(Laiva laiva) throws IllegalArgumentException {
         if (voidaankoAsettaa(laiva)) {
             lisaaLaiva(laiva);
@@ -87,6 +86,15 @@ public class Pelilauta {
         
     }
     
+    public boolean osuikoLaivaan(Sijainti sijainti) {
+        for (Laiva laiva : this.laivat) {
+            if (laiva.osuiko(sijainti)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
  
     public boolean onkoRuutuunAmmuttu(Sijainti verrattava) throws IllegalArgumentException {
         Ruutu ruutu = haeRuutu(verrattava);
@@ -97,7 +105,7 @@ public class Pelilauta {
         haeRuutu(sijainti).muutaAmmutuksi();
     }
     
-    private Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
+    public Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
         for (Ruutu ruutu: this.ruudut) {
             if (ruutu.getSijainti().equals(sijainti)) {
                 return ruutu;

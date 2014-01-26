@@ -1,6 +1,10 @@
 package Kayttoliittyma;
+
 import Ohjaus.LaivojenLuoja;
 import Ohjaus.Peli;
+import Ohjaus.PelilaudanLuoja;
+import Ohjaus.KoordinaatinValitsin;
+
 import Tyokalut.Lukija;
 import Tyokalut.Suunta;
 
@@ -12,8 +16,7 @@ public class Kayttoliittyma  {
         tulostaOhjeet();
         this.lukija = new Lukija();
         this.peli = new Peli(this.lukija);
-        
-        asetaKayttajanLaivat();
+       
         kaynnista();
     }
     
@@ -49,6 +52,7 @@ public class Kayttoliittyma  {
                 System.out.println("Tähän paikkaan ei voi luoda laivaa.\n");
                 i--;
             }
+            piirraKayttajanPelilauta();
         }
     }
     
@@ -80,25 +84,10 @@ public class Kayttoliittyma  {
     }
     
     private int valitseKoordinaatti(char XtaiY) {
-        
         System.out.println("Valitse laivan " + XtaiY + " koordinaatin sijainti.");
         
-        while (true) {
-            System.out.print(XtaiY + " : ");
-            
-            try {
-                int luku = lukija.seuraavaRiviKokonaislukuna();
-                if (luku < 0) {
-                    System.out.println("Valitse positiivinen kokonaisluku.");
-                }
-                else {
-                    return luku;
-                }
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Valitse positiivinen kokonaisluku.");
-            }
-        }
+        KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, this.peli.getKayttaja().getPelilauta());
+        return valitsin.valitseKoordinaatti(XtaiY);
     }
     
     private int haeKoko(int i) {
@@ -113,12 +102,28 @@ public class Kayttoliittyma  {
         return koko;
     }
     
-    
-    public void kaynnista() {
-        piirraPelilauta();
+    private void piirraKayttajanPelilauta() {
+        PelilaudanLuoja pelilaudanLuoja = new PelilaudanLuoja(this.peli.getKayttaja());
+        pelilaudanLuoja.piirraPelilauta();
     }
     
-    private void piirraPelilauta() {
+    
+    public void kaynnista() {
+        piirraKayttajanPelilauta();
+        asetaKayttajanLaivat();
         
+        while (true) {
+            try {
+                this.peli.suoritaPelaajanVuoro();
+                piirraKayttajanPelilauta();
+                if(!this.peli.jatketaanko()) {
+                    break;
+                }
+            }
+            catch (IllegalArgumentException e) {
+                
+            }
+
+        }
     }
 }

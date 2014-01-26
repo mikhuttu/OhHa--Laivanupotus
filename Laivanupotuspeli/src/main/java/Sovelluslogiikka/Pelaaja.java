@@ -11,13 +11,19 @@ public class Pelaaja {
         return this.pelilauta;
     }
     
-    public void ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+    public boolean ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
         // palautetaan eteenpäin tieto siitä onnistuiko ampuminen. Jos onnistui, tuhoa osa laivaa, soita äänet tms. 
         // Jos laivaan osuu, inkrementoi "osumamääriä".
         
         if(vastustajanLauta.onkoRuutuunAmmuttu(sijainti)) {
-            throw new IllegalArgumentException("Ruutuun on jo ammuttu.\nValitse toinen ruutu.");
+            System.out.println("Ruutuun on jo ammuttu.\nValitse toinen ruutu.\n");
+            throw new IllegalArgumentException();
         }
         vastustajanLauta.muutaAmmutuksi(sijainti);
+        
+        if (vastustajanLauta.osuikoLaivaan(sijainti)) {
+            return true;
+        }
+        return false;
     }
 }
