@@ -1,34 +1,21 @@
 package Ohjaus;
 
-import Tyokalut.Lukija;
-import Tyokalut.Suunta;
-
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+//import Tyokalut.Lukija;
+//import Tyokalut.Suunta;
+//
+//import org.junit.Before;
+//import org.junit.Test;
 
 public class LaivojenLuojaTest {
-    LaivojenLuoja luoja;
-    Lukija lukija;
-    Peli peli;
-    Suunta suunta;
-    
+//    LaivojenLuoja laivojenLuoja;
+//    
 //    @Before
 //    public void setUp() {
-//        this.lukija = new Lukija();
-//        this.peli = new Peli(this.lukija);
-//        this.luoja = new LaivojenLuoja(this.peli);
-//        this.suunta = Suunta.ALAS;
-//    }
-//    
-//    @Test
-//    public void laivanLuontiKayttajanPelilaudalleOnnistuu() {
-//        this.luoja.luoKayttajanLaudalleLaiva(suunta, 1, 1, 3);
-//        assertEquals(1, this.peli.getKayttaja().getPelilauta().getLaivat().size());
+//        this.laivojenLuoja = new LaivojenLuoja(new Peli(new Lukija()));
 //    }
 //    
 //    @Test (expected = IllegalArgumentException.class)
-//    public void laivanLuontiKayttajanPelilaudalleEiOnnistu() {
-//        this.luoja.luoKayttajanLaudalleLaiva(suunta, 15, 15, 3);
+//    public void laivanLisaaminenEiOnnistu() {
+//        this.laivojenLuoja.luoKayttajanLaudalleLaiva(Suunta.ALAS, 7, 7, 4);
 //    }
 }

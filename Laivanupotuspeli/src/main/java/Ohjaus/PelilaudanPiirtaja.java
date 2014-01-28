@@ -7,10 +7,10 @@ import Sovelluslogiikka.Pelaaja;
 import Sovelluslogiikka.Ruutu;
 import Sovelluslogiikka.Sijainti;
 
-public class PelilaudanLuoja {
+public class PelilaudanPiirtaja {
     Pelaaja pelaaja;
     
-    public PelilaudanLuoja(Pelaaja pelaaja) {
+    public PelilaudanPiirtaja(Pelaaja pelaaja) {
         this.pelaaja = pelaaja;
     }
     
@@ -19,10 +19,11 @@ public class PelilaudanLuoja {
         ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
         
         for (int y = 0; y < koko; y++) {
+            String seuraavaRivi = "";
             for (int x = 0; x < koko; x++) {
-                tulostaRuutu(x, y, laivojenSijainnit);
+                seuraavaRivi += seuraavaMerkki(new Sijainti(x,y), laivojenSijainnit);
             }
-            System.out.println();
+            System.out.println(seuraavaRivi);
         }
         System.out.println();
     }
@@ -40,24 +41,22 @@ public class PelilaudanLuoja {
         return laivojenSijainnit;
     }
     
-    private void tulostaRuutu(int x, int y, ArrayList<Sijainti> laivojenSijainnit) {
-        Ruutu ruutu = this.pelaaja.getPelilauta().haeRuutu(new Sijainti(x,y));
+    private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
+        Ruutu ruutu = this.pelaaja.getPelilauta().haeRuutu(sijainti);
+        char tulostettava = '~';
+        
         if (ruutu.onkoAmmuttu()) {
-            System.out.print("x");
+            tulostettava = 'x';
         }
         else {
-            Sijainti sijainti = new Sijainti(x,y);
-            boolean paikassaLaiva = false;
-                    
             for (Sijainti sij : laivojenSijainnit) {
                 if (sij.equals(sijainti)) {
-                    System.out.print("o");
-                    paikassaLaiva = true;
+                    tulostettava = 'o';
+                    continue;
                 }
             }
-            if (!paikassaLaiva) {
-                System.out.print("~");
-            }
-         }
+        }
+        
+        return tulostettava;
     }
 }

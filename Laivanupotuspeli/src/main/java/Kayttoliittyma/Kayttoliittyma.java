@@ -2,7 +2,7 @@ package Kayttoliittyma;
 
 import Ohjaus.LaivojenLuoja;
 import Ohjaus.Peli;
-import Ohjaus.PelilaudanLuoja;
+import Ohjaus.PelilaudanPiirtaja;
 import Ohjaus.KoordinaatinValitsin;
 
 import Tyokalut.Lukija;
@@ -13,14 +13,14 @@ public class Kayttoliittyma  {
     private Lukija lukija;
     
     public void run() {
-        tulostaOhjeet();
+        tulostaAloitusNakyma();
         this.lukija = new Lukija();
         this.peli = new Peli(this.lukija);
        
         kaynnista();
     }
     
-    private void tulostaOhjeet() {
+    private void tulostaAloitusNakyma() {
         System.out.println("--------------------");
         System.out.println(" ------------------");
         System.out.println("  LAIVANUPOTUSPELI");
@@ -103,10 +103,9 @@ public class Kayttoliittyma  {
     }
     
     private void piirraKayttajanPelilauta() {
-        PelilaudanLuoja pelilaudanLuoja = new PelilaudanLuoja(this.peli.getKayttaja());
+        PelilaudanPiirtaja pelilaudanLuoja = new PelilaudanPiirtaja(this.peli.getKayttaja());
         pelilaudanLuoja.piirraPelilauta();
     }
-    
     
     public void kaynnista() {
         piirraKayttajanPelilauta();
@@ -119,11 +118,12 @@ public class Kayttoliittyma  {
                 if(!this.peli.jatketaanko()) {
                     break;
                 }
+                System.out.println("(Tietokoneen vuoro...)");
+                // tee jotain...
             }
-            catch (IllegalArgumentException e) {
+            catch (IllegalArgumentException e) {    // suoritetaan mikäli ammutaan jo ammuttuun ruutuun.
                 
             }
-
         }
     }
 }

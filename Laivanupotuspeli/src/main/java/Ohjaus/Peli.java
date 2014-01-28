@@ -31,7 +31,15 @@ public class Peli {
     
     public void suoritaPelaajanVuoro() throws IllegalArgumentException {
         System.out.println("Valitse ammuttava koordinaatti.");
-        Pelilauta pelilauta = this.kayttaja.getPelilauta(); // ampuu alkuun omaansa
+        Pelilauta pelilauta = this.kayttaja.getPelilauta();         // ampuu omaansa
+        Sijainti sijainti = valitseAmmuttavaSijainti(pelilauta);
+        
+        if (this.kayttaja.ammu(pelilauta, sijainti)) {      
+            kasvataKayttajaanOsuneita();
+        }
+    }
+    
+    private Sijainti valitseAmmuttavaSijainti(Pelilauta pelilauta) throws IllegalArgumentException {
         KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, pelilauta);
         
         int x = valitsin.valitseKoordinaatti('X');
@@ -39,9 +47,7 @@ public class Peli {
         int y = valitsin.valitseKoordinaatti('Y');
         System.out.println();
         
-        if(this.kayttaja.ammu(pelilauta, new Sijainti(x,y))) {
-            kasvataKayttajaanOsuneita();
-        }
+        return new Sijainti (x,y);
     }
     
     public boolean jatketaanko() {
