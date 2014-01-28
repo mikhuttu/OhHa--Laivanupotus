@@ -1,34 +1,39 @@
 15.1.2014
 -6h
--Githubin ja Git Bashin kanssa sekoilu
--Alustavan projektin toiminnalisuuden suunnitteleminen
--Luokkien Laiva, Sijainti ja enum Suunta ohjelmointi
+-Githubin ja Git Bashin kanssa sekoilu.
+-Alustavan projektin toiminnalisuuden suunnitteleminen.
+-Luokkien Laiva, Sijainti ja enum Suunta ohjelmointi.
 
 16.1.2014
 -5h
 -Alustava määrittelyvaiheen luokkakaavio
--Luokat Pelilauta, Ruutu ja Pelaaja lisätty Sovelluslogiikkaan
+-Luokat Pelilauta, Ruutu ja Pelaaja lisätty Sovelluslogiikkaan.
 --Varsinkin Pelaajan osalta toiminnallisuudet vielä kesken.
 -"Ohjaus-pakkaus" luotu ja sinne on lisätty luokat Tulostaja ja Peli.
 
 22.1.2014
 -3h
 -Tulostaja-luokka poistettu
--Uusia toiminnallisuuksia sovelluslogiikkaan
--Tekstikäyttöliittymän suunnittelu ja aloitus
+-Uusia toiminnallisuuksia sovelluslogiikkaan.
+-Tekstikäyttöliittymän suunnittelu ja aloitus.
 
 23.1.2014
 -5h
--Laivojen lisääminen pelilaudalle toteutettu
--Luokkien toiminnallisuuksia muutettu jonkin verran
--Testit korjattu toimimaan uusien toiminnallisuuksien mukaan
+-Laivojen lisääminen pelilaudalle toteutettu.
+-Luokkien toiminnallisuuksia muutettu jonkin verran.
+-Testit korjattu toimimaan uusien toiminnallisuuksien mukaan.
 
 25.1.2014
 -1h
--Pelilaudan tulostaminen tekstikäyttöliittymällä toteutettu
+-Pelilaudan tulostaminen tekstikäyttöliittymällä toteutettu.
+
+26.1.2014
+-2h
+-Vuoropohjaisuuden toteuttaminen aloitettu.
+-Peliä voi nyt pelata siten että voi ampua omalla pelilaudalla oleviin pisteisiin ja peli päättyy kun omat laivat on tuhottu.
 
 28.1.2014
 -1h
--Koodia muokattu paremmin luettavaksi
--Muutamia uusia testejä kirjoitettu
+-Koodia muokattu paremmin luettavaksi ja pelilaudan tulostusalgoritmiä parannettu toimimaan nopeammin.
+-Muutamia uusia testejä kirjoitettu.
 -Ohjaus-pakkauksen testausta yritetty, mutta huomasin että siinä ei ole oikeastaan mitään järkeä, koska niistä monien toiminta riippuvaista syötteen lukemisesta.
