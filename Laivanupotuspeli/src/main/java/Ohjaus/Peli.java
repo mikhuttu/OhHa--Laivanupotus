@@ -1,63 +1,47 @@
 package Ohjaus;
+
+import Sovelluslogiikka.Kayttaja;
 import Sovelluslogiikka.Pelaaja;
-import Sovelluslogiikka.Pelilauta;
-import Sovelluslogiikka.Sijainti;
+import Sovelluslogiikka.Tietokone;
+import Sovelluslogiikka.tietokonealy.Aly;
 import Tyokalut.Lukija;
 
 public class Peli {
-    private Pelaaja kayttaja;
-    private Pelaaja tietokone;
+    private Kayttaja pelaaja;
+    private Kayttaja tietokone;
     private Lukija lukija;
     
-    private int kayttajaanOsuneet;
-    private int tietokoneeseenOsuneet;
-    
-    public Peli(Lukija lukija) {
-        this.kayttaja = new Pelaaja();
-        this.tietokone = new Pelaaja();
+    public Peli(Aly aly, Lukija lukija) {
         this.lukija = lukija;
-        
-        this.kayttajaanOsuneet = 0;
-        this.tietokoneeseenOsuneet = 0;
+        this.pelaaja = new Pelaaja(lukija);
+        this.tietokone = new Tietokone(aly);
     }
     
-    public Pelaaja getKayttaja() {
-        return this.kayttaja;
+    public Kayttaja getPelaaja() {
+        return this.pelaaja;
     }
     
-    public Pelaaja getTietokone() {
+    public Kayttaja getTietokone() {
         return this.tietokone;
     }
     
-    public void suoritaPelaajanVuoro() throws IllegalArgumentException {
-        System.out.println("Valitse ammuttava koordinaatti.");
-        Pelilauta pelilauta = this.kayttaja.getPelilauta();         // ampuu omaansa
-        Sijainti sijainti = valitseAmmuttavaSijainti(pelilauta);
-        
-        if (this.kayttaja.ammu(pelilauta, sijainti)) {      
-            kasvataKayttajaanOsuneita();
-        }
+    public Lukija getLukija() {
+        return this.lukija;
     }
     
-    private Sijainti valitseAmmuttavaSijainti(Pelilauta pelilauta) throws IllegalArgumentException {
-        KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, pelilauta);
-        
-        int x = valitsin.valitseKoordinaatti('X');
-        System.out.println();
-        int y = valitsin.valitseKoordinaatti('Y');
-        System.out.println();
-        
-        return new Sijainti (x,y);
+    public void suoritaVuoro(Kayttaja kayttaja) throws IllegalArgumentException {
+        if (kayttaja.equals(pelaaja)) {
+            this.pelaaja.suoritaVuoro(this.tietokone.getPelilauta());
+        }
+        else {
+            this.tietokone.suoritaVuoro(this.pelaaja.getPelilauta());
+        } 
     }
     
     public boolean jatketaanko() {
-        if (this.kayttajaanOsuneet == 12 || this.tietokoneeseenOsuneet == 12) {
+        if (this.pelaaja.getOsuneet() == 12 || this.tietokone.getOsuneet() == 12) {
             return false;
         }
         return true;
-    }
-    
-    public void kasvataKayttajaanOsuneita() {
-        this.kayttajaanOsuneet++;
     }
 }

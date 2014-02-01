@@ -37,3 +37,12 @@
 -Koodia muokattu paremmin luettavaksi ja pelilaudan tulostusalgoritmiä parannettu toimimaan nopeammin.
 -Muutamia uusia testejä kirjoitettu.
 -Ohjaus-pakkauksen testausta yritetty, mutta huomasin että siinä ei ole oikeastaan mitään järkeä, koska niistä monien toiminta riippuvaista syötteen lukemisesta.
+
+1.2.2014
+-6h
+-Käyttöliittymä -luokkaa muokattu siten että suuri osa toiminnallisuudesta delegoitu muualle.
+-Peli -luokkaa muokattu siten että Peli ei enää pyydä "Pelaajaa" suorittamaan vuoroa. Sen sijaan, se kysyy abstractin luokan "Kayttaja" toteuttamaa oliota suorittamaan vuoronsa.
+-Pelaaja ja Tietokone toteuttavat abstraktin luokan "Kayttaja". Tietokone tietää "Pelaajan" (ja sitä kautta Pelilautansa) ja sille on määritetty "Äly".
+-Pakkaus "Sovelluslogiikka.Tietokonealy" kehitetty, jonne on lisätty kaksi erilaista "Alykkyyttä" - "Arpoja" sekä "Cheater".
+
+-Kaikki testaus uusia muutoksia varten vielä tekemättä. Seuraavana vuorossa testit ja sen jälkeen mahd. graafinen käyttöliittymä.

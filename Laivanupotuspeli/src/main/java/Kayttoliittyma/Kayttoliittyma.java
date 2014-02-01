@@ -3,127 +3,98 @@ package Kayttoliittyma;
 import Ohjaus.LaivojenLuoja;
 import Ohjaus.Peli;
 import Ohjaus.PelilaudanPiirtaja;
-import Ohjaus.KoordinaatinValitsin;
-
+import Sovelluslogiikka.Kayttaja;
+import Sovelluslogiikka.tietokonealy.Aly;
 import Tyokalut.Lukija;
-import Tyokalut.Suunta;
 
-public class Kayttoliittyma  {
+public class Kayttoliittyma implements Runnable {
     private Peli peli;
     private Lukija lukija;
     
+    @Override
     public void run() {
         tulostaAloitusNakyma();
         this.lukija = new Lukija();
-        this.peli = new Peli(this.lukija);
+        this.peli = new Peli(valitseTietokoneAly(), this.lukija);
        
         kaynnista();
     }
     
     private void tulostaAloitusNakyma() {
-        System.out.println("--------------------");
-        System.out.println(" ------------------");
-        System.out.println("  LAIVANUPOTUSPELI");
-        System.out.println(" ------------------");
-        System.out.println("--------------------");
+        System.out.println("------------------");
+        System.out.println(" LAIVANUPOTUSPELI ");
+        System.out.println("------------------");
         
-        System.out.println("\nLuodaan laivat... Seuraa ohjeita.\n");
+        System.out.println("\nLuodaan laivat... Seuraa ohjeita.");
     }
     
-    private void asetaKayttajanLaivat() {
-        LaivojenLuoja luoja = new LaivojenLuoja(this.peli);
-
-        for (int i = 1; i <= 4; i++) {
-            
-            int koko = haeKoko(i);
-            System.out.println(i + ". laivan koko: " + koko + "\n");
-            
-            Suunta suunta = valitseSuunta(i);
-            System.out.println();
-            int Xsij = valitseKoordinaatti('X');
-            System.out.println();
-            int Ysij = valitseKoordinaatti('Y');
-            System.out.println();
-
-            try {
-                luoja.luoKayttajanLaudalleLaiva(suunta, Xsij, Ysij, koko);
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Tähän paikkaan ei voi luoda laivaa.\n");
-                i--;
-            }
-            piirraKayttajanPelilauta();
-        }
-    }
-    
-    private Suunta valitseSuunta(int i) {
-        
-        System.out.println("Valitse " + i + ". laivan suunta.\n0 = Alas\n1 = Oikealle\n");
-        Suunta suunta = Suunta.ALAS;
-        
+    private Aly valitseTietokoneAly() {
         while (true) {
-            System.out.print("Suunta: ");
-            
-            try {
-                int s = lukija.seuraavaRiviKokonaislukuna();
-                if (s == 0 || s == 1) {
-                    if (s == 1) {
-                        suunta = Suunta.OIKEALLE;
-                    }
-                    break;
-                }
-                System.out.println("Valitse suunnaksi 0 (Alas) tai 1 (Oikealle)");     
-            }
-            
-            catch (IllegalArgumentException e) {
-                System.out.println("Valitse suunnaksi 0 (Alas) tai 1 (Oikealle)");
-            }
-        }
-
-        return suunta;
-    }
-    
-    private int valitseKoordinaatti(char XtaiY) {
-        System.out.println("Valitse laivan " + XtaiY + " koordinaatin sijainti.");
+            System.out.println("\nValitse tietokoneen älykkyys:\n(1) Sattuma\n(2) Cheater\n");
         
-        KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, this.peli.getKayttaja().getPelilauta());
-        return valitsin.valitseKoordinaatti(XtaiY);
+            try {
+                int luku = this.lukija.seuraavaRiviKokonaislukuna();
+                if (luku == 1) {
+                    return Aly.ARPA;
+                }
+                else if (luku == 2) {
+                    return Aly.CHEATER;
+                }
+                System.out.println("Syötä joko '1' tai '2'");
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Syötä joko '1' tai '2'");
+            }
+        }
+        
     }
     
-    private int haeKoko(int i) {
-        int koko = 4;
-            
-        if (i > 1 && i < 4) {
-            koko = 3;
-        }
-        else if (i == 4) {
-            koko = 2;
-        }
-        return koko;
+    private void asetaKayttajienLaivat() {
+        LaivojenLuoja luoja = new LaivojenLuoja(this.peli);
+        luoja.asetaPelaajanLaivat();
+        luoja.asetaTietokoneenLaivat();
     }
-    
-    private void piirraKayttajanPelilauta() {
-        PelilaudanPiirtaja pelilaudanLuoja = new PelilaudanPiirtaja(this.peli.getKayttaja());
-        pelilaudanLuoja.piirraPelilauta();
+
+    private void piirraPelilauta(Kayttaja kayttaja) {
+        PelilaudanPiirtaja piirtaja = new PelilaudanPiirtaja(kayttaja);
+        piirtaja.piirraPelilauta();
     }
     
     public void kaynnista() {
-        piirraKayttajanPelilauta();
-        asetaKayttajanLaivat();
+        
+        piirraPelilauta(this.peli.getPelaaja());
+        asetaKayttajienLaivat();
+        String tuloste = "HÄVISIT!!! :P";
         
         while (true) {
-            try {
-                this.peli.suoritaPelaajanVuoro();
-                piirraKayttajanPelilauta();
-                if(!this.peli.jatketaanko()) {
-                    break;
-                }
-                System.out.println("(Tietokoneen vuoro...)");
-                // tee jotain...
+            if(!seuraavaKierros(this.peli.getPelaaja())) {
+                tuloste = "VOITIT PELIN!!!";
+                break;
             }
-            catch (IllegalArgumentException e) {    // suoritetaan mikäli ammutaan jo ammuttuun ruutuun.
-                
+            System.out.println("(Tietokoneen vuoro...)\n");
+            if (!seuraavaKierros(this.peli.getTietokone())) {
+                break;
             }
         }
+        System.out.println(tuloste);
+    }
+    
+    private boolean seuraavaKierros(Kayttaja kayttaja) {
+        while (true) {
+            try {
+                this.peli.suoritaVuoro(kayttaja);
+                break;
+            }
+            catch (IllegalArgumentException e) {    // suoritetaan mikäli ammutaan jo ammuttuun ruutuun.
+            }  
+        }
+        
+        System.out.println("Pelaajan pelilauta:\n");
+        piirraPelilauta(this.peli.getPelaaja());
+        
+        System.out.println("Tietokoneen pelilauta:\n");
+        piirraPelilauta(this.peli.getTietokone());
+        
+        return this.peli.jatketaanko();
     }
 }

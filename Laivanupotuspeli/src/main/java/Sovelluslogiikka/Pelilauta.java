@@ -1,8 +1,8 @@
 package Sovelluslogiikka;
 
+import Tyokalut.Suunta;
 import java.util.ArrayList;
 import java.util.List;
-import Tyokalut.Suunta;
 
 public class Pelilauta {
     private int koko;
@@ -17,9 +17,9 @@ public class Pelilauta {
     }
     
     private void asetaRuudutPelilaudalle() {
-        for (int i = 0; i < koko; i++) {
-            for (int j = 0; j < koko; j++) {
-                Ruutu ruutu = new Ruutu(new Sijainti(i,j));
+        for (int y = 0; y < koko; y++) {
+            for (int x = 0; x < koko; x++) {
+                Ruutu ruutu = new Ruutu(new Sijainti(x,y));
                 this.ruudut.add(ruutu);
             }
         }
@@ -106,10 +106,11 @@ public class Pelilauta {
     }
     
     public Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
-        for (Ruutu ruutu: this.ruudut) {
-            if (ruutu.getSijainti().equals(sijainti)) {
-                return ruutu;
-            }
+        int x = sijainti.getX();
+        int y = sijainti.getY();
+        
+        if (Math.max(x, y) < this.koko) {
+            return this.ruudut.get(y * this.koko + x);
         }
         
         throw new IllegalArgumentException("Virhe: Valitsemasi ruutu ei ole koordinaatistossa!");

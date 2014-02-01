@@ -1,21 +1,20 @@
 package Ohjaus;
 
-import java.util.ArrayList;
-
+import Sovelluslogiikka.Kayttaja;
 import Sovelluslogiikka.Laiva;
-import Sovelluslogiikka.Pelaaja;
 import Sovelluslogiikka.Ruutu;
 import Sovelluslogiikka.Sijainti;
+import java.util.ArrayList;
 
 public class PelilaudanPiirtaja {
-    Pelaaja pelaaja;
+    Kayttaja kayttaja;
     
-    public PelilaudanPiirtaja(Pelaaja pelaaja) {
-        this.pelaaja = pelaaja;
+    public PelilaudanPiirtaja(Kayttaja kayttaja) {
+        this.kayttaja = kayttaja;
     }
     
     public void piirraPelilauta() {
-        int koko = this.pelaaja.getPelilauta().getKoko();
+        int koko = this.kayttaja.getPelilauta().getKoko();
         ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
         
         for (int y = 0; y < koko; y++) {
@@ -31,8 +30,8 @@ public class PelilaudanPiirtaja {
     private ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
         ArrayList<Sijainti> laivojenSijainnit = new ArrayList<Sijainti>();
         
-        for (int i = 0; i < this.pelaaja.getPelilauta().getLaivat().size(); i++) {
-            Laiva laiva = this.pelaaja.getPelilauta().getLaivat().get(i);
+        for (int i = 0; i < this.kayttaja.getPelilauta().getLaivat().size(); i++) {
+            Laiva laiva = this.kayttaja.getPelilauta().getLaivat().get(i);
             
             for (int j = 0; j < laiva.getKoko(); j++) {     
                 laivojenSijainnit.add(laiva.haeLaivanOsanSijainti(j));
@@ -42,7 +41,7 @@ public class PelilaudanPiirtaja {
     }
     
     private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
-        Ruutu ruutu = this.pelaaja.getPelilauta().haeRuutu(sijainti);
+        Ruutu ruutu = this.kayttaja.getPelilauta().haeRuutu(sijainti);
         char tulostettava = '~';
         
         if (ruutu.onkoAmmuttu()) {
