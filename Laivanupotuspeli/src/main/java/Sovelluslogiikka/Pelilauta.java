@@ -10,7 +10,7 @@ public class Pelilauta {
     private List<Ruutu> ruudut;
     
     public Pelilauta() {
-        this.koko = 8;
+        this.koko = 6;
         this.laivat = new ArrayList<Laiva>();
         this.ruudut = new ArrayList<Ruutu>();
         asetaRuudutPelilaudalle();
@@ -114,6 +114,31 @@ public class Pelilauta {
         }
         
         throw new IllegalArgumentException("Virhe: Valitsemasi ruutu ei ole koordinaatistossa!");
+    }
+    
+    public boolean onkoTuhottu(Laiva laiva) {
+        for (int i = 0; i < laiva.getKoko(); i++) {
+            Sijainti sijainti = laiva.haeLaivanOsanSijainti(i);
+            Ruutu ruutu = haeRuutu(sijainti);
+            
+            if (!ruutu.onkoAmmuttu()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
+        ArrayList<Sijainti> laivojenSijainnit = new ArrayList<Sijainti>();
+        
+        for (int i = 0; i < this.laivat.size(); i++) {
+            Laiva laiva = this.laivat.get(i);
+            
+            for (int j = 0; j < laiva.getKoko(); j++) {     
+                laivojenSijainnit.add(laiva.haeLaivanOsanSijainti(j));
+            }
+        }
+        return laivojenSijainnit;
     }
     
 }

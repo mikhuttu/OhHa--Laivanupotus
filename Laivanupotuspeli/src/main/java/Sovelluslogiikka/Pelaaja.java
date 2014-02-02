@@ -22,13 +22,17 @@ public class Pelaaja extends Kayttaja {
     }
     
     @Override
-    public void suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
+    public boolean suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
         System.out.println("Valitse ammuttava koordinaatti.");
         Sijainti sijainti = valitseAmmuttavaSijainti(vastustajanLauta);
         
+        boolean osuiko = false;
+        
         if (ammu(vastustajanLauta, sijainti)) {
             kasvataVastustajaanOsuneet();
+            osuiko = true;
         }
+        return osuiko;
     }
     
     private Sijainti valitseAmmuttavaSijainti(Pelilauta pelilauta) throws IllegalArgumentException {

@@ -51,12 +51,14 @@ public class LaivojenLuoja {
             int koko = haeKoko(i);
             Suunta suunta = Suunta.ALAS;
             
-            if (random.nextInt(1) == 1) {
+            if (random.nextInt(2) == 1) {
                 suunta = Suunta.OIKEALLE;
             }
             
-            int Xsij = random.nextInt(7);
-            int Ysij = random.nextInt(7);
+            int laudanKoko = this.peli.getTietokone().getPelilauta().getKoko();
+            
+            int Xsij = random.nextInt(laudanKoko - 1);
+            int Ysij = random.nextInt(laudanKoko - 1);
             
             try {
                 luoKayttajanLaudalleLaiva(this.peli.getTietokone(), suunta, Xsij, Ysij, koko);

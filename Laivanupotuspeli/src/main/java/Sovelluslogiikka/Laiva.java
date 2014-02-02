@@ -58,4 +58,6 @@ public class Laiva {
         }
         return laivanOsa;            
     }
+    
+
 }

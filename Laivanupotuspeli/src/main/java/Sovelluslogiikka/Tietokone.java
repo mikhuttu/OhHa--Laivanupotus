@@ -21,19 +21,22 @@ public class Tietokone extends Kayttaja {
     }
     
     @Override
-    public void suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
+    public boolean suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
+        boolean osuiko = false;
         Sijainti sijainti = maaritaSijainti(vastustajanLauta);
         
         if (ammu(vastustajanLauta, sijainti)) {
-                kasvataVastustajaanOsuneet();
+            kasvataVastustajaanOsuneet();
+            osuiko = true;
         }
+        return osuiko;
     }
     
     private Sijainti maaritaSijainti(Pelilauta vastustajanLauta) {
-        Alykkyys alykkyys = new Sattuma();
+        Alykkyys alykkyys = new Easy();
         
-        if (this.aly == Aly.CHEATER) {
-            alykkyys = new Cheater();
+        if (this.aly == Aly.IMPOSSIBLE) {
+            alykkyys = new Impossible();
         }
 
         return alykkyys.maaritaSijainti(vastustajanLauta);

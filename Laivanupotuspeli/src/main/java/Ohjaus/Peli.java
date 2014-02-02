@@ -29,12 +29,12 @@ public class Peli {
         return this.lukija;
     }
     
-    public void suoritaVuoro(Kayttaja kayttaja) throws IllegalArgumentException {
+    public boolean suoritaVuoro(Kayttaja kayttaja) throws IllegalArgumentException {
         if (kayttaja.equals(pelaaja)) {
-            this.pelaaja.suoritaVuoro(this.tietokone.getPelilauta());
+            return this.pelaaja.suoritaVuoro(this.tietokone.getPelilauta());
         }
         else {
-            this.tietokone.suoritaVuoro(this.pelaaja.getPelilauta());
+            return this.tietokone.suoritaVuoro(this.pelaaja.getPelilauta());
         } 
     }
     

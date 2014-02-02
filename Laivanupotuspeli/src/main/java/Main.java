@@ -1,13 +1,8 @@
-import java.util.Random;
+import Kayttoliittyma.Kayttoliittyma;
 
 public class Main {
     public static void main(String[] args) {
-        Random random = new Random();
-        
-        for (int i = 0; i < 10; i++) {
-            System.out.println(random.nextInt(i));
-        }
-        
-        // new Kayttoliittyma().run();
+
+        new Kayttoliittyma().run();
     }
 }

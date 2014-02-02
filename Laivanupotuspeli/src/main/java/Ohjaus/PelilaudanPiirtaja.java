@@ -2,8 +2,11 @@ package Ohjaus;
 
 import Sovelluslogiikka.Kayttaja;
 import Sovelluslogiikka.Laiva;
+import Sovelluslogiikka.Pelilauta;
 import Sovelluslogiikka.Ruutu;
 import Sovelluslogiikka.Sijainti;
+import Sovelluslogiikka.Tietokone;
+import Sovelluslogiikka.tietokonealy.Aly;
 import java.util.ArrayList;
 
 public class PelilaudanPiirtaja {
@@ -28,34 +31,62 @@ public class PelilaudanPiirtaja {
     }
     
     private ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
-        ArrayList<Sijainti> laivojenSijainnit = new ArrayList<Sijainti>();
-        
-        for (int i = 0; i < this.kayttaja.getPelilauta().getLaivat().size(); i++) {
-            Laiva laiva = this.kayttaja.getPelilauta().getLaivat().get(i);
-            
-            for (int j = 0; j < laiva.getKoko(); j++) {     
-                laivojenSijainnit.add(laiva.haeLaivanOsanSijainti(j));
-            }
-        }
-        return laivojenSijainnit;
+        Pelilauta pelilauta = this.kayttaja.getPelilauta();
+        return pelilauta.haeLaivojenOsienSijainnit();
     }
     
     private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
         Ruutu ruutu = this.kayttaja.getPelilauta().haeRuutu(sijainti);
         char tulostettava = '~';
+
+        if (!tulostuksessaTietokoneenLauta()) {
+            if (ruudussaOnLaiva(sijainti, laivojenSijainnit)) {
+                tulostettava = 'O';
+            }
+        }
         
         if (ruutu.onkoAmmuttu()) {
             tulostettava = 'x';
-        }
-        else {
-            for (Sijainti sij : laivojenSijainnit) {
-                if (sij.equals(sijainti)) {
-                    tulostettava = 'o';
-                    continue;
+                
+            if (ruudussaOnLaiva(sijainti, laivojenSijainnit)) {
+                tulostettava = 'X';
+                    
+                try {
+                    if(onkoSijainnissaOlevaLaivaTuhottu(sijainti)) {
+                        tulostettava = 'L';
+                    }
+                }
+                catch (IllegalArgumentException e) {
+                    System.out.println("Virhetilanne. Sijainti ei kuulunut millekään käyttäjän laivalle.");
                 }
             }
         }
         
         return tulostettava;
+    }
+    
+    private boolean tulostuksessaTietokoneenLauta() {
+        Tietokone verrattava = new Tietokone(Aly.EASY);
+        return kayttaja.getClass() == verrattava.getClass();
+    }
+    
+    private boolean ruudussaOnLaiva(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
+        for (Sijainti sij : laivojenSijainnit) {
+            if (sij.equals(sijainti)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean onkoSijainnissaOlevaLaivaTuhottu(Sijainti sijainti) throws IllegalArgumentException {
+        Pelilauta pelilauta = this.kayttaja.getPelilauta();
+        
+        for (Laiva laiva : pelilauta.getLaivat()) {
+            if (laiva.osuiko(sijainti)) {
+                return pelilauta.onkoTuhottu(laiva);
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

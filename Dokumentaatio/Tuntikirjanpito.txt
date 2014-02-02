@@ -45,4 +45,8 @@
 -Pelaaja ja Tietokone toteuttavat abstraktin luokan "Kayttaja". Tietokone tietää "Pelaajan" (ja sitä kautta Pelilautansa) ja sille on määritetty "Äly".
 -Pakkaus "Sovelluslogiikka.Tietokonealy" kehitetty, jonne on lisätty kaksi erilaista "Alykkyyttä" - "Arpoja" sekä "Cheater".
 
--Kaikki testaus uusia muutoksia varten vielä tekemättä. Seuraavana vuorossa testit ja sen jälkeen mahd. graafinen käyttöliittymä.
+2.2.2014
+-5h
+-Uusia toiminnallisuuksia lisätty siten että peli näyttäisi toimivan juuri niin kuin sen tekstikäyttöliittymällä pitääkin!
+
+-Kaikki testaus uusia muutoksia varten vielä tekemättä. Seuraavana vuorossa testit ja sen jälkeen graafinen käyttöliittymä. Lopuksi mahdollisuus vielä luoda uusi vaikeusaste kahden muun rinnalle.

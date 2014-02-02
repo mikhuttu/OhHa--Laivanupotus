@@ -4,7 +4,7 @@ import Sovelluslogiikka.Pelilauta;
 import Sovelluslogiikka.Sijainti;
 import java.util.Random;
 
-public class Sattuma implements Alykkyys {
+public class Easy implements Alykkyys {
     
     @Override
     public Sijainti maaritaSijainti(Pelilauta vastustajanLauta) {
