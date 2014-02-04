@@ -42,7 +42,7 @@
                 <instrumentation>
                     <includes>
                         
-                        <include>Sovelluslogiikka/*.class</include>
+                        <include>Laivanupotus.Sovelluslogiikka/*.class</include>
                     </includes>
                 </instrumentation>
             </configuration>
@@ -56,11 +56,11 @@
             <configuration>
                 <targetClasses>
                     
-                    <param>Sovelluslogiikka*</param>
+                    <param>Laivanupotus.*</param>
                 </targetClasses>
                 <targetTests>
                     
-                    <param>Sovelluslogiikka*</param>
+                    <param>Laivanupotus.*</param>
                 </targetTests>
             </configuration>
         </plugin>

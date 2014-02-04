@@ -50,3 +50,8 @@
 -Uusia toiminnallisuuksia lisätty siten että peli näyttäisi toimivan juuri niin kuin sen tekstikäyttöliittymällä pitääkin!
 
 -Kaikki testaus uusia muutoksia varten vielä tekemättä. Seuraavana vuorossa testit ja sen jälkeen graafinen käyttöliittymä. Lopuksi mahdollisuus vielä luoda uusi vaikeusaste kahden muun rinnalle.
+
+4.2.2014
+-3h
+-Mielekkäät testit uusien toiminnallisuuksien pohjalle kirjoitettu.
+-Javadocin sekä sekvenssikaavioiden aloitus
