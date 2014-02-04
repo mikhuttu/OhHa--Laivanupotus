@@ -1,5 +1,10 @@
 package Laivanupotus.Sovelluslogiikka;
 
+/**
+ * Pelilaudalla on Ruutuja.
+ * Ruuduilla on Sijainti, ja Ruutu tietää lisäksi, onko siihen ammuttu.
+ */
+
 public class Ruutu {
     private Sijainti sijainti;
     private boolean ammuttu;
@@ -20,6 +25,14 @@ public class Ruutu {
     public boolean onkoAmmuttu() {
         return this.ammuttu;
     }
+    
+    /**
+     * equals metodi vertaa, onko parametrina saatu olio sama ruutu kuin "tämä" ruutu.
+     * Se käyttää vertailun apuna Sijaintien vertailuun perustuvaa equals metodia.
+
+     * @param olio
+     * @return 
+     */
     
     @Override
     public boolean equals(Object olio) {

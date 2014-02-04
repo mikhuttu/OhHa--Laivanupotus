@@ -1,5 +1,9 @@
 package Laivanupotus.Sovelluslogiikka;
 
+/**
+ * Kayttaja on abstrakti luokka, jonka metodit sekä Pelaaja että Tietokone toteuttavat.
+ * Käyttäjä tietää, kuinka monta kertaan vastustajan laivoihin on osuttu (max. 12, sillä silloin ne kaikkin on jo tuhottu).
+ */
 public abstract class Kayttaja {
     private int vastustajaanOsuneet;
     

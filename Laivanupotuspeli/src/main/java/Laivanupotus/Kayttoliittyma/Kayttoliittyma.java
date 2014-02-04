@@ -7,6 +7,13 @@ import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Tyokalut.Lukija;
 
+/**
+ * Käyttöliittymä -luokalla on tällä hetkellä paljon toiminnallisuuksia, joista varmaankin suuri osa
+ * delegoidaan muualle.
+ * 
+ * Tällä hetkellä Käyttöliittymä -luokka hallitsee koko pelin toimintaa.
+ */
+
 public class Kayttoliittyma implements Runnable {
     private Peli peli;
     private Lukija lukija;
@@ -62,6 +69,15 @@ public class Kayttoliittyma implements Runnable {
         piirtaja.piirraPelilauta();
     }
     
+    /**
+     * kaynnista -metodin sisällä on oikeastaan koko pelin toiminnallisuus.
+     * Metodi pyytää ensin käyttäjiä asettamaan laivansa, jonka jälkeen suoritetaan seuraavaKierros
+     * käyttäen parametrina käyttäjää, joka on kierroksella vuorossa.
+     * 
+     * tuloste alustetaan pointtaamaan tekstiin "HÄVISIT!!! :P" jo alussa, sillä todennäköisyys siihen että
+     * käyttäjä valitsi vaikeusasteeksi Impossible ja hävisi pelin on suuri.
+     */
+    
     public void kaynnista() {
         
         System.out.println("Pelaajan pelilauta:\n");
@@ -86,6 +102,13 @@ public class Kayttoliittyma implements Runnable {
         System.out.println(tuloste);
     }
     
+    /**
+     * Pyydetään käyttäjää suorittamaan vuoronsa niin monta kertaa peräkkäin kun osuu vastustajaan (ellei peli lopu
+     * vastustajan laivojen tuhoutumisen myötä).
+
+     * @param kayttaja
+     * @return 
+     */
     private boolean seuraavaKierros(Kayttaja kayttaja) {
         boolean osuikoVastustajanLaivaan = false;
         
@@ -100,16 +123,8 @@ public class Kayttoliittyma implements Runnable {
                 }
             }
         
-            if (kayttaja.getClass() == this.peli.getPelaaja().getClass()) {
-                System.out.println("Tietokoneen pelilauta:\n");
-                piirraPelilauta(this.peli.getTietokone());
-            }
-        
-            else {
-                System.out.println("Pelaajan pelilauta:\n");
-                piirraPelilauta(this.peli.getPelaaja());
-            }
-
+            pyydaPiirtamaanVastustajanPelilauta(kayttaja);
+            
             nuku();
             
             if (!this.peli.jatketaanko()) {
@@ -122,6 +137,18 @@ public class Kayttoliittyma implements Runnable {
         }
 
         return true;
+    }
+    
+    private void pyydaPiirtamaanVastustajanPelilauta(Kayttaja kayttaja) {
+        if (kayttaja.getClass() == this.peli.getPelaaja().getClass()) {
+            System.out.println("Tietokoneen pelilauta:\n"); 
+            piirraPelilauta(this.peli.getTietokone());
+        }
+        
+        else {
+            System.out.println("Pelaajan pelilauta:\n");
+            piirraPelilauta(this.peli.getPelaaja());
+        }
     }
     
     private void nuku() {

@@ -1,5 +1,13 @@
 package Laivanupotus.Sovelluslogiikka;
 
+/**
+ * Sijainti on tälläinen yleisluokka, jota käytetään vähän joka puolella ohjelmakoodia.
+ * Sijainnit liittyvät kuitenkin Sovelluslogiikkaan monin tavoin, joten se nyt on vaan täällä.
+ * 
+ * Sijainti on koordinaatti, joka koostuu x -ja y-arvoista.
+ * Sijaintia voidaan kasvattaa ja sijainteja voidaan vertailla keskenään.
+ */
+
 public class Sijainti {
     private int x;
     private int y;

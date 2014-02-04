@@ -2,6 +2,10 @@ package Laivanupotus.Ohjaus;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Tyokalut.Lukija;
 
+/**
+ * Luokan ainoa toiminnallisuus on toimia metodina, jota voidaan kutsua eri luokista.
+ */
+
 public class KoordinaatinValitsin {
     private Pelilauta pelilauta;
     private Lukija lukija;
@@ -11,6 +15,11 @@ public class KoordinaatinValitsin {
         this.pelilauta = pelilauta;
     }
     
+/**
+ * Pelaaja valitsee luvun väliltä 0 ja pelilauta.getKoko() ja metodi palauttaa sen.
+ * @param XtaiY valittava koordinaatti
+ * @return palauttaa x tai y koordinaatin
+ */    
     public int valitseKoordinaatti(char XtaiY) {
         while (true) {
             

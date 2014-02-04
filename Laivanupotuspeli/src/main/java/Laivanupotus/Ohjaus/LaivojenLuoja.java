@@ -10,6 +10,10 @@ import Laivanupotus.Tyokalut.Lukija;
 import Laivanupotus.Tyokalut.Suunta;
 import java.util.Random;
 
+/**
+ * Käyttöliittymä pyytää tätä luokkaa asettamaan laivat pelin alussa pelaajan ja tietokoneen pelilaudoille.
+ */
+
 public class LaivojenLuoja {
     private Lukija lukija;
     private Peli peli;
@@ -19,6 +23,11 @@ public class LaivojenLuoja {
         this.lukija = pelaaja.getLukija();
         this.peli = peli;
     }
+    
+    /**
+     * Metodi pyytää pelaajaa valitsemaan jokaiselle laivalleen sijainnin (x, y) ja asettaa laivan tähän sijaintiin.
+     * Mikäli asettaminen ei onnistu, sama laiva asetetaan uudelleen (catch -haaran alla).
+     */
     
     public void asetaPelaajanLaivat() {
         for (int i = 1; i <= 4; i++) {
@@ -46,6 +55,11 @@ public class LaivojenLuoja {
         }
     }
     
+    /**
+     * Metodi sijoittaa tietokoneen laivat pelilaudalle sattumanvaraisesti.
+     * Mikäli asettaminen ei onnistu, sama laiva asetetaan uudelleen (catch -haaran alla).
+     */
+    
     public void asetaTietokoneenLaivat() {
         Random random = new Random();
         
@@ -71,6 +85,12 @@ public class LaivojenLuoja {
             }
         }
     }
+    /**
+     * Metodi pyytää pelaajaa valitsemaan asetettavalle laivalle suunnan (joka alas tai oikealle).
+     * 
+     * @param i
+     * @return Palauttaa valitun suunnan.
+     */
     
     private Suunta valitseSuunta(int i) {
         
@@ -99,12 +119,27 @@ public class LaivojenLuoja {
         return suunta;
     }
     
+    /**
+     * Metodi pyytää pelaajaa valitsemaan X tai Y koordinaatin ja palauttaa sen.
+     * 
+     * @param XtaiY
+     * @return 
+     */
+    
     private int valitseKoordinaatti(char XtaiY) {
         System.out.println("Valitse laivan " + XtaiY + " koordinaatin sijainti.");
         
         KoordinaatinValitsin valitsin = new KoordinaatinValitsin(this.lukija, this.peli.getPelaaja().getPelilauta());
         return valitsin.valitseKoordinaatti(XtaiY);
     }
+    
+    /**
+     * Metodi saa parametrinaan tiedon siitä, kuinka mones laiva pelilaudalle ollaan asettamassa ja "päättää" tämän
+     * perusteella asetettavan laivan koon.
+     * 
+     * @param i "monesko laiva"
+     * @return palauttaa ko. laivalle koon.
+     */
     
     private int haeKoko(int i) {
         int koko = 4;
@@ -117,6 +152,19 @@ public class LaivojenLuoja {
         }
         return koko;
     }
+    
+    /**
+     * Metodi asettaa käyttäjän pelilaudalle uuden laivan.
+     * Mikäli asettaminen ei onnistu, palauttaa metodi IllegalArgumentException -virheen, joka käsitellään yllä
+     * olevissa metodeissa catch -haarassa.
+     * 
+     * @param kayttaja Pelaaja tai Tietokone
+     * @param suunta Laivan suunta (alas tai oikealle)
+     * @param Xsij
+     * @param Ysij
+     * @param koko
+     * @throws IllegalArgumentException asettaminen ei onnistunut
+     */
     
     private void luoKayttajanLaudalleLaiva(Kayttaja kayttaja, Suunta suunta, int Xsij, int Ysij, int koko) throws IllegalArgumentException {
         Laiva laiva = new Laiva(new Sijainti(Xsij, Ysij), suunta, koko);

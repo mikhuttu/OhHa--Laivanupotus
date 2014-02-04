@@ -1,6 +1,12 @@
 package Laivanupotus.Sovelluslogiikka;
 import Laivanupotus.Tyokalut.Suunta;
 
+/**
+ * Laiva on luokka, joka nimensä mukaisesti kuvaa laivaa.
+ * Laivalla on tietty yksikäsitteinen Sijainti, mutta koska sen koko on suurempi kuin 1,
+ * se jatkuu sijainnista toiseen.
+ */
+
 public class Laiva {
     private Sijainti sijainti;
     private Suunta suunta;
@@ -24,6 +30,14 @@ public class Laiva {
         return this.koko;
     }
     
+    /**
+     * Metodi testaa, meneekö tämä ko. laiva päällekäin asetettavan (verrattava) laivan kanssa.
+     * Mikäli menee, metodi palauttaa true, ja tämä käsitellään muualla (myöh. LaivojenLuoja).
+     * 
+     * @param verrattava
+     * @return
+     */
+    
     public boolean menevatkoPaallekain(Laiva verrattava) {
         for (int i = 0; i < this.getKoko(); i++) {
             Sijainti thisSij = haeLaivanOsanSijainti(i);
@@ -35,6 +49,14 @@ public class Laiva {
         return false;
     }
     
+    /**
+     * Metodissa testataan, kuuluuko Sijainti verrattava tähän ko. laivaan siten että laivan Sijainti joko
+     * olisi se, tai sen osa olisi siinä Sijainnissa.
+     * Metodia käytetään mm. ampumiseen, mutta sillä on myös muita käyttötarkoituksia.
+     * 
+     * @param verrattava
+     * @return Palauttaa true mikäli "verrattava" on osa laivaa.
+     */
     
     public boolean osuiko(Sijainti verrattava) {
         for (int i = 0; i < this.koko; i++) {
@@ -47,6 +69,17 @@ public class Laiva {
         return false;
     }
     
+    /**
+     * Metodi hakee laivan osan sijainnin.
+     * Mikäli i = 0, metodi palauttaa laivan sijainnin. Muuten, se palauttaa i:n päässä laivan sijannista olevan
+     * sijainnin.
+     * 
+     * Metodia kutsuttaessa, i < laiva.koko.
+     * 
+     * @param i viittaa siihen, kuinka mones laivan osa kyseessä
+     * @return 
+     */
+    
     public Sijainti haeLaivanOsanSijainti(int i) {
         Sijainti laivanOsa = new Sijainti (this.sijainti.getX(), this.sijainti.getY());
         
@@ -58,6 +91,4 @@ public class Laiva {
         }
         return laivanOsa;            
     }
-    
-
 }

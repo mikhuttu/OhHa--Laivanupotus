@@ -20,8 +20,8 @@ public class PelilautaTest {
     @Test
     public void konstruktori_toimii() {
         KoonAsetusToimii();
-        pelilaudallaEiOleAlussaLaivoja();
         pelilaudallaOikeaMaaraRuutuja();
+        pelilaudallaEiOleAlussaLaivoja();
     }
     
     private void KoonAsetusToimii() {

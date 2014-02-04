@@ -4,6 +4,10 @@ import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
 import java.util.Random;
 
+/**
+ * "Helppo vaikeustaso", joka toimii siten että tietokone määrittää ammuttavan sijainnin sattumanvaraisesti.
+ */
+
 public class Easy implements Alykkyys {
     
     @Override

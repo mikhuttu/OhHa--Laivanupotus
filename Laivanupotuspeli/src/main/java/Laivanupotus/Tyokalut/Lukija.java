@@ -2,6 +2,12 @@ package Laivanupotus.Tyokalut;
 
 import java.util.Scanner;
 
+/**
+ * "Scanner -luokka"
+ * 
+ * Lukija voi lisäksi lukea tekstiä, joka on ainoastaan testauksen mahdollistamiseksi.
+ */
+
 public class Lukija {
     private Scanner lukija;
     
