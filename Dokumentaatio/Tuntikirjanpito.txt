@@ -54,4 +54,9 @@
 4.2.2014
 -5h
 -Mielekk‰‰t testit uusien toiminnallisuuksien pohjalle kirjoitettu.
--Javadocin sek‰ sekvenssikaavioiden aloitus
+-Javadocin aloitus
+
+5.2.2014
+-1h
+-Javadocia eteenp‰in
+-Luokkakaavio p‰ivitetty vastaamaan nykytilannetta
