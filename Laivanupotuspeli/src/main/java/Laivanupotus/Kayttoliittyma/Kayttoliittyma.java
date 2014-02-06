@@ -52,7 +52,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private void luoYlaOsanKomponentit() {
-        ylaosa = new LuoYlaosanLaivojenAsetusKomponetit().luo();
+        ylaosa = new LuoYlaosanLaivojenAsetusKomponetit(peli).luo();
     }
         
     private void luoVasemmanKomponentit() {

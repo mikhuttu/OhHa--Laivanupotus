@@ -5,10 +5,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import Laivanupotus.Sovelluslogiikka.Peli;
 
 public class LuoYlaosanLaivojenAsetusKomponetit {
     private JTextField suunta;
+    private Peli peli;
     
+    public LuoYlaosanLaivojenAsetusKomponetit(Peli peli) {
+        this.peli = peli;
+    }
     
     public JPanel luo() {
         int i = 1;
@@ -73,7 +78,7 @@ public class LuoYlaosanLaivojenAsetusKomponetit {
         sijainti.addActionListener(null);
         
         JButton luoLaiva = new JButton("LUO LAIVA");
-        luoLaiva.addActionListener(new LuoLaivanKuuntelija(sijainti, suunta));
+        luoLaiva.addActionListener(new LuoLaivanKuuntelija(sijainti, suunta, peli));
         
         alakentta.add(laivanSijainti);
         alakentta.add(sijainti);

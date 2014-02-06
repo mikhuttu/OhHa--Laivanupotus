@@ -41,9 +41,11 @@ public class LaivojenLuoja {
             System.out.println();
             int Ysij = valitseKoordinaatti('Y');
             System.out.println();
+            
+            Sijainti sijainti = new Sijainti(Xsij, Ysij);
 
             try {
-                luoKayttajanLaudalleLaiva(this.peli.getPelaaja(), suunta, Xsij, Ysij, koko);
+                luoKayttajanLaudalleLaiva(this.peli.getPelaaja(), suunta, sijainti, koko);
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Tähän paikkaan ei voi luoda laivaa.\n");
@@ -76,9 +78,10 @@ public class LaivojenLuoja {
             
             int Xsij = random.nextInt(laudanKoko - 1);
             int Ysij = random.nextInt(laudanKoko - 1);
+            Sijainti sijainti = new Sijainti(Xsij, Ysij);
             
             try {
-                luoKayttajanLaudalleLaiva(this.peli.getTietokone(), suunta, Xsij, Ysij, koko);
+                luoKayttajanLaudalleLaiva(this.peli.getTietokone(), suunta, sijainti, koko);
             }
             catch (IllegalArgumentException e) {
                 i--;
@@ -166,9 +169,15 @@ public class LaivojenLuoja {
      * @throws IllegalArgumentException asettaminen ei onnistunut
      */
     
-    private void luoKayttajanLaudalleLaiva(Kayttaja kayttaja, Suunta suunta, int Xsij, int Ysij, int koko) throws IllegalArgumentException {
-        Laiva laiva = new Laiva(new Sijainti(Xsij, Ysij), suunta, koko);
+    private void luoKayttajanLaudalleLaiva(Kayttaja kayttaja, Suunta suunta, Sijainti sijainti, int koko) throws IllegalArgumentException {
+        Laiva laiva = new Laiva(sijainti, suunta, koko);
         Pelilauta pelilauta = kayttaja.getPelilauta();  
         pelilauta.asetaLaiva(laiva);
+    }
+    
+    public void asetaPelaajanLaudalleLaiva(Suunta suunta, Sijainti sijainti) throws IllegalArgumentException {
+        Kayttaja kayttaja = this.peli.getPelaaja();
+        int koko = haeKoko(kayttaja.getPelilauta().getLaivat().size());
+        luoKayttajanLaudalleLaiva(kayttaja, suunta, sijainti, koko);
     }
 }
