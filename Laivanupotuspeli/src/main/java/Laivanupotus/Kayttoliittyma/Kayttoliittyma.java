@@ -11,7 +11,7 @@ import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Tyokalut.Lukija;
 
-public class Kayttoliittyma implements Runnable{
+public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
     private JPanel ylaosa;
