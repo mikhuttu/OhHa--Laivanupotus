@@ -1,162 +1,69 @@
 package Laivanupotus.Kayttoliittyma;
 
-import Laivanupotus.Ohjaus.LaivojenLuoja;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import Laivanupotus.Sovelluslogiikka.Peli;
-import Laivanupotus.Ohjaus.PelilaudanPiirtaja;
-import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Tyokalut.Lukija;
 
-/**
- * Käyttöliittymä -luokalla on tällä hetkellä paljon toiminnallisuuksia, joista varmaankin suuri osa
- * delegoidaan muualle.
- * 
- * Tällä hetkellä Käyttöliittymä -luokka hallitsee koko pelin toimintaa.
- */
+public class Kayttoliittyma implements Runnable{
 
-public class Kayttoliittyma implements Runnable {
+    private JFrame frame;
+    private JPanel ylaosa;
+    private JPanel vasen;
+    private JPanel oikea;
+    
     private Peli peli;
-    private Lukija lukija;
+    
+    public Kayttoliittyma() {
+        this.peli = new Peli(Aly.EASY, new Lukija());
+    }
     
     @Override
     public void run() {
-        tulostaAloitusNakyma();
-        this.lukija = new Lukija();
-        this.peli = new Peli(valitseTietokoneAly(), this.lukija);
-       
-        kaynnista();
+        frame = new JFrame("Laivanupotus");
+        frame.setPreferredSize(new Dimension(640,480));
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        luoJPanelienKomponentit(frame.getContentPane());
+        frame.pack();
+        frame.setVisible(true);
     }
     
-    private void tulostaAloitusNakyma() {
-        System.out.println("------------------");
-        System.out.println(" LAIVANUPOTUSPELI ");
-        System.out.println("------------------");
+    private void luoJPanelienKomponentit(Container container) {
+        container.setLayout(new BorderLayout());
         
-        System.out.println("\nLuodaan laivat... Seuraa ohjeita.");
+        luoYlaOsanKomponentit();
+        luoVasemmanKomponentit();
+        luoOikeanKomponentit();
+        
+        JPanel alaosa = new JPanel(new GridLayout(2,1));
+        alaosa.add(vasen);
+        alaosa.add(oikea);
+        
+        container.add(ylaosa, BorderLayout.NORTH);
+//        container.add(new JPanel(), BorderLayout.WEST);
+//        container.add(new JPanel(), BorderLayout.EAST);
     }
     
-    private Aly valitseTietokoneAly() {
-        while (true) {
-            System.out.println("\nValitse vaikeusaste:\n(1) Easy\n(2) Impossible\n");
+    private void luoYlaOsanKomponentit() {
+        ylaosa = new LuoYlaosanLaivojenAsetusKomponetit().luo();
+    }
         
-            try {
-                int luku = this.lukija.seuraavaRiviKokonaislukuna();
-                System.out.println();
-                
-                if (luku == 1) {
-                    return Aly.EASY;
-                }
-                else if (luku == 2) {
-                    return Aly.IMPOSSIBLE;
-                }
-                System.out.println("Syötä joko '1' tai '2'");
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("\nSyötä joko '1' tai '2'");
-            }
-        }
-        
+    private void luoVasemmanKomponentit() {
+        vasen = new JPanel(new GridLayout(6,6));
     }
     
-    private void asetaKayttajienLaivat() {
-        LaivojenLuoja luoja = new LaivojenLuoja(this.peli);
-        luoja.asetaPelaajanLaivat();
-        luoja.asetaTietokoneenLaivat();
-    }
-
-    private void piirraPelilauta(Kayttaja kayttaja) {
-        PelilaudanPiirtaja piirtaja = new PelilaudanPiirtaja(kayttaja);
-        piirtaja.piirraPelilauta();
+    private void luoOikeanKomponentit() {
+        oikea = new JPanel(new GridLayout(6,6));
     }
     
-    /**
-     * kaynnista -metodin sisällä on oikeastaan koko pelin toiminnallisuus.
-     * Metodi pyytää ensin käyttäjiä asettamaan laivansa, jonka jälkeen suoritetaan seuraavaKierros
-     * käyttäen parametrina käyttäjää, joka on kierroksella vuorossa.
-     * 
-     * tuloste alustetaan pointtaamaan tekstiin "HÄVISIT!!! :P" jo alussa, sillä todennäköisyys siihen että
-     * käyttäjä valitsi vaikeusasteeksi Impossible ja hävisi pelin on suuri.
-     */
-    
-    public void kaynnista() {
-        
-        System.out.println("Pelaajan pelilauta:\n");
-        piirraPelilauta(this.peli.getPelaaja());
-        
-        asetaKayttajienLaivat();
-        
-        System.out.println("Tietokoneen pelilauta:\n");
-        piirraPelilauta(this.peli.getTietokone());
-        
-        String tuloste = "HÄVISIT!!! :P";
-        while (true) {
-            if(!seuraavaKierros(this.peli.getPelaaja())) {
-                tuloste = "VOITIT PELIN!!!";
-                break;
-            }
-            System.out.println("(Tietokoneen vuoro...)\n");
-            if (!seuraavaKierros(this.peli.getTietokone())) {
-                break;
-            }
-        }
-        System.out.println(tuloste);
-    }
-    
-    /**
-     * Pyydetään käyttäjää suorittamaan vuoronsa niin monta kertaa peräkkäin kun osuu vastustajaan (ellei peli lopu
-     * vastustajan laivojen tuhoutumisen myötä).
-
-     * @param kayttaja
-     * @return 
-     */
-    private boolean seuraavaKierros(Kayttaja kayttaja) {
-        boolean osuikoVastustajanLaivaan = false;
-        
-        while (true) {  // mahdollisuus ampua monesti peräkäin.
-            
-            while (true) {
-                try {
-                    osuikoVastustajanLaivaan = this.peli.suoritaVuoro(kayttaja);
-                    break;
-                }
-                catch (IllegalArgumentException e) {    // suoritetaan mikäli ammutaan jo ammuttuun ruutuun.
-                }
-            }
-        
-            pyydaPiirtamaanVastustajanPelilauta(kayttaja);
-            
-            nuku();
-            
-            if (!this.peli.jatketaanko()) {
-                return false;
-            }
-            
-            if (!osuikoVastustajanLaivaan) {
-                break;
-            }
-        }
-
-        return true;
-    }
-    
-    private void pyydaPiirtamaanVastustajanPelilauta(Kayttaja kayttaja) {
-        if (kayttaja.getClass() == this.peli.getPelaaja().getClass()) {
-            System.out.println("Tietokoneen pelilauta:\n"); 
-            piirraPelilauta(this.peli.getTietokone());
-        }
-        
-        else {
-            System.out.println("Pelaajan pelilauta:\n");
-            piirraPelilauta(this.peli.getPelaaja());
-        }
-    }
-    
-    private void nuku() {
-        try {
-            Thread.sleep(300);
-        }
-        
-        catch (InterruptedException ie) {
-        }
+    public JFrame getFrame() {
+        return frame;
     }
 }
