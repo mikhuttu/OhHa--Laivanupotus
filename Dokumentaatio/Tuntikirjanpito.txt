@@ -60,3 +60,8 @@
 -1h
 -Javadocia eteenpäin
 -Luokkakaavio päivitetty vastaamaan nykytilannetta
+
+6.2.2014
+-4h
+-Graafisen käyttöliittymän toteutus aloitettu ja muutama käyttöliittymäluokka luotu
+-Kolme sekvenssikaaviota piirretty
