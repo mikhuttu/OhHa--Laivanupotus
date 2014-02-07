@@ -170,6 +170,10 @@ public class LaivojenLuoja {
      */
     
     private void luoKayttajanLaudalleLaiva(Kayttaja kayttaja, Suunta suunta, Sijainti sijainti, int koko) throws IllegalArgumentException {
+        if (kayttaja == null || suunta == null || sijainti == null) {
+            throw new IllegalArgumentException();
+        }
+        
         Laiva laiva = new Laiva(sijainti, suunta, koko);
         Pelilauta pelilauta = kayttaja.getPelilauta();  
         pelilauta.asetaLaiva(laiva);

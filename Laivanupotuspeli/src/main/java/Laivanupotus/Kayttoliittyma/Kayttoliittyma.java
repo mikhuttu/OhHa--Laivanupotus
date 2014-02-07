@@ -14,14 +14,16 @@ import Laivanupotus.Tyokalut.Lukija;
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private JPanel ylaosa;
     private JPanel vasen;
     private JPanel oikea;
+    
+    private LuoYlaosanLaivojenAsetusKomponetit ylaosa;
     
     private Peli peli;
     
     public Kayttoliittyma() {
         this.peli = new Peli(Aly.EASY, new Lukija());
+        this.ylaosa = new LuoYlaosanLaivojenAsetusKomponetit(this);
     }
     
     @Override
@@ -38,21 +40,23 @@ public class Kayttoliittyma implements Runnable {
     private void luoJPanelienKomponentit(Container container) {
         container.setLayout(new BorderLayout());
         
-        luoYlaOsanKomponentit();
+        luoYlaOsanKomponentit(container);
         luoVasemmanKomponentit();
         luoOikeanKomponentit();
         
         JPanel alaosa = new JPanel(new GridLayout(2,1));
         alaosa.add(vasen);
         alaosa.add(oikea);
-        
-        container.add(ylaosa, BorderLayout.NORTH);
+
 //        container.add(new JPanel(), BorderLayout.WEST);
 //        container.add(new JPanel(), BorderLayout.EAST);
     }
     
-    private void luoYlaOsanKomponentit() {
-        ylaosa = new LuoYlaosanLaivojenAsetusKomponetit(peli).luo();
+    private void luoYlaOsanKomponentit(Container container) {
+        int laivanIndeksi = peli.getPelaaja().getPelilauta().getLaivat().size() + 1;
+        JPanel ylhaalla = ylaosa.luo(laivanIndeksi);
+        
+        container.add(ylhaalla, BorderLayout.NORTH);
     }
         
     private void luoVasemmanKomponentit() {
@@ -65,5 +69,24 @@ public class Kayttoliittyma implements Runnable {
     
     public JFrame getFrame() {
         return frame;
+    }
+    
+    public Peli getPeli() {
+        return this.peli;
+    }
+    
+    public void laivaAsetettiinPelilaudalle() {
+        int laivoja = peli.getPelaaja().getPelilauta().getLaivat().size();
+        if (laivoja < 4) {
+            JPanel paivitetty = ylaosa.paivita(laivoja + 1);
+            frame.getContentPane().add(paivitetty, BorderLayout.NORTH);
+            frame.pack();
+        }
+        else {
+        }
+    }
+    
+    public void laivanAsetusPelilaudalleEiOnnistunut() {
+        
     }
 }

@@ -5,19 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import Laivanupotus.Ohjaus.LaivojenLuoja;
-import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Tyokalut.Suunta;
 
 public class LuoLaivanKuuntelija implements ActionListener {
     private JTextField sijaintiKentta;
     private JTextField suuntaKentta;
-    private Peli peli;
+    private Kayttoliittyma kayttoliittyma;
     
-    public LuoLaivanKuuntelija(JTextField sijaintiKentta, JTextField suuntaKentta, Peli peli) {
+    public LuoLaivanKuuntelija(JTextField sijaintiKentta, JTextField suuntaKentta, Kayttoliittyma kayttoliittyma) {
         this.sijaintiKentta = sijaintiKentta;
         this.suuntaKentta = suuntaKentta;
-        this.peli = peli;
+        this.kayttoliittyma = kayttoliittyma;
     }
     
     @Override
@@ -25,18 +24,21 @@ public class LuoLaivanKuuntelija implements ActionListener {
         Suunta suunta = palautaTekstiKentanSisaltoaVastaavaSuunta();
         Sijainti sijainti = palautaTekstiKentanSisaltoaVastaavaSijainti();
         
-        LaivojenLuoja luoja = new LaivojenLuoja(peli);
+        sijainti = new Sijainti(0,2);
+        
+        LaivojenLuoja luoja = new LaivojenLuoja(kayttoliittyma.getPeli());
         try {
             luoja.asetaPelaajanLaudalleLaiva(suunta, sijainti);
+            kayttoliittyma.laivaAsetettiinPelilaudalle();
         }
         catch (IllegalArgumentException e) {
-            // lähetä tieto eteenpäin että laivan asettaminen epäonnistui
+            kayttoliittyma.laivanAsetusPelilaudalleEiOnnistunut();
         }
     }
     
     
     private Suunta palautaTekstiKentanSisaltoaVastaavaSuunta() {
-        if (suuntaKentta == null) {
+        if (suuntaKentta.getText().equals("")) {
             return null;
         }
             String sisalto = this.suuntaKentta.getText();
@@ -48,7 +50,7 @@ public class LuoLaivanKuuntelija implements ActionListener {
     }
     
     private Sijainti palautaTekstiKentanSisaltoaVastaavaSijainti() {
-        if (sijaintiKentta.getText() == null) {
+        if (sijaintiKentta.getText().equals("")) {
             return null;
         }
         
