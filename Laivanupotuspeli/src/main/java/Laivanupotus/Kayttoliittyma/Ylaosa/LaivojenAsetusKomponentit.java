@@ -1,31 +1,34 @@
-package Laivanupotus.Kayttoliittyma;
+package Laivanupotus.Kayttoliittyma.Ylaosa;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
-public class LuoYlaosanLaivojenAsetusKomponetit {
+public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     private Kayttoliittyma kayttoliittyma;
-    private JTextField kommentti;
+    private JLabel laivanKoko;
     private JTextField sijainti;
     private JTextField suunta;
-    private JPanel ylaosa;
     
-    public LuoYlaosanLaivojenAsetusKomponetit(Kayttoliittyma kayttoliittyma) {
+    
+    public JPanel seuraava(int laivanIndeksi) {
+        laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
+        suunta.setText("");
+        sijainti.setText("");
+        kommentti.setText("Valitse " + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
+        return ylaosa;
+    }
+    
+    
+    public LaivojenAsetusKomponentit(Kayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
         this.ylaosa = new JPanel(new GridLayout(4,1));
     }
     
-    public JPanel paivita(int laivanIndeksi) {
-        suunta.setText("");
-        sijainti.setText("");
-        kommentti.setText("Valitse" + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
-        return ylaosa;
-    }
-    
-    public JPanel luo(int laivanIndeksi) {
+    public void luo(int laivanIndeksi) {
         ylaosa = new JPanel(new GridLayout(4,1));
         
         JPanel ylakentta = ylakentta(laivanIndeksi);
@@ -37,8 +40,6 @@ public class LuoYlaosanLaivojenAsetusKomponetit {
         ylaosa.add(keskikentta);
         ylaosa.add(alakentta);
         ylaosa.add(kommenttikentta);
-        
-        return ylaosa;
     }
     
     private int haeKoko(int laivanIndeksi) {
@@ -57,7 +58,7 @@ public class LuoYlaosanLaivojenAsetusKomponetit {
     private JPanel ylakentta(int laivanIndeksi) {
         JPanel ylakentta = new JPanel(new GridLayout(1,1));
 
-        JLabel laivanKoko = new JLabel(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
+        laivanKoko = new JLabel(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
         
         ylakentta.add(laivanKoko);
         return ylakentta;
@@ -113,10 +114,9 @@ public class LuoYlaosanLaivojenAsetusKomponetit {
         
         kommentti = new JTextField("Valitse " + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
         kommentti.setEnabled(false);
-        kommentti.addActionListener(null);
 
         kommenttikentta.add(kommentti);
-        kommenttikentta.add(new JLabel());
+        kommenttikentta.add(new JPanel());
         
         return kommenttikentta;
     }

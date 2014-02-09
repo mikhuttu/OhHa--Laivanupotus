@@ -1,12 +1,15 @@
-package Laivanupotus.Kayttoliittyma;
+package Laivanupotus.Kayttoliittyma.Ylaosa;
 
 
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import Laivanupotus.Ohjaus.LaivojenLuoja;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Tyokalut.Suunta;
+
+import java.util.Random;
 
 public class LuoLaivanKuuntelija implements ActionListener {
     private JTextField sijaintiKentta;
@@ -24,7 +27,10 @@ public class LuoLaivanKuuntelija implements ActionListener {
         Suunta suunta = palautaTekstiKentanSisaltoaVastaavaSuunta();
         Sijainti sijainti = palautaTekstiKentanSisaltoaVastaavaSijainti();
         
-        sijainti = new Sijainti(0,2);
+        Random arpoja = new Random();
+        
+        
+        sijainti = new Sijainti(arpoja.nextInt(6), arpoja.nextInt(6));
         
         LaivojenLuoja luoja = new LaivojenLuoja(kayttoliittyma.getPeli());
         try {

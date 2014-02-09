@@ -65,3 +65,7 @@
 -4h
 -Graafisen käyttöliittymän toteutus aloitettu ja muutama käyttöliittymäluokka luotu
 -Kolme sekvenssikaaviota piirretty
+
+8-9.2.2014
+-3h
+-Käyttöliittymän yläkomponentti alkaa tulla pikkuhiljaa valmiiksi. Ongelmana vielä yläkomponentin vaihto ilman bugeja, kun 4 laivaa on pelilaudalle asetettu.

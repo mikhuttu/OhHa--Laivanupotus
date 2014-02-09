@@ -1,10 +1,9 @@
-package Laivanupotus.Kayttoliittyma;
+package Laivanupotus.Kayttoliittyma.Ylaosa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import Laivanupotus.Tyokalut.Suunta;
 
 public class SuuntaNappienKuuntelija implements ActionListener {
     private JTextField suuntaKentta;
@@ -26,6 +25,4 @@ public class SuuntaNappienKuuntelija implements ActionListener {
             suuntaKentta.setText("OIKEALLE");
         }
     }
-    
-
 }
