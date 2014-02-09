@@ -8,7 +8,6 @@ public abstract class Kayttaja {
     private int vastustajaanOsuneet;
     
     public abstract boolean ammu(Pelilauta vastustajanLauta, Sijainti sijainti);
-    public abstract boolean suoritaVuoro(Pelilauta vastustajanLauta);
     public abstract Pelilauta getPelilauta();
     
     public Kayttaja() {

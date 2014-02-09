@@ -1,8 +1,5 @@
 package Laivanupotus.Kayttoliittyma;
 
-import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
-import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
-import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
+import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
+import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
 import Laivanupotus.Ohjaus.PelilaudanPiirtaja;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Peli;
@@ -36,25 +36,25 @@ public class Kayttoliittyma implements Runnable {
         frame.setPreferredSize(new Dimension(640,480));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        luoKomponentitAlussa();
+        luoKomponentit();
         
         frame.pack();
         frame.setVisible(true);
     }
     
-    private void luoKomponentitAlussa() {
+    private void luoKomponentit() {
         frame.getContentPane().setLayout(new BorderLayout());
         
         luoLaivojenAsetusKomponentit();
         
-        // luoVasenPelilauta();
-        // luoOikeaPelilauta();
+         luoVasenPelilauta();
+         luoOikeaPelilauta();
         
-        // JPanel alaosa = new JPanel(new GridLayout(2,1));
-        // alaosa.add(vasen);
-        // alaosa.add(oikea);
-        //        
-        // frame.getContentPane().add(alaosa, BorderLayout.SOUTH);
+         JPanel alaosa = new JPanel(new GridLayout(2,1));
+         alaosa.add(vasen);
+         alaosa.add(oikea);
+                
+         frame.getContentPane().add(alaosa, BorderLayout.SOUTH);
     }
     
     private void luoLaivojenAsetusKomponentit() {
@@ -83,22 +83,16 @@ public class Kayttoliittyma implements Runnable {
     
     public void laivaAsetettiinPelilaudalle() {
         int laivoja = peli.getPelaaja().getPelilauta().getLaivat().size();
+        piirraPelilauta(this.peli.getPelaaja());
+        
+        if (laivoja >= 4) {
+            luoAmpumisKomponentit();
+            return;
+        }
         
         LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
         komponentit.seuraava(laivoja + 1);
-        piirraPelilauta(this.peli.getPelaaja());
-        
-        if (laivoja < 4) {
-            paivitaYlaOsa();
-        }
-        else {
-            luoAmpumisKomponentit();
-        }
-    }
-    
-    public void laivanAsetusPelilaudalleEiOnnistunut() {
-        LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
-        komponentit.kommenttiPaivitys("Tähän paikkaan ei voi luoda laivaa.");
+
         paivitaYlaOsa();
     }
     
@@ -109,7 +103,6 @@ public class Kayttoliittyma implements Runnable {
     
     private void luoAmpumisKomponentit() {
         this.ylaosa = new AmpumisKomponentit(this);
-        paivitaYlaOsa();
         
         AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
         komponentit.luo();
@@ -118,7 +111,36 @@ public class Kayttoliittyma implements Runnable {
     
     private void paivitaYlaOsa() {
         JPanel paivitetty = ylaosa.getPanel();
-        frame.getContentPane().add(paivitetty, BorderLayout.NORTH);
+        
+        if (frame.getContentPane().getComponentCount() > 0) {
+            frame.getContentPane().remove(0);                           // poistaa vanhan JPanel-olion.
+        }
+        
+        frame.getContentPane().add(paivitetty, BorderLayout.NORTH, 0);  // asettaa uuden JPanel-olion vanhan paikalle.
         frame.pack();
+    }
+    
+    
+    public void osuttiinLaivaan() {
+         paivitaKommentti("");
+        // soita joku ääni koska osuttiin?
+        // seuraavaksi tietokoneen vuoro
+    }
+    
+    public void eiOsuttuLaivaan() {
+        paivitaKommentti("");
+        // seuraavaksi tietokoneen vuoro
+    }
+    
+    public void paivitaKommentti(String kommentti) {
+        if (ylaosa.getClass() == AmpumisKomponentit.class) {
+            AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
+            komponentit.kommenttiPaivitys(kommentti);
+        }
+        else {
+            LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
+            komponentit.kommenttiPaivitys(kommentti);
+        }
+        paivitaYlaOsa();
     }
 }

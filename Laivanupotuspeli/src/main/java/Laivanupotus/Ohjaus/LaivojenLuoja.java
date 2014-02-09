@@ -147,10 +147,10 @@ public class LaivojenLuoja {
     private int haeKoko(int i) {
         int koko = 4;
             
-        if (i > 1 && i < 4) {
+        if (i == 1 || i == 2) {
             koko = 3;
         }
-        else if (i == 4) {
+        else if (i == 3) {
             koko = 2;
         }
         return koko;

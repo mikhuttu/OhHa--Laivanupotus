@@ -12,6 +12,8 @@ AMPUMISKOMPONENTIT
 "Valitse ammuttava ruutu oik. pelilaudalta: " [sijainti]	[AMMU]
 [kommenttikenttä] 					/ "Valitsit ruudun johon on jo ammuttu." / "Tietokoneen vuoro..."
 
+
+
 1. Tulosta kaksi pelilautaa vierekkäin ja niiden väliin tyhjää tilaa.
 2. Tulosta pelilaudan yläpuolelle tekstikenttä jossa lukee:
 

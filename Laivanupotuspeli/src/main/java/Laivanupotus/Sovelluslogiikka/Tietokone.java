@@ -44,7 +44,6 @@ public class Tietokone extends Kayttaja {
      * @throws IllegalArgumentException 
      */
     
-    @Override
     public boolean suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
         boolean osuiko = false;
         Sijainti sijainti = maaritaSijainti(vastustajanLauta);

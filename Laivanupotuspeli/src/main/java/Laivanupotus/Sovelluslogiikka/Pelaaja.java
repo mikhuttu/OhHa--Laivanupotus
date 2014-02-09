@@ -52,8 +52,7 @@ public class Pelaaja extends Kayttaja {
      * @throws IllegalArgumentException Ampuminen epäonnistuu, koska sijaintiin on jo ammuttu.
      */
     
-    @Override
-    public boolean suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
+    public boolean suoritaVuoroAlkuperainen(Pelilauta vastustajanLauta) throws IllegalArgumentException {
         System.out.println("Valitse ammuttava koordinaatti.");
         Sijainti sijainti = valitseAmmuttavaSijainti(vastustajanLauta);
         
@@ -65,6 +64,16 @@ public class Pelaaja extends Kayttaja {
         }
         return osuiko;
     }
+    
+    public boolean suoritaVuoro(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+        boolean osuiko = false;
+        
+        if (ammu(vastustajanLauta, sijainti)) {
+            kasvataVastustajaanOsuneet();
+            osuiko = true;
+        }
+        return osuiko;
+    }    
     
     /**
      * Palauttaa ammuttavan sijainnin "suoritaVuoro" metodille.
@@ -98,6 +107,9 @@ public class Pelaaja extends Kayttaja {
     
     @Override
     public boolean ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+        if (sijainti == null) {
+            throw new IllegalArgumentException();
+        }
         
         if(vastustajanLauta.onkoRuutuunAmmuttu(sijainti)) {
             System.out.println("Ruutuun on jo ammuttu.\nValitse toinen ruutu.\n");

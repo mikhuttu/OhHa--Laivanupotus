@@ -71,15 +71,12 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         
         suunta = new JTextField();
         suunta.setEnabled(false);
-        
-        
         JButton alasNappi = new JButton("ALAS");
         JButton oikealleNappi = new JButton("OIKEALLE");
 
         SuuntaNappienKuuntelija suunnanKuuntelija = new SuuntaNappienKuuntelija(suunta, alasNappi, oikealleNappi);
         alasNappi.addActionListener(suunnanKuuntelija);
         oikealleNappi.addActionListener(suunnanKuuntelija);
-        
         
         keskikentta.add(laivanSuunta);
         keskikentta.add(suunta);
@@ -95,11 +92,11 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         JLabel laivanSijainti = new JLabel("Laivan sijainti: ");
         
         sijainti = new JTextField();
-        sijainti.setEnabled(false);
+        sijainti.setEnabled(true);              // testauksen takia true
         sijainti.addActionListener(null);
         
         JButton luoLaiva = new JButton("LUO LAIVA");
-        luoLaiva.addActionListener(new LuoLaivanKuuntelija(sijainti, suunta, kayttoliittyma));
+        luoLaiva.addActionListener(new LuoLaivanKuuntelija(kayttoliittyma, sijainti, suunta));
         
         alakentta.add(laivanSijainti);
         alakentta.add(sijainti);

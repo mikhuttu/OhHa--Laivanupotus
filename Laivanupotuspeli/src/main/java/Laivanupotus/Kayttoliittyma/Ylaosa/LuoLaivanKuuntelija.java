@@ -1,6 +1,5 @@
 package Laivanupotus.Kayttoliittyma.Ylaosa;
 
-
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,85 +8,47 @@ import Laivanupotus.Ohjaus.LaivojenLuoja;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Tyokalut.Suunta;
 
-import java.util.Random;
-
 public class LuoLaivanKuuntelija implements ActionListener {
+    private Kayttoliittyma kayttoliittyma;
     private JTextField sijaintiKentta;
     private JTextField suuntaKentta;
-    private Kayttoliittyma kayttoliittyma;
     
-    public LuoLaivanKuuntelija(JTextField sijaintiKentta, JTextField suuntaKentta, Kayttoliittyma kayttoliittyma) {
+    public LuoLaivanKuuntelija(Kayttoliittyma kayttoliittyma, JTextField sijaintiKentta, JTextField suuntaKentta) {
+        this.kayttoliittyma = kayttoliittyma;
         this.sijaintiKentta = sijaintiKentta;
         this.suuntaKentta = suuntaKentta;
-        this.kayttoliittyma = kayttoliittyma;
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        Suunta suunta = palautaTekstiKentanSisaltoaVastaavaSuunta();
-        Sijainti sijainti = palautaTekstiKentanSisaltoaVastaavaSijainti();
-        
-        Random arpoja = new Random();
-        
-        
-        sijainti = new Sijainti(arpoja.nextInt(6), arpoja.nextInt(6));
-        
         LaivojenLuoja luoja = new LaivojenLuoja(kayttoliittyma.getPeli());
+        Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
+        Suunta suunta = palautaTekstiKentanSisaltoaVastaavaSuunta(suuntaKentta);
+        
         try {
             luoja.asetaPelaajanLaudalleLaiva(suunta, sijainti);
             kayttoliittyma.laivaAsetettiinPelilaudalle();
         }
+        
         catch (IllegalArgumentException e) {
-            kayttoliittyma.laivanAsetusPelilaudalleEiOnnistunut();
+            String virheIlmoitus = "Tähän paikkaan ei voi luoda laivaa.";
+            if (suunta == null || sijainti == null) {
+                virheIlmoitus = "Valitse laivalle ensin suunta ja sijainti.";
+            }
+            
+            kayttoliittyma.paivitaKommentti(virheIlmoitus);
         }
     }
     
-    
-    private Suunta palautaTekstiKentanSisaltoaVastaavaSuunta() {
+    private Suunta palautaTekstiKentanSisaltoaVastaavaSuunta(JTextField suuntaKentta) {
         if (suuntaKentta.getText().equals("")) {
             return null;
         }
-            String sisalto = this.suuntaKentta.getText();
+            String sisalto = suuntaKentta.getText();
         
         if (sisalto.equals("ALAS")) {
             return Suunta.ALAS;
         }
         return Suunta.OIKEALLE;
-    }
-    
-    private Sijainti palautaTekstiKentanSisaltoaVastaavaSijainti() {
-        if (sijaintiKentta.getText().equals("")) {
-            return null;
-        }
-        
-        String teksti = sijaintiKentta.getText();
-        String x = "";
-        String y = "";
-        boolean pilkku = false;
-        
-        for (int i = 0; i < teksti.length(); i++) {
-            char merkki = teksti.charAt(i);
-
-            try {
-                Integer.parseInt("" + merkki);
-                if (!pilkku) {
-                    x += merkki;
-                }
-                else {
-                    y += merkki;
-                }
-            }
-            catch (NumberFormatException e) {
-                if (merkki == ',') {
-                    pilkku = true;
-                }
-            }
-            
-        }
-        
-        int Xsij = Integer.parseInt(x);
-        int Ysij = Integer.parseInt(y);
-        
-        return new Sijainti(Xsij, Ysij);
     }
 }

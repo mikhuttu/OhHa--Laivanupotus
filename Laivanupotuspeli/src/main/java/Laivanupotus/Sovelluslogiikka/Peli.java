@@ -39,10 +39,12 @@ public class Peli {
     
     public boolean suoritaVuoro(Kayttaja kayttaja) throws IllegalArgumentException {
         if (kayttaja.equals(pelaaja)) {
-            return this.pelaaja.suoritaVuoro(this.tietokone.getPelilauta());
+            Pelaaja p = (Pelaaja) kayttaja;
+            return p.suoritaVuoroAlkuperainen(this.tietokone.getPelilauta());
         }
         else {
-            return this.tietokone.suoritaVuoro(this.pelaaja.getPelilauta());
+            Tietokone t = (Tietokone) kayttaja;
+            return t.suoritaVuoro(this.pelaaja.getPelilauta());
         } 
     }
     

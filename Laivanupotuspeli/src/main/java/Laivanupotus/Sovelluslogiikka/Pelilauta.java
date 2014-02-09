@@ -105,21 +105,21 @@ public class Pelilauta {
      * @return 
      */
     private boolean laivaMeneeRuudukonYli(Laiva laiva) {
-        int laivanKoko = laiva.getKoko();
+        int siirtyma = laiva.getKoko() - 1;
         Sijainti sijainti = new Sijainti(laiva.getSijainti().getX(), laiva.getSijainti().getY());
         
         if (laiva.getSuunta() == Suunta.ALAS) {
-            sijainti.kasvataY(laivanKoko);
+            sijainti.kasvataY(siirtyma);
         }
         else {
-            sijainti.kasvataX(laivanKoko);
+            sijainti.kasvataX(siirtyma);
         }
 
-        if (Math.max(sijainti.getX(), sijainti.getY()) > this.koko) {
-            return true;
+        if (Math.max(sijainti.getX(), sijainti.getY()) < this.koko) {
+            return false;
         }
 
-        return false;  
+        return true;
     }
     
     /**
