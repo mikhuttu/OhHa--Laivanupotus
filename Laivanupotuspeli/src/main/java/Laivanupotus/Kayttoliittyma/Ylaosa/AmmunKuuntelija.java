@@ -24,12 +24,7 @@ public class AmmunKuuntelija implements ActionListener {
         
         try {
             boolean osuiko = pelaaja.suoritaVuoro(this.kayttoliittyma.getPeli().getTietokone().getPelilauta(), sijainti);
-            if (osuiko) {
-                kayttoliittyma.osuttiinLaivaan();
-            }
-            else {
-                kayttoliittyma.eiOsuttuLaivaan();
-            }
+            kayttoliittyma.pelaajaAmpui(osuiko);
         }
         catch (IllegalArgumentException e) {
             String virheIlmoitus = "Valitse ensin ruutu johon ampua.";

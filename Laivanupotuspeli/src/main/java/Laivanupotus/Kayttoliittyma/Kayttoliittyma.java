@@ -7,12 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import Laivanupotus.Kayttoliittyma.Aloitusnakyma.AloitusNakyma;
 import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
+import Laivanupotus.Ohjaus.LaivojenLuoja;
 import Laivanupotus.Ohjaus.PelilaudanPiirtaja;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Peli;
+import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Tyokalut.Lukija;
 
@@ -22,13 +25,9 @@ public class Kayttoliittyma implements Runnable {
     private JPanel vasen;
     private JPanel oikea;
     private YlaOsanKomponentit ylaosa;
+    private AloitusNakyma aloitusnakyma;
     
-    private final Peli peli;
-    
-    public Kayttoliittyma() {
-        this.peli = new Peli(Aly.EASY, new Lukija());
-        this.ylaosa = new LaivojenAsetusKomponentit(this);
-    }
+    private Peli peli;
     
     @Override
     public void run() {
@@ -36,28 +35,47 @@ public class Kayttoliittyma implements Runnable {
         frame.setPreferredSize(new Dimension(640,480));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        luoKomponentit();
+        frame.getContentPane().setLayout(new BorderLayout());
+        
+        luoAloitusNakyma();
         
         frame.pack();
         frame.setVisible(true);
     }
     
-    private void luoKomponentit() {
-        frame.getContentPane().setLayout(new BorderLayout());
-        
+    private void luoAloitusNakyma() {
+        this.aloitusnakyma = new AloitusNakyma(this);
+        aloitusnakyma.luo();
+        frame.getContentPane().add(aloitusnakyma.getPanel(), BorderLayout.NORTH);
+    }
+    
+    public void aloitaPeli(Aly aly) {
+        this.peli = new Peli(aly, new Lukija());
+        luoTietokoneenLaivat();
+        frame.getContentPane().remove(0);
+        luoPaaKomponentit();
+    }
+    
+    public Peli getPeli() {
+        return this.peli;
+    }
+    
+    private void luoPaaKomponentit() {
         luoLaivojenAsetusKomponentit();
         
-         luoVasenPelilauta();
-         luoOikeaPelilauta();
+        luoVasenPelilauta();
+        luoOikeaPelilauta();
         
-         JPanel alaosa = new JPanel(new GridLayout(2,1));
-         alaosa.add(vasen);
-         alaosa.add(oikea);
+        JPanel alaosa = new JPanel(new GridLayout(2,1));
+        alaosa.add(vasen);
+        alaosa.add(oikea);
                 
-         frame.getContentPane().add(alaosa, BorderLayout.SOUTH);
+        frame.getContentPane().add(alaosa, BorderLayout.SOUTH);
     }
     
     private void luoLaivojenAsetusKomponentit() {
+        this.ylaosa = new LaivojenAsetusKomponentit(this);
+        
         int laivanIndeksi = peli.getPelaaja().getPelilauta().getLaivat().size() + 1;
         LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
         komponentit.luo(laivanIndeksi);
@@ -71,14 +89,6 @@ public class Kayttoliittyma implements Runnable {
     
     private void luoOikeaPelilauta() {
         oikea = new JPanel(new GridLayout(6,6));
-    }
-    
-    public JFrame getFrame() {
-        return frame;
-    }
-    
-    public Peli getPeli() {
-        return this.peli;
     }
     
     public void laivaAsetettiinPelilaudalle() {
@@ -121,15 +131,73 @@ public class Kayttoliittyma implements Runnable {
     }
     
     
-    public void osuttiinLaivaan() {
-         paivitaKommentti("");
-        // soita joku ääni koska osuttiin?
-        // seuraavaksi tietokoneen vuoro
+    // kaikki mitä tän alta löytyy vois olla jossain muualla. "KayttoliittymaLogiikka" ?
+    
+    private void luoTietokoneenLaivat() {
+        LaivojenLuoja luoja = new LaivojenLuoja(this.peli);
+        luoja.asetaTietokoneenLaivat();
     }
     
-    public void eiOsuttuLaivaan() {
-        paivitaKommentti("");
-        // seuraavaksi tietokoneen vuoro
+    public void pelaajaAmpui(boolean osuiko) {
+        piirraPelilauta(this.peli.getTietokone());
+        if (osuiko) {
+            osuttiinLaivaan();
+        }
+        else {
+            eiOsuttuLaivaan();
+        }
+    }
+    
+    private void osuttiinLaivaan() {
+        // soita joku ääni koska osuttiin?
+        
+        if (!this.peli.jatketaanko()) {
+            peliPaattyi(true);
+        }
+        seuraavaVuoro(this.peli.getPelaaja());
+    }
+    
+    private void eiOsuttuLaivaan() {
+        seuraavaVuoro(this.peli.getTietokone());
+    }
+    
+    private void seuraavaVuoro(Kayttaja kayttaja) {
+        nuku();
+        
+        if (kayttaja.getClass() == Tietokone.class) {
+            paivitaKommentti("(Tietokoneen vuoro...)");
+            tietokoneenVuoro();
+        }
+        else {
+            paivitaKommentti("Valitse ammuttava ruutu oik. pelilaudalta: ");    // pelaaja saa jatkaa / pelaajan vuoro alkaa
+        }
+    }
+    
+    private void tietokoneenVuoro() {
+        boolean osuiko = this.peli.suoritaVuoro(this.peli.getTietokone());
+        piirraPelilauta(this.peli.getPelaaja());
+        
+        if (osuiko) {
+            if (!this.peli.jatketaanko()) {
+                peliPaattyi(false);
+            }
+            else {
+                seuraavaVuoro(this.peli.getTietokone());
+            }
+        }
+        else {
+            seuraavaVuoro(this.peli.getPelaaja());
+        }
+    }
+    
+    private void peliPaattyi(boolean voitettiinko) {
+        if (voitettiinko) {
+            paivitaKommentti("VOITIT PELIN!!!");
+        }
+        else {
+            paivitaKommentti("HÄVISIT :P");
+        }
+        // laita peli päättymään jotenkin fiksusti
     }
     
     public void paivitaKommentti(String kommentti) {
@@ -142,5 +210,13 @@ public class Kayttoliittyma implements Runnable {
             komponentit.kommenttiPaivitys(kommentti);
         }
         paivitaYlaOsa();
+    }
+    
+    private void nuku() {
+        try {
+            Thread.sleep(400);
+        }
+        catch (InterruptedException ie) {
+        }
     }
 }

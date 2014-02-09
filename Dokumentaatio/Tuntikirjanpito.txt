@@ -71,7 +71,7 @@
 -Käyttöliittymän yläkomponentti alkaa tulla pikkuhiljaa valmiiksi. Ongelmana vielä yläkomponentin vaihto ilman bugeja, kun 4 laivaa on pelilaudalle asetettu.
 
 9.2.2014
--3h
+-4h
 -Yläkomponentin vaihto-ongelmasta päästy eroon pienellä ohjelmointikikalla - poistamalla komponentti aina juuri ennen uuden asettamista, jonka jälkeen kutsuttu frame.pack().
 -AmpumisKomponentit on nyt myös toteutettu toimimaan niin kuin pitääkin.
 -Seuraavana vuorossa vuoropohjaisuus ja pelilautojen tulostaminen osaksi käyttöliittymää.

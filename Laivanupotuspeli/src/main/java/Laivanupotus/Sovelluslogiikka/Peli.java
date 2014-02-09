@@ -54,9 +54,9 @@ public class Peli {
      */
     
     public boolean jatketaanko() {
-        if (this.pelaaja.getOsuneet() == 12 || this.tietokone.getOsuneet() == 12) {
-            return false;
+        if (Math.max(this.pelaaja.getOsuneet(), this.tietokone.getOsuneet()) < 12) {
+            return true;
         }
-        return true;
+        return false;
     }
 }
