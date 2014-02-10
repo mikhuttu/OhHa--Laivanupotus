@@ -93,7 +93,6 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         
         sijainti = new JTextField();
         sijainti.setEnabled(true);              // testauksen takia true
-        sijainti.addActionListener(null);
         
         JButton luoLaiva = new JButton("LUO LAIVA");
         luoLaiva.addActionListener(new LuoLaivanKuuntelija(kayttoliittyma, sijainti, suunta));
