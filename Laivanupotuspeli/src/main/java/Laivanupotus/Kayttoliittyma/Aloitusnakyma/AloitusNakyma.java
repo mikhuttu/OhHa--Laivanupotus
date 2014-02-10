@@ -34,8 +34,10 @@ public class AloitusNakyma {
         
         NapinKuuntelija kuuntelija = new NapinKuuntelija(kayttoliittyma, easy, hard, impossible);
         
+        hard.setEnabled(false);
+        
         easy.addActionListener(kuuntelija);
-        hard.addActionListener(null);
+        hard.addActionListener(kuuntelija);
         impossible.addActionListener(kuuntelija);
         
         nappulat.add(easy);

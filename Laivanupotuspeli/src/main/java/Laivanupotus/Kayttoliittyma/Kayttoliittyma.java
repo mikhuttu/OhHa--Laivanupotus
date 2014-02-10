@@ -138,6 +138,7 @@ public class Kayttoliittyma implements Runnable {
         luoja.asetaTietokoneenLaivat();
     }
     
+    
     public void pelaajaAmpui(boolean osuiko) {
         piirraPelilauta(this.peli.getTietokone());
         if (osuiko) {
@@ -153,7 +154,9 @@ public class Kayttoliittyma implements Runnable {
         
         if (!this.peli.jatketaanko()) {
             peliPaattyi(true);
+            return;
         }
+
         seuraavaVuoro(this.peli.getPelaaja());
     }
     
@@ -180,10 +183,10 @@ public class Kayttoliittyma implements Runnable {
         if (osuiko) {
             if (!this.peli.jatketaanko()) {
                 peliPaattyi(false);
+                return;
             }
-            else {
-                seuraavaVuoro(this.peli.getTietokone());
-            }
+
+            seuraavaVuoro(this.peli.getTietokone());
         }
         else {
             seuraavaVuoro(this.peli.getPelaaja());
@@ -197,7 +200,8 @@ public class Kayttoliittyma implements Runnable {
         else {
             paivitaKommentti("HÄVISIT :P");
         }
-        // laita peli päättymään jotenkin fiksusti
+        
+        // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
     }
     
     public void paivitaKommentti(String kommentti) {

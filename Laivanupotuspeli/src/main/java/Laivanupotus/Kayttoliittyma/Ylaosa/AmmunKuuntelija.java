@@ -4,6 +4,7 @@ package Laivanupotus.Kayttoliittyma.Ylaosa;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import Laivanupotus.Sovelluslogiikka.Pelaaja;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
@@ -11,15 +12,21 @@ import Laivanupotus.Sovelluslogiikka.Sijainti;
 public class AmmunKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
     private JTextField sijaintikentta;
+    private JButton nappula;
     
-    public AmmunKuuntelija(Kayttoliittyma kayttoliittyma, JTextField sijaintikentta) {
+    public AmmunKuuntelija(Kayttoliittyma kayttoliittyma, JTextField sijaintikentta, JButton nappula) {
         this.kayttoliittyma = kayttoliittyma;
-        this.sijaintikentta = sijaintikentta;    
+        this.sijaintikentta = sijaintikentta;
+        this.nappula = nappula;
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        nappula.setEnabled(false);
+
         Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintikentta);
+        sijaintikentta.setText(null);
+        
         Pelaaja pelaaja = (Pelaaja) this.kayttoliittyma.getPeli().getPelaaja();
         
         try {
@@ -36,5 +43,6 @@ public class AmmunKuuntelija implements ActionListener {
             
             kayttoliittyma.paivitaKommentti(virheIlmoitus);
         }
+        nappula.setEnabled(true);
     }
 }

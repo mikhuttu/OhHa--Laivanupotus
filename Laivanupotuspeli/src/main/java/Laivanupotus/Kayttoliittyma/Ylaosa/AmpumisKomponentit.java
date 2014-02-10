@@ -41,7 +41,7 @@ public class AmpumisKomponentit extends YlaOsanKomponentit {
         sijainti.addActionListener(null);
         
         JButton ammu = new JButton("AMMU");
-        ammu.addActionListener(new AmmunKuuntelija(kayttoliittyma, sijainti));
+        ammu.addActionListener(new AmmunKuuntelija(kayttoliittyma, sijainti, ammu));
         
         alakentta.add(sijainti);
         alakentta.add(new JLabel());
