@@ -99,6 +99,7 @@ public class Kayttoliittyma implements Runnable {
     
     private void piirraPelilauta(Kayttaja kayttaja) {
         alaosa.piirra(kayttaja);
+        alaosa.update(alaosa.getGraphics());
     }
     
     private void luoAmpumisKomponentit() {
@@ -107,6 +108,7 @@ public class Kayttoliittyma implements Runnable {
         AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
         komponentit.luo();
         paivitaYlaOsa();
+        frame.pack();
     }
     
     private void paivitaYlaOsa() {
@@ -117,7 +119,6 @@ public class Kayttoliittyma implements Runnable {
         }
         
         frame.getContentPane().add(paivitetty, BorderLayout.NORTH, 0);  // asettaa uuden JPanel-olion vanhan paikalle.
-        frame.pack();
     }
     
     
@@ -190,6 +191,8 @@ public class Kayttoliittyma implements Runnable {
         else {
             paivitaKommentti("HÄVISIT :P");
         }
+        paivitaYlaOsa();
+        ylaosa.update(ylaosa.getGraphics());
         
         // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
     }

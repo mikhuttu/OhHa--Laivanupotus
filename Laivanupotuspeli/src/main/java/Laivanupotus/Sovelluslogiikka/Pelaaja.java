@@ -112,7 +112,6 @@ public class Pelaaja extends Kayttaja {
         }
         
         if(vastustajanLauta.onkoRuutuunAmmuttu(sijainti)) {
-            System.out.println("Ruutuun on jo ammuttu.\nValitse toinen ruutu.\n");
             throw new IllegalArgumentException();
         }
         vastustajanLauta.muutaAmmutuksi(sijainti);
