@@ -66,7 +66,7 @@ public class TekstiKayttoliittyma {
 
     private void piirraPelilauta(Kayttaja kayttaja) {
         PelilaudanPiirtaja piirtaja = new PelilaudanPiirtaja(kayttaja);
-        piirtaja.piirraPelilauta();
+//        piirtaja.piirraPelilauta();
     }
     
     /**

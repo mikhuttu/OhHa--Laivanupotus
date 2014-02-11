@@ -2,17 +2,16 @@ package Laivanupotus.Kayttoliittyma;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import Laivanupotus.Kayttoliittyma.Alaosa.AlaOsanKomponentit;
 import Laivanupotus.Kayttoliittyma.Aloitusnakyma.AloitusNakyma;
 import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
 import Laivanupotus.Ohjaus.LaivojenLuoja;
-import Laivanupotus.Ohjaus.PelilaudanPiirtaja;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
@@ -21,13 +20,12 @@ import Laivanupotus.Tyokalut.Lukija;
 
 public class Kayttoliittyma implements Runnable {
 
-    private JFrame frame;
-    private JPanel vasen;
-    private JPanel oikea;
-    private YlaOsanKomponentit ylaosa;
-    private AloitusNakyma aloitusnakyma;
-    
     private Peli peli;
+    private JFrame frame;
+    private AloitusNakyma aloitusnakyma;
+    private AlaOsanKomponentit alaosa;
+    private YlaOsanKomponentit ylaosa;
+    
     
     @Override
     public void run() {
@@ -39,6 +37,7 @@ public class Kayttoliittyma implements Runnable {
         
         luoAloitusNakyma();
         
+        
         frame.pack();
         frame.setVisible(true);
     }
@@ -46,7 +45,7 @@ public class Kayttoliittyma implements Runnable {
     private void luoAloitusNakyma() {
         this.aloitusnakyma = new AloitusNakyma(this);
         aloitusnakyma.luo();
-        frame.getContentPane().add(aloitusnakyma.getPanel(), BorderLayout.NORTH);
+        frame.getContentPane().add(aloitusnakyma, BorderLayout.NORTH);
     }
     
     public void aloitaPeli(Aly aly) {
@@ -62,15 +61,9 @@ public class Kayttoliittyma implements Runnable {
     
     private void luoPaaKomponentit() {
         luoLaivojenAsetusKomponentit();
+        luoAlaOsanKomponentit();
         
-        luoVasenPelilauta();
-        luoOikeaPelilauta();
-        
-        JPanel alaosa = new JPanel(new GridLayout(2,1));
-        alaosa.add(vasen);
-        alaosa.add(oikea);
-                
-        frame.getContentPane().add(alaosa, BorderLayout.SOUTH);
+        frame.pack();
     }
     
     private void luoLaivojenAsetusKomponentit() {
@@ -82,13 +75,11 @@ public class Kayttoliittyma implements Runnable {
         
         paivitaYlaOsa();
     }
-        
-    private void luoVasenPelilauta() {
-        vasen = new JPanel(new GridLayout(6,6));
-    }
     
-    private void luoOikeaPelilauta() {
-        oikea = new JPanel(new GridLayout(6,6));
+    private void luoAlaOsanKomponentit() {
+        this.alaosa = new AlaOsanKomponentit(this.peli);
+        alaosa.luo();
+        frame.getContentPane().add(alaosa, BorderLayout.CENTER);
     }
     
     public void laivaAsetettiinPelilaudalle() {
@@ -107,8 +98,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private void piirraPelilauta(Kayttaja kayttaja) {
-        PelilaudanPiirtaja piirtaja = new PelilaudanPiirtaja(kayttaja);
-        piirtaja.piirraPelilauta();
+        alaosa.piirra(kayttaja);
     }
     
     private void luoAmpumisKomponentit() {
@@ -120,7 +110,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private void paivitaYlaOsa() {
-        JPanel paivitetty = ylaosa.getPanel();
+        JPanel paivitetty = ylaosa;
         
         if (frame.getContentPane().getComponentCount() > 0) {
             frame.getContentPane().remove(0);                           // poistaa vanhan JPanel-olion.

@@ -8,38 +8,34 @@ import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
 public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
-    private Kayttoliittyma kayttoliittyma;
+    private LuoLaivanKuuntelija kuuntelija;
     private JLabel laivanKoko;
-    private JTextField sijainti;
-    private JTextField suunta;
     
+    public LaivojenAsetusKomponentit(Kayttoliittyma kayttoliittyma) {
+        this.kuuntelija = new LuoLaivanKuuntelija(kayttoliittyma);
+        this.setLayout(new GridLayout(4,1));
+    }    
     
     public JPanel seuraava(int laivanIndeksi) {
         laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
-        suunta.setText("");
-        sijainti.setText("");
+        kuuntelija.getSuuntaKentta().setText("");
+        kuuntelija.getSijaintiKentta().setText("");
         kommentti.setText("Valitse " + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
-        return ylaosa;
-    }
-    
-    
-    public LaivojenAsetusKomponentit(Kayttoliittyma kayttoliittyma) {
-        this.kayttoliittyma = kayttoliittyma;
-        this.ylaosa = new JPanel(new GridLayout(4,1));
+        return this;
     }
     
     public void luo(int laivanIndeksi) {
-        ylaosa = new JPanel(new GridLayout(4,1));
+        this.setLayout(new GridLayout(4,1));
         
         JPanel ylakentta = ylakentta(laivanIndeksi);
         JPanel keskikentta = keskikentta();
         JPanel alakentta = alakentta();
         JPanel kommenttikentta = kommenttikentta(laivanIndeksi);
         
-        ylaosa.add(ylakentta);
-        ylaosa.add(keskikentta);
-        ylaosa.add(alakentta);
-        ylaosa.add(kommenttikentta);
+        this.add(ylakentta);
+        this.add(keskikentta);
+        this.add(alakentta);
+        this.add(kommenttikentta);
     }
     
     private int haeKoko(int laivanIndeksi) {
@@ -69,8 +65,10 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         
         JLabel laivanSuunta = new JLabel("Laivan suunta: ");
         
-        suunta = new JTextField();
+        JTextField suunta = new JTextField();
         suunta.setEnabled(false);
+        this.kuuntelija.tuoSuuntaKentta(suunta);
+        
         JButton alasNappi = new JButton("ALAS");
         JButton oikealleNappi = new JButton("OIKEALLE");
 
@@ -91,12 +89,13 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
 
         JLabel laivanSijainti = new JLabel("Laivan sijainti: ");
         
-        sijainti = new JTextField();
+        JTextField sijainti = new JTextField();
         sijainti.setEnabled(true);              // testauksen takia true
         sijainti.addActionListener(null);
+        kuuntelija.tuoSijaintiKentta(sijainti);
         
         JButton luoLaiva = new JButton("LUO LAIVA");
-        luoLaiva.addActionListener(new LuoLaivanKuuntelija(kayttoliittyma, sijainti, suunta));
+        luoLaiva.addActionListener(kuuntelija);
         
         alakentta.add(laivanSijainti);
         alakentta.add(sijainti);

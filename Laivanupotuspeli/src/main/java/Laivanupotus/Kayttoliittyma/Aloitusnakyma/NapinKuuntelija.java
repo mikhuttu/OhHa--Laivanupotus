@@ -12,12 +12,16 @@ public class NapinKuuntelija implements ActionListener {
     private JButton hard;
     private JButton impossible;
     
-    public NapinKuuntelija(Kayttoliittyma kayttoliittyma, JButton easy, JButton hard, JButton impossible) {
+    public NapinKuuntelija(Kayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
+    }
+    
+    public void tuoKomponentit(JButton easy, JButton hard, JButton impossible) {
         this.easy = easy;
         this.hard = hard;
         this.impossible = impossible;
     }
+    
     
     @Override
     public void actionPerformed(ActionEvent ae) {

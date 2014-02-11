@@ -16,27 +16,37 @@ public class PelilaudanPiirtaja {
         this.kayttaja = kayttaja;
     }
     
-    public void piirraPelilauta() {
-        int koko = this.kayttaja.getPelilauta().getKoko();
-        ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
-        
-        for (int y = 0; y < koko; y++) {
-            String seuraavaRivi = "";
-            for (int x = 0; x < koko; x++) {
-                seuraavaRivi += seuraavaMerkki(new Sijainti(x,y), laivojenSijainnit);
-            }
-            System.out.println(seuraavaRivi);
-        }
-        System.out.println();
-    }
+//    public void piirraPelilautaAlkuperainen() {
+//        int koko = this.kayttaja.getPelilauta().getKoko();
+//        ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
+//        
+//        for (int y = 0; y < koko; y++) {
+//            String seuraavaRivi = "";
+//            for (int x = 0; x < koko; x++) {
+//                seuraavaRivi += seuraavaMerkki(new Sijainti(x,y), laivojenSijainnit);
+//            }
+//            System.out.println(seuraavaRivi);
+//        }
+//        System.out.println();
+//    }
     
+
     private ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
         Pelilauta pelilauta = this.kayttaja.getPelilauta();
         return pelilauta.haeLaivojenOsienSijainnit();
     }
     
+    
+    public char palautaSeuraavaMerkki(Sijainti sijainti) {
+        
+        ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
+        return seuraavaMerkki(sijainti, laivojenSijainnit);
+    }    
+    
     private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
-        Ruutu ruutu = this.kayttaja.getPelilauta().haeRuutu(sijainti);
+        Pelilauta pelilauta = kayttaja.getPelilauta();
+        
+        Ruutu ruutu = pelilauta.haeRuutu(sijainti);
         char tulostettava = '~';
 
         if (!tulostuksessaTietokoneenLauta()) {
@@ -66,8 +76,7 @@ public class PelilaudanPiirtaja {
     }
     
     private boolean tulostuksessaTietokoneenLauta() {
-        Tietokone verrattava = new Tietokone(Aly.EASY);
-        return kayttaja.getClass() == verrattava.getClass();
+        return kayttaja.getClass() == Tietokone.class;
     }
     
     private boolean ruudussaOnLaiva(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {

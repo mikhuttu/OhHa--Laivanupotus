@@ -53,7 +53,7 @@ public class LaivojenLuoja {
             }
             
             PelilaudanPiirtaja piirtaja = new PelilaudanPiirtaja(this.peli.getPelaaja());
-            piirtaja.piirraPelilauta();
+//            piirtaja.piirraPelilauta();
         }
     }
     

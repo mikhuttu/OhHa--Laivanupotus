@@ -1,4 +1,3 @@
-
 package Laivanupotus.Kayttoliittyma.Ylaosa;
 
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
@@ -11,12 +10,15 @@ import Laivanupotus.Sovelluslogiikka.Sijainti;
 
 public class AmmunKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
-    private JTextField sijaintikentta;
+    private JTextField sijaintiKentta;
     private JButton nappula;
     
-    public AmmunKuuntelija(Kayttoliittyma kayttoliittyma, JTextField sijaintikentta, JButton nappula) {
+    public AmmunKuuntelija(Kayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
-        this.sijaintikentta = sijaintikentta;
+    }
+    
+    public void tuoKomponentit(JTextField sijaintiKentta, JButton nappula) {
+        this.sijaintiKentta = sijaintiKentta;
         this.nappula = nappula;
     }
     
@@ -24,8 +26,8 @@ public class AmmunKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         nappula.setEnabled(false);
 
-        Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintikentta);
-        sijaintikentta.setText(null);
+        Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
+        sijaintiKentta.setText(null);
         
         Pelaaja pelaaja = (Pelaaja) this.kayttoliittyma.getPeli().getPelaaja();
         

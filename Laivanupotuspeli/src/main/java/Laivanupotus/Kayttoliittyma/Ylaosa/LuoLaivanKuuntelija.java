@@ -13,10 +13,24 @@ public class LuoLaivanKuuntelija implements ActionListener {
     private JTextField sijaintiKentta;
     private JTextField suuntaKentta;
     
-    public LuoLaivanKuuntelija(Kayttoliittyma kayttoliittyma, JTextField sijaintiKentta, JTextField suuntaKentta) {
+    public LuoLaivanKuuntelija(Kayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
-        this.sijaintiKentta = sijaintiKentta;
+    }
+    
+    public void tuoSuuntaKentta(JTextField suuntaKentta) {
         this.suuntaKentta = suuntaKentta;
+    }
+    
+    public void tuoSijaintiKentta(JTextField sijaintiKentta) {
+        this.sijaintiKentta = sijaintiKentta;
+    }
+    
+    public JTextField getSuuntaKentta() {
+        return this.suuntaKentta;
+    }    
+    
+    public JTextField getSijaintiKentta() {
+        return this.sijaintiKentta;
     }
     
     @Override

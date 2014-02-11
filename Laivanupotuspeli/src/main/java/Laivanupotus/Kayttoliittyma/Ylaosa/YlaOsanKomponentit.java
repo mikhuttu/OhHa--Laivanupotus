@@ -3,13 +3,12 @@ package Laivanupotus.Kayttoliittyma.Ylaosa;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public abstract class YlaOsanKomponentit {
+public abstract class YlaOsanKomponentit extends JPanel {
     
-    protected JPanel ylaosa;
     protected JTextField kommentti;
     
     public JPanel getPanel() {
-        return this.ylaosa;
+        return this;
     }
     
     public void kommenttiPaivitys(String paivitys) {

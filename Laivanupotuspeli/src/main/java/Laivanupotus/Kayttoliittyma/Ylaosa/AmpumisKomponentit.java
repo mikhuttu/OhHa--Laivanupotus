@@ -9,19 +9,18 @@ import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
 
 public class AmpumisKomponentit extends YlaOsanKomponentit {
-    private Kayttoliittyma kayttoliittyma;
-    private JTextField sijainti;
+    private AmmunKuuntelija kuuntelija;
     
     public AmpumisKomponentit(Kayttoliittyma kayttoliittyma) {
-        this.kayttoliittyma = kayttoliittyma;
-        ylaosa = new JPanel(new GridLayout(4,1));
+        this.kuuntelija = new AmmunKuuntelija(kayttoliittyma);
+        this.setLayout(new GridLayout(4,1));
     }
     
     public void luo() {
-        ylaosa.add(ylakentta());
-        ylaosa.add(alakentta());
-        ylaosa.add(kommenttikentta());
-        ylaosa.add(new JPanel());
+        this.add(ylakentta());
+        this.add(alakentta());
+        this.add(kommenttikentta());
+        this.add(new JLabel());
     }
     
     private JPanel ylakentta() {
@@ -36,12 +35,14 @@ public class AmpumisKomponentit extends YlaOsanKomponentit {
     private JPanel alakentta() {
         JPanel alakentta = new JPanel(new GridLayout(1,3));
         
-        sijainti = new JTextField();
+        JTextField sijainti = new JTextField();
         sijainti.setEnabled(true);              // testauksen vuoksi
         sijainti.addActionListener(null);
         
         JButton ammu = new JButton("AMMU");
-        ammu.addActionListener(new AmmunKuuntelija(kayttoliittyma, sijainti, ammu));
+        ammu.addActionListener(kuuntelija);
+        
+        kuuntelija.tuoKomponentit(sijainti, ammu);
         
         alakentta.add(sijainti);
         alakentta.add(new JLabel());

@@ -6,23 +6,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
-public class AloitusNakyma {
-    private Kayttoliittyma kayttoliittyma;
-    private JPanel aloitusnakyma;
+public class AloitusNakyma extends JPanel {
+    private NapinKuuntelija kuuntelija;
     
-    public AloitusNakyma(Kayttoliittyma kayttoliittyma) {             
-        this.kayttoliittyma = kayttoliittyma;                        
-        this.aloitusnakyma = new JPanel(new GridLayout(3,1));         
+    public AloitusNakyma(Kayttoliittyma kayttoliittyma) {
+        this.setLayout(new GridLayout(3,1));
+        this.kuuntelija = new NapinKuuntelija(kayttoliittyma);                     
     }                                                                   
     
     public JPanel getPanel() {
-        return this.aloitusnakyma;
+        return this;
     }
     
     public void luo() {
-        this.aloitusnakyma.add(new JLabel("LAIVANUPOTUSPELI"));
-        this.aloitusnakyma.add(new JLabel("Valitse vaikeustaso:"));
-        this.aloitusnakyma.add(nappulat());
+        this.add(new JLabel("LAIVANUPOTUSPELI"));
+        this.add(new JLabel("Valitse vaikeustaso:"));
+        this.add(nappulat());
     }
     
     private JPanel nappulat() {
@@ -32,13 +31,12 @@ public class AloitusNakyma {
         JButton hard = new JButton("HARD");
         JButton impossible = new JButton("IMPOSSIBLE");
         
-        NapinKuuntelija kuuntelija = new NapinKuuntelija(kayttoliittyma, easy, hard, impossible);
-        
-        hard.setEnabled(false);
-        
         easy.addActionListener(kuuntelija);
         hard.addActionListener(kuuntelija);
+        hard.setEnabled(false);
         impossible.addActionListener(kuuntelija);
+        
+        kuuntelija.tuoKomponentit(easy, hard, impossible);
         
         nappulat.add(easy);
         nappulat.add(hard);
