@@ -81,3 +81,12 @@
 -Peli vaikuttaa bugittomalta ja se toimii sekä Easy että Impossible -vaikeusasteilla.
 -Käyttöliittymään tulee lisätä vielä graafiset pelilaudat (ja koodata niiden toiminnallisuus) sekä luoda lopetusnäkymä pelin päättymisen jälkeen
 -Näiden jälkeen tarkoituksena kirjoittaa ainakin vielä oikea tekoäly
+
+11.2.2014
+-3h
+-Graafiset pelilaudat on nyt käyttöliittymään lisätty. Niistä puuttuu vielä kuuntelijat, ja ne ovat muutenkin aika "heikohkon" näköiset.
+
+13.2.2014
+-5h
+-Koodia refaktoroitu ja muutamista luokista "hankkiduttu eroon". Nykyään ei mm. ole olemassa pelaaja-luokkaa enää ollenkaan.
+-Aihemäärittely, testit, javadoc ja luokkakaavio tehty vastaamaan nykytilannetta.
