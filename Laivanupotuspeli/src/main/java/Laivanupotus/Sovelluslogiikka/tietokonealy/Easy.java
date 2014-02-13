@@ -1,7 +1,7 @@
 package Laivanupotus.Sovelluslogiikka.tietokonealy;
 
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
+import Laivanupotus.Tyokalut.Sijainti;
 import java.util.Random;
 
 /**

@@ -1,10 +1,10 @@
 package Laivanupotus.Sovelluslogiikka.tietokonealy;
 
+import java.util.Random;
 import Laivanupotus.Sovelluslogiikka.Laiva;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
-import java.util.Random;
+import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  * "Mahdoton vaikeustaso", joka toimii siten että mikäli tietokoneen älykkyys on Aly.IMPOSSIBLE, tietokone määrittää

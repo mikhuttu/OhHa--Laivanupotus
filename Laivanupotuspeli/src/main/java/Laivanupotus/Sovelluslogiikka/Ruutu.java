@@ -1,12 +1,14 @@
 package Laivanupotus.Sovelluslogiikka;
 
+import Laivanupotus.Tyokalut.Sijainti;
+
 /**
  * Pelilaudalla on Ruutuja.
  * Ruuduilla on Sijainti, ja Ruutu tietää lisäksi, onko siihen ammuttu.
  */
 
 public class Ruutu {
-    private Sijainti sijainti;
+    private final Sijainti sijainti;
     private boolean ammuttu;
     
     public Ruutu(Sijainti sijainti) {
@@ -31,7 +33,6 @@ public class Ruutu {
      * Se käyttää vertailun apuna Sijaintien vertailuun perustuvaa equals metodia.
 
      * @param olio
-     * @return 
      */
     
     @Override

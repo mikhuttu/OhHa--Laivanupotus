@@ -8,6 +8,14 @@ import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Tyokalut.LaivanKoonMaarittaja;
 
+/**
+ * LaivanAsetusKomponentit perii JPanel -luokan perivän YlaOsanKomponentit -luokan.
+ * Nimensä mukaisesti luokka sisältää Käyttöliittymä -luokan yläosaan asetettavat komponentit, kun pelaaja
+ * voi asettaa pelilaudalle laivoja.
+ * 
+ * "LUO LAIVA" napille asetetaan LuoLaivanKuuntelija, ja suuntanapeille "SuuntaNappienKuuntelija".
+ */
+
 public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     private LuoLaivanKuuntelija kuuntelija;
     private JLabel laivanKoko;
@@ -19,7 +27,7 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     
     public JPanel seuraava(int laivanIndeksi) {
         
-        laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
+        laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi - 1));
         kuuntelija.getSuuntaKentta().setText("");
         kuuntelija.getSijaintiKentta().setText("");
         kommentti.setText("Valitse " + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
@@ -44,7 +52,7 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     private JPanel ylakentta(int laivanIndeksi) {
         JPanel ylakentta = new JPanel(new GridLayout(1,1));
 
-        laivanKoko = new JLabel(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
+        laivanKoko = new JLabel(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi - 1));
         
         ylakentta.add(laivanKoko);
         return ylakentta;

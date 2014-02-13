@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Sovelluslogiikka.LaivojenLuoja;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Tyokalut.SijainninMaarittaja;
+import Laivanupotus.Tyokalut.Sijainti;
 import Laivanupotus.Tyokalut.Suunta;
 
+/**
+ * LuoLaivanKuuntelija palauttaa Kayttoliittymalle tiedon siitä, onnistuuko laivan lisäys pelilaudalle vai ei.
+ */
 
 public class LuoLaivanKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
@@ -35,6 +38,13 @@ public class LuoLaivanKuuntelija implements ActionListener {
         return this.sijaintiKentta;
     }
     
+    /**
+     * Kun "LUO LAIVA" nappulaa on painettu, tämän metodin suoritus alkaa.
+     * 
+     * Metodi käyttää LaivojenLuoja -luokkaa, ja yrittää asettaa pelaajan pelilaudalle laivan.
+     * Riippuen siitä onnistuuko asettaminen vai ei, käyttöliittymälle palautetaan erilaiset tiedot.
+     */
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         LaivojenLuoja luoja = new LaivojenLuoja(kayttoliittyma.getPeli());
@@ -60,7 +70,8 @@ public class LuoLaivanKuuntelija implements ActionListener {
         if (suuntaKentta.getText().equals("")) {
             return null;
         }
-            String sisalto = suuntaKentta.getText();
+        
+        String sisalto = suuntaKentta.getText();
         
         if (sisalto.equals("ALAS")) {
             return Suunta.ALAS;

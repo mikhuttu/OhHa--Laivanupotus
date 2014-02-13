@@ -6,8 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Tyokalut.SijainninMaarittaja;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class AmmunKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;

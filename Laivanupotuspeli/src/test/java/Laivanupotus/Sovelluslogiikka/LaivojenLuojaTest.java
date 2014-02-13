@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Tyokalut.Suunta;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class LaivojenLuojaTest {
     private LaivojenLuoja luoja;

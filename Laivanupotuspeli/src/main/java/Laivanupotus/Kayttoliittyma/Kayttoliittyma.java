@@ -17,6 +17,13 @@ import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 
+/**
+ * Kayttoliittyma tuntee käyttöliittymän pääkomponentit, joita ovat aloitusnäkymä, ala- ja yläosat sekä lopetusnäkymä (jota
+ * ei ole vielä toteutettu).
+ * 
+ * Käyttöliittymä luo muut komponentit ja saa näiden komponenttien kuuntelijoilta viestejä, joiden pohjalta peli toimii.
+ */
+
 public class Kayttoliittyma implements Runnable {
 
     private Peli peli;
@@ -47,6 +54,14 @@ public class Kayttoliittyma implements Runnable {
         frame.getContentPane().add(aloitusnakyma, BorderLayout.NORTH);
     }
     
+    /**
+     * Peli alkaa, kun pelaaja on ensin valinnut jonkun mahdollisista vaikeusasteista ja se on tässä metodin parametrina.
+     * 
+     * Metodi käskee luomaan uuden pelin ja tietokoneen laivat.
+     * Tämän jälkeen poistetaan alkuperäinen käyttöliittymäkomponentti "Aloitusnäkymä" ja korvataan se uusilla pääkomponenteilla.
+     * @param aly 
+     */
+    
     public void aloitaPeli(Aly aly) {
         this.peli = new Peli(aly);
         luoTietokoneenLaivat();
@@ -58,12 +73,21 @@ public class Kayttoliittyma implements Runnable {
         return this.peli;
     }
     
+    /**
+     * Luodaan komponentit laivojen asetusta ja pelilaudan näyttämistä varten ja päivitetään nämä näkyviin pelaajaa varten.
+     */
+    
     private void luoPaaKomponentit() {
         luoLaivojenAsetusKomponentit();
         luoAlaOsanKomponentit();
         
         frame.pack();
     }
+    
+    /**
+     * ylaosa laitetaan sisältämään LaivojenAsetusKomponentit, joka toteuttaa abstraktin luokan YlaOsanKomponentit.
+     * laivanIndeksi alustetaan arvoon 1.
+     */
     
     private void luoLaivojenAsetusKomponentit() {
         this.ylaosa = new LaivojenAsetusKomponentit(this);
@@ -81,6 +105,13 @@ public class Kayttoliittyma implements Runnable {
         frame.getContentPane().add(alaosa, BorderLayout.CENTER);
     }
     
+    /**
+     * Käyttöliittymä saanut tiedon siitä, että käyttäjä on nyt asettanut edeltävän laivan pelilaudalle.
+     * 
+     * Piirretään käyttäjän pelilauta ja päivitetään yläosan näkymä metodia "seuraava(laivoja + 1)" käyttäen.
+     * Mikäli pelaaja on asettanut kaikki 4 laivaansa, luodaan ampumiskomponentit.
+     */
+    
     public void laivaAsetettiinPelilaudalle() {
         int laivoja = peli.getPelaaja().getPelilauta().getLaivat().size();
         piirraPelilauta(this.peli.getPelaaja());
@@ -96,10 +127,18 @@ public class Kayttoliittyma implements Runnable {
         paivitaYlaOsa();
     }
     
+    /*
+    * Metodi pyytää piirtämään käyttäjän pelilaudan ja sen jälkeen päivittämään ko. pelilaudan näkymän.
+    */
+    
     private void piirraPelilauta(Kayttaja kayttaja) {
         alaosa.piirra(kayttaja);
         alaosa.update(alaosa.getGraphics());
     }
+    
+    /*
+    * Yläosa vaihdetaan AmpumisKomponenteiksi ja luodaan ko. komponentit.
+    */
     
     private void luoAmpumisKomponentit() {
         this.ylaosa = new AmpumisKomponentit(this);
@@ -110,25 +149,38 @@ public class Kayttoliittyma implements Runnable {
         frame.pack();
     }
     
+    /**
+     * frame-oliolle asetetaan uusi JPanel (ylaosa) indeksiin "0" (tässä tapauksessa ylaosan paikalle).
+     * Samalla vanha JPanel -olio poistetaan indeksistä 0, mikäli sellainen siellä jo on.
+     */
+    
     private void paivitaYlaOsa() {
         JPanel paivitetty = ylaosa;
         
         if (frame.getContentPane().getComponentCount() > 0) {
-            frame.getContentPane().remove(0);                           // poistaa vanhan JPanel-olion.
+            frame.getContentPane().remove(0);
         }
         
-        frame.getContentPane().add(paivitetty, BorderLayout.NORTH, 0);  // asettaa uuden JPanel-olion vanhan paikalle.
+        frame.getContentPane().add(paivitetty, BorderLayout.NORTH, 0);
     }
     
     
-    // kaikki mitä tän alta löytyy vois olla jossain muualla. "KayttoliittymaLogiikka" ?
+    /**
+     * Luodaan tietokoneen laivat ja asetetaan ne tietokoneen pelilaudalle.
+     * Laivat eivät tule pelaajalle näkyviin.
+     */
     
     private void luoTietokoneenLaivat() {
         LaivojenLuoja luoja = new LaivojenLuoja(this.peli);
         luoja.asetaTietokoneenLaivat();
     }
     
-    
+    /**
+     * Kun pelaaja on ampunut johonkin tietokoneen pelilaudalla olevaan ruutuun ja ko. ruutuun ei ole vielä ammuttu,
+     * tämän metodin suoritus alkaa.
+     * 
+     * @param osuiko - kuvaa osuttiinko ampuessa laivaan vai ei
+     */
     public void pelaajaAmpui(boolean osuiko) {
         piirraPelilauta(this.peli.getTietokone());
         if (osuiko) {
@@ -138,6 +190,11 @@ public class Kayttoliittyma implements Runnable {
             eiOsuttuLaivaan();
         }
     }
+    
+    /**
+     * Koska laivaan osuttiin, tarkistetaan päättyykö peli, eli ovatko vastustajan kaikki laivat tuhottu vai ei.
+     * Mikäli eivät ole, pelaaja saa jatkaa.
+     */
     
     private void osuttiinLaivaan() {
         // soita joku ääni koska osuttiin?
@@ -150,9 +207,20 @@ public class Kayttoliittyma implements Runnable {
         seuraavaVuoro(this.peli.getPelaaja());
     }
     
+    /**
+     * Koska pelaaja ei ampuessaan vastustajan laivoihin osunut, tietokone saa jatkaa.
+     */
+    
     private void eiOsuttuLaivaan() {
         seuraavaVuoro(this.peli.getTietokone());
     }
+    
+    /**
+     * nuku -metodi pyytää odottamaan 0,4s ennen suorituksen jatkumista.
+     * Seuraavaksi tarkistetaan onko vuoron saaja pelaaja vai tietokone. Jos se on tietokone, suoritetaan tietokoneenVuoro().
+     * 
+     * @param kayttaja 
+     */
     
     private void seuraavaVuoro(Kayttaja kayttaja) {
         nuku();
@@ -165,6 +233,11 @@ public class Kayttoliittyma implements Runnable {
             paivitaKommentti("Valitse ammuttava ruutu oik. pelilaudalta: ");    // pelaaja saa jatkaa / pelaajan vuoro alkaa
         }
     }
+    
+    /**
+     * Tietokone suorittaa vuoronsa kutsumalla oman luokkansa suoritaVuoro -metodia, joka palauttaa true (osuttiin), tai false.
+     * Jos tietokone osuu pelaajan laivaan, saa se jatkaa mikäli peli ei pääty (eli mikäli pelaajan laivat eivät ole tuhottu).
+     */
     
     private void tietokoneenVuoro() {
         Tietokone tietokone = (Tietokone) this.peli.getTietokone();
@@ -198,17 +271,19 @@ public class Kayttoliittyma implements Runnable {
         // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
     }
     
+    /**
+     * Päivitetään YlaOsanKomponentit -luokan määrittämää kommenttia.
+     * @param kommentti 
+     */
+    
     public void paivitaKommentti(String kommentti) {
-        if (ylaosa.getClass() == AmpumisKomponentit.class) {
-            AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
-            komponentit.kommenttiPaivitys(kommentti);
-        }
-        else {
-            LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
-            komponentit.kommenttiPaivitys(kommentti);
-        }
+        ylaosa.kommenttiPaivitys(kommentti);
         paivitaYlaOsa();
     }
+    
+    /**
+     * Odota 0,4s.
+     */
     
     private void nuku() {
         try {

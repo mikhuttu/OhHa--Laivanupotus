@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 import Laivanupotus.Tyokalut.Suunta;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class PelilautaTest {
     Pelilauta pelilauta;
@@ -29,7 +30,7 @@ public class PelilautaTest {
     }
     
     private void pelilaudallaOikeaMaaraRuutuja() {
-        assertEquals(36, pelilauta.getRuudut().size());
+        assertEquals(6, pelilauta.getRuudut().length);
     }
     
     private void pelilaudallaEiOleAlussaLaivoja(){
@@ -63,11 +64,6 @@ public class PelilautaTest {
     @Test
     public void ruutuihinEiOleAlussaAmmuttu() {
         assertFalse(pelilauta.onkoRuutuunAmmuttu(new Sijainti(3,5)));
-    }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void virheIlmoitusKunRuutuEiPelilaudalla() {
-        ruutu = pelilauta.haeRuutu(new Sijainti(5, 20));
     }
     
     @Test

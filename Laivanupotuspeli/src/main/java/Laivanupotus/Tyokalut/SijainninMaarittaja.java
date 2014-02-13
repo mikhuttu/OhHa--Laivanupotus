@@ -1,7 +1,15 @@
 package Laivanupotus.Tyokalut;
 
 import javax.swing.JTextField;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
+
+/**
+ * SijainninMaarittajaa käytetään yleisluokkana eri käyttöliittymäkomponenteista.
+ * 
+ * Sen tarkoituksena on palauttaa tekstikentän sisältöä (muotoa 'x,y') vastaava sijainti.
+ * 
+ * Jos sisältö ei ole kyseistä muotoa, ohjelma kaatuu, mutta jatkossa sijaintia ei voi tekstikenttään kirjoittaa itse, joten
+ * sillä ei niinkään väliä.
+ */
 
 public class SijainninMaarittaja {
     

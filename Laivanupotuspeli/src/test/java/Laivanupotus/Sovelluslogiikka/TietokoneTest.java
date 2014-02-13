@@ -3,6 +3,7 @@ package Laivanupotus.Sovelluslogiikka;
 import org.junit.Before;
 import org.junit.Test;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
+import Laivanupotus.Tyokalut.Sijainti;
 
 
 public class TietokoneTest {

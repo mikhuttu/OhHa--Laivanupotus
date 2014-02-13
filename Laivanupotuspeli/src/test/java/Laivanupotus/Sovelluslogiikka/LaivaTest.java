@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import Laivanupotus.Tyokalut.Suunta;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class LaivaTest {
     Laiva laivaAlas;

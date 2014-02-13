@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
+/**
+ * Luokka huolehtii nimensä mukaisesti AmpumisKomponenteista.
+ * Samoin kuten LaivojenAsetusKomponentit, perii YlaOsanKomponentit luokan (joka perii JPanelin).
+ */
 
 public class AmpumisKomponentit extends YlaOsanKomponentit {
     private AmmunKuuntelija kuuntelija;

@@ -1,8 +1,9 @@
 package Laivanupotus.Sovelluslogiikka;
 
+import java.util.Random;
 import Laivanupotus.Tyokalut.LaivanKoonMaarittaja;
 import Laivanupotus.Tyokalut.Suunta;
-import java.util.Random;
+import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  * Käyttöliittymä pyytää tätä luokkaa asettamaan laivat pelin alussa pelaajan ja tietokoneen pelilaudoille.
@@ -71,6 +72,13 @@ public class LaivojenLuoja {
         Pelilauta pelilauta = kayttaja.getPelilauta();  
         pelilauta.asetaLaiva(laiva);
     }
+    /**
+     * Selvittää käyttäjän sekä asetettavan laivan koon ja kutsuu näillä tiedoilla metodia luoKayttajanLaudalleLaiva.
+     * 
+     * @param suunta
+     * @param sijainti
+     * @throws IllegalArgumentException 
+     */
     
     public void asetaPelaajanLaudalleLaiva(Suunta suunta, Sijainti sijainti) throws IllegalArgumentException {
         Kayttaja kayttaja = this.peli.getPelaaja();

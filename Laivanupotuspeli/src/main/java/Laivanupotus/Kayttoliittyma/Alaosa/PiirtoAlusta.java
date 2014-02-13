@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class PiirtoAlusta extends JPanel {
     private Kayttaja kayttaja;

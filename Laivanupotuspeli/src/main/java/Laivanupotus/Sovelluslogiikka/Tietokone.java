@@ -4,6 +4,7 @@ import Laivanupotus.Sovelluslogiikka.tietokonealy.Alykkyys;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Easy;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Impossible;
+import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  * Tietokone perii Kayttaja -luokan ja on siis toinen pelin kayttajista.

@@ -1,5 +1,7 @@
 package Laivanupotus.Sovelluslogiikka;
 
+import Laivanupotus.Tyokalut.Sijainti;
+
 /**
  * Kayttaja on abstrakti luokka, joka kuvaa pelin pelaajaa, mutta myös tietokonetta.
  * Tietokone perii Kayttaja -luokan ja sillä on tämän luokan metodien lisäksi tekoäly, jota se käyttää ammuttavien sijaintien määrittämiseen.
@@ -53,11 +55,9 @@ public class Kayttaja {
      * Metodissa vastustajan pelilaudalla oleva sijainti muutetaan ammutuksi (mikäli siihen ei ole jo
      * ammuttu jolloin palautetaan virheilmoitus eteenpäin).
      * 
-     * Metodi palauttaa "true" mikäli ampuessa osuttiin vastustajan johonkin laivaan, muuten "false".
-     * 
      * @param vastustajanLauta
      * @param sijainti
-     * @return
+     * @return palauttaa "true" mikäli ampuessa osuttiin vastustajan johonkin laivaan, muuten "false".
      * @throws IllegalArgumentException 
      */
     

@@ -6,6 +6,12 @@ import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.Peli;
 
+/**
+ * Alaosan toiminnallisuuden kehittäminen on täysin kesken, joten en viitsi sen metodeja varten alkaa Javadociakaan kirjoittamaan.
+ * 
+ * Tarkoituksena on toteuttaa seuraavaksi JButtoneista koostuva näkymä.
+*/
+
 public class AlaOsanKomponentit extends JPanel {
     private final PiirtoAlusta vasen;
 //    private PiirtoAlusta keski;

@@ -6,6 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
+/**
+ * NapinKuuntelija liittyy AloitusNakymaan, ja kun jotain sen JButton -napeista klikataan, tämä luokka toimittaa
+ * siitä tiedon Kayttoliittymalle.
+ */
+
 public class NapinKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
     private JButton easy;
@@ -22,6 +27,10 @@ public class NapinKuuntelija implements ActionListener {
         this.impossible = impossible;
     }
     
+    /**
+     * Klikattu painike määrittää pelin tekoälyn.
+     * @param ae 
+     */
     
     @Override
     public void actionPerformed(ActionEvent ae) {

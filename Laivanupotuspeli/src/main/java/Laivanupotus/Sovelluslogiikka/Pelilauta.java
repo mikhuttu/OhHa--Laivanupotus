@@ -1,38 +1,34 @@
 package Laivanupotus.Sovelluslogiikka;
 
-import Laivanupotus.Tyokalut.Suunta;
 import java.util.ArrayList;
 import java.util.List;
+import Laivanupotus.Tyokalut.Sijainti;
+import Laivanupotus.Tyokalut.Suunta;
 
 /**
- * Pelilaudalla on tällä hetkellä suuri määrä eri toiminnallisuuksia, sillä se on käsitteenä aika laaja.
- * 
- * Sekä Pelaajalla että Tietokoneella on oma pelilautansa, joka pitää kirjaa siitä, missä pelilaudalla olevat
- * laivat ovat. Lisäksi pelilauta tietää sillä olevat ruudut. (Eli ts. 2 vastuuta)
+ * Pelilauta pitää kirjaa sekä pelilaudalla olevista laivoista sekä ruuduista.
  */
 
 public class Pelilauta {
-    private int koko;
-    private List<Laiva> laivat;
-    private List<Ruutu> ruudut;
+    private final int koko = 6;
+    private final List<Laiva> laivat;
+    private final Ruutu[][] ruudut;
     
     public Pelilauta() {
-        this.koko = 6;
         this.laivat = new ArrayList<>();
-        this.ruudut = new ArrayList<>();
+        this.ruudut = new Ruutu[koko][koko];
         asetaRuudutPelilaudalle();
     }
-    
+
     /**
-     * Ruudut asetetaan pelilaudalle vaakasuuntaan, joten niihin on helppo jatkossa viitata suoraan kun tietyn ruudun
-     * indeksi on tiedossa. Mm. kohdassa (2,3) on 3*6 + 2 = 20. ruutu.
-     */
+     * Luodaan ruudut yksi kerrallaan ja asetetaan taulukkoon.
+    */
     
     private void asetaRuudutPelilaudalle() {
         for (int y = 0; y < koko; y++) {
             for (int x = 0; x < koko; x++) {
                 Ruutu ruutu = new Ruutu(new Sijainti(x,y));
-                this.ruudut.add(ruutu);
+                this.ruudut[x][y] = ruutu;
             }
         }
     }
@@ -41,7 +37,7 @@ public class Pelilauta {
         return this.koko;
     }
     
-    public List<Ruutu> getRuudut() {
+    public Ruutu[][] getRuudut() {
         return this.ruudut;
     }
     
@@ -53,7 +49,7 @@ public class Pelilauta {
      * asetaLaiva on "yleismetodi", joka lisää pelilaudalle laivan mikäli se voidaan pelilaudalle asettaa.
      * 
      * @param laiva
-     * @throws IllegalArgumentException 
+     * @throws IllegalArgumentException
      */
     
     public void asetaLaiva(Laiva laiva) throws IllegalArgumentException {
@@ -67,26 +63,21 @@ public class Pelilauta {
     
     private void lisaaLaiva(Laiva laiva) {
         this.laivat.add(laiva);
-    }    
+    }
     
     /**
      * Mikäli laiva voidaan asettaa pelilaudalle, palauttaa true.
      * @param laiva
-     * @return 
      */
     
     private boolean voidaankoAsettaa(Laiva laiva) {
-        if (!laivatMenevatPaallekain(laiva) && !laivaMeneeRuudukonYli(laiva)) {
-            return true;
-        }
-        return false;
+        return !laivatMenevatPaallekain(laiva) && !laivaMeneeRuudukonYli(laiva);
     }
     
     /**
      * Metodi kysyy jokaiselta pelilaudalla jo olevalta laivalta erikseen, meneekö se
      * päällekäin asetettavan laivan kanssa. Mikäli jokin menee, palauttaa true.
      * @param verrattava
-     * @return 
      */
     
     private boolean laivatMenevatPaallekain(Laiva verrattava) {
@@ -102,8 +93,8 @@ public class Pelilauta {
      * Mikäli asetettavan laivan "häntä" olisi pelilaudan ulkopuolella, palautetaan true.
      * Muuten palautetaan false, ja laiva voidaan tältä osin pelilaudalle lisätä.
      * @param laiva
-     * @return 
      */
+    
     private boolean laivaMeneeRuudukonYli(Laiva laiva) {
         int siirtyma = laiva.getKoko() - 1;
         Sijainti sijainti = new Sijainti(laiva.getSijainti().getX(), laiva.getSijainti().getY());
@@ -115,17 +106,12 @@ public class Pelilauta {
             sijainti.kasvataX(siirtyma);
         }
 
-        if (Math.max(sijainti.getX(), sijainti.getY()) < this.koko) {
-            return false;
-        }
-
-        return true;
+        return Math.max(sijainti.getX(), sijainti.getY()) >= this.koko;
     }
     
     /**
      * Metodi palauttaa true mikäli johonkin pelilaudalla olevaan laivaan osuttiin.
      * @param sijainti
-     * @return 
      */
     
     public boolean osuikoLaivaan(Sijainti sijainti) {
@@ -140,7 +126,6 @@ public class Pelilauta {
     /**
      * Metodi kysyy, onko Sijaintia verrattava vastaavaan ruutuun ammuttu ja palauttaa siitä tiedon.
      * @param verrattava
-     * @return
      * @throws IllegalArgumentException 
      */
     
@@ -151,7 +136,6 @@ public class Pelilauta {
     
     /**
      * Metodi muuttaa sijaintia vastaavan pelilaudan ruudun ammutuksi.
-     * 
      * @param sijainti 
      */
     
@@ -164,7 +148,6 @@ public class Pelilauta {
      * Ei pitäisi koskaan palauttaa virheilmoitusta, mutta siihen silti varauduttu.
      * 
      * @param sijainti
-     * @return
      * @throws IllegalArgumentException 
      */
     
@@ -172,19 +155,13 @@ public class Pelilauta {
         int x = sijainti.getX();
         int y = sijainti.getY();
         
-        if (Math.max(x, y) < this.koko) {
-            return this.ruudut.get(y * this.koko + x);
-        }
-        
-        throw new IllegalArgumentException("Virhe: Valitsemasi ruutu ei ole koordinaatistossa!");
+        return this.ruudut[x][y];
     }
     
     /**
      * PelilaudanPiirtaja kysyy pelilaudan tältä metodilta, onko ko. laiva tuhottu.
      * Metodi käy läpi laivan osien sijainteja ja mikäli kaikki sijainnit on tuhottu, metodi palauttaa true.
-     * 
      * @param laiva
-     * @return 
      */
     
     public boolean onkoTuhottu(Laiva laiva) {
@@ -201,7 +178,6 @@ public class Pelilauta {
     
     /**
      * Metodi palauttaa listana kaikki pelilaudalla olevien laivojen osien sijainnit.
-     * @return 
      */
     
     public ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
@@ -216,5 +192,4 @@ public class Pelilauta {
         }
         return laivojenSijainnit;
     }
-    
 }

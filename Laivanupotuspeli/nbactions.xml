@@ -15,14 +15,17 @@
         </goals>
     </action>
     <action>
-            <actionName>javadoc</actionName>
-            <goals>
-                <goal>generate-sources</goal>
-                <goal>javadoc:javadoc</goal>
-            </goals>
-        </action>
+        <actionName>CUSTOM-Javadoc</actionName>
+        <displayName>Javadoc</displayName>
+        <goals>
+            <goal>javadoc:javadoc</goal>
+        </goals>
+    </action>
     <action>
             <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
             <goals>
                 <goal>process-classes</goal>
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>

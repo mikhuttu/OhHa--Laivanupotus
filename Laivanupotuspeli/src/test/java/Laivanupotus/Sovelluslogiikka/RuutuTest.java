@@ -3,6 +3,7 @@ package Laivanupotus.Sovelluslogiikka;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import Laivanupotus.Tyokalut.Sijainti;
 
 public class RuutuTest {
     Ruutu ruutu;

@@ -1,4 +1,4 @@
-package Laivanupotus.Sovelluslogiikka;
+package Laivanupotus.Tyokalut;
 
 import static org.junit.Assert.*;
 import org.junit.Before;

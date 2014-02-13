@@ -1,12 +1,13 @@
 package Laivanupotus.Kayttoliittyma.Alaosa;
 
+import java.util.ArrayList;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Laiva;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
-import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
-import java.util.ArrayList;
+import Laivanupotus.Tyokalut.Sijainti;
+
 
 public class PelilaudanPiirtaja {
     Kayttaja kayttaja;

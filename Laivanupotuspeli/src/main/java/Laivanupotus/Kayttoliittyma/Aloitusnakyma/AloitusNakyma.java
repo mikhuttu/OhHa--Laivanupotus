@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
+/**
+ * AloitusNakyma perii JPanel -luokan ja sisältää aloitusnäkymän komponentit.
+ */
+
 public class AloitusNakyma extends JPanel {
     private NapinKuuntelija kuuntelija;
     

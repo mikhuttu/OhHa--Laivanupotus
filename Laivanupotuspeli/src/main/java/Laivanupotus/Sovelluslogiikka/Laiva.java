@@ -1,4 +1,6 @@
 package Laivanupotus.Sovelluslogiikka;
+
+import Laivanupotus.Tyokalut.Sijainti;
 import Laivanupotus.Tyokalut.Suunta;
 
 /**
