@@ -1,9 +1,9 @@
 package Laivanupotus.Sovelluslogiikka;
 
-import Laivanupotus.Tyokalut.Suunta;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import Laivanupotus.Tyokalut.Suunta;
 
 public class LaivaTest {
     Laiva laivaAlas;

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import Laivanupotus.Ohjaus.PelilaudanPiirtaja;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;

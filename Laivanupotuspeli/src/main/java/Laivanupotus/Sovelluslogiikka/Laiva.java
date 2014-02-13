@@ -8,9 +8,9 @@ import Laivanupotus.Tyokalut.Suunta;
  */
 
 public class Laiva {
-    private Sijainti sijainti;
-    private Suunta suunta;
-    private int koko;
+    private final Sijainti sijainti;
+    private final Suunta suunta;
+    private final int koko;
     
     public Laiva(Sijainti sijainti, Suunta suunta, int koko) {
         this.sijainti = sijainti;

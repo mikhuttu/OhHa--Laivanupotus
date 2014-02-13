@@ -3,13 +3,13 @@ package Laivanupotus.Kayttoliittyma.Alaosa;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
-import Laivanupotus.Sovelluslogiikka.Pelaaja;
+import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.Peli;
 
 public class AlaOsanKomponentit extends JPanel {
-    private PiirtoAlusta vasen;
+    private final PiirtoAlusta vasen;
 //    private PiirtoAlusta keski;
-    private PiirtoAlusta oikea;
+    private final PiirtoAlusta oikea;
     
     public AlaOsanKomponentit(Peli peli) {
         this.setLayout(new GridLayout(1,3));
@@ -28,7 +28,7 @@ public class AlaOsanKomponentit extends JPanel {
     }
     
     public void piirra(Kayttaja kayttaja) {
-        if (kayttaja.getClass() == Pelaaja.class) {
+        if (kayttaja.getClass() != Tietokone.class) {
             vasen.repaint();
         }
         else {

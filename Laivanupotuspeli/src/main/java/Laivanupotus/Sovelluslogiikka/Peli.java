@@ -1,22 +1,18 @@
 package Laivanupotus.Sovelluslogiikka;
 
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
-import Laivanupotus.Tyokalut.Lukija;
 
 /**
- * Pelin lopullinen käyttötarkoitus on yhä vähän "auki", mutta tällä hetkellä Peli
- * toimii linkkinä eri luokkien välillä siten että peli tuntee käyttäjät ja pyytää
- * käyttäjiä suorittamaan vuorojaan.
- * 
+ * Peli -luokka tietää molemmat Kayttajat, ja tätä tietoa Käyttöliittymä hyödyntää.
  * Lisäksi peli luokka tietää, tuleeko peliä vielä jatkaa vai ei.
  */
 
 public class Peli {
-    private Kayttaja pelaaja;
-    private Kayttaja tietokone;
+    private final Kayttaja pelaaja;
+    private final Kayttaja tietokone;
  
-    public Peli(Aly aly, Lukija lukija) {
-        this.pelaaja = new Pelaaja(lukija);
+    public Peli(Aly aly) {
+        this.pelaaja = new Kayttaja();
         this.tietokone = new Tietokone(aly);
     }
     
@@ -29,34 +25,11 @@ public class Peli {
     }
     
     /**
-     * Pyytää parametrinaan saavaa käyttäjää suorittamaan vuoronsa.
-     * Palauttaa "true" tai "false" sen mukaan, osuiko käyttäjä vuoroa suorittaessaan (= ampuessa) laivaan vai ei.
-     * 
-     * @param kayttaja
-     * @return
-     * @throws IllegalArgumentException 
-     */
-    
-    public boolean suoritaVuoro(Kayttaja kayttaja) throws IllegalArgumentException {
-        if (kayttaja.equals(pelaaja)) {
-            Pelaaja p = (Pelaaja) kayttaja;
-            return p.suoritaVuoroAlkuperainen(this.tietokone.getPelilauta());
-        }
-        else {
-            Tietokone t = (Tietokone) kayttaja;
-            return t.suoritaVuoro(this.pelaaja.getPelilauta());
-        } 
-    }
-    
-    /**
      * Palauttaa false mikäli pelin tulee päättyä.
      * @return 
      */
     
     public boolean jatketaanko() {
-        if (Math.max(this.pelaaja.getOsuneet(), this.tietokone.getOsuneet()) < 12) {
-            return true;
-        }
-        return false;
+        return Math.max(this.pelaaja.getOsuneet(), this.tietokone.getOsuneet()) < 12;
     }
 }

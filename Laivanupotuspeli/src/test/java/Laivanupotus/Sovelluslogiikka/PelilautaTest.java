@@ -1,10 +1,10 @@
 package Laivanupotus.Sovelluslogiikka;
 
-import Laivanupotus.Tyokalut.Suunta;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
+import Laivanupotus.Tyokalut.Suunta;
 
 public class PelilautaTest {
     Pelilauta pelilauta;

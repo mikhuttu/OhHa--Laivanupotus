@@ -1,23 +1,22 @@
 package Laivanupotus.Sovelluslogiikka;
 
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
-import Laivanupotus.Tyokalut.Lukija;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 
 public class PeliTest {
     Peli peli;
     
     @Before
     public void setUp() {
-        peli = new Peli(Aly.EASY, new Lukija());
+        peli = new Peli(Aly.EASY);
     }
     
     @Test
     public void konstruktoriToimii() {
-        assertTrue(new Pelaaja().getClass() == peli.getPelaaja().getClass());
-        assertTrue(new Tietokone(Aly.EASY).getClass() == peli.getTietokone().getClass());
+        assertTrue(peli.getPelaaja().getClass() == Kayttaja.class);
+        assertTrue(peli.getTietokone().getClass() == Tietokone.class);
     }
     
     @Test

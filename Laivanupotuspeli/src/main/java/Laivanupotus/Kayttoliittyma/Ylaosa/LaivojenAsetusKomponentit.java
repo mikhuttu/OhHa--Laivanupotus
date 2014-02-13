@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
+import Laivanupotus.Tyokalut.LaivanKoonMaarittaja;
 
 public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     private LuoLaivanKuuntelija kuuntelija;
@@ -17,6 +18,7 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     }    
     
     public JPanel seuraava(int laivanIndeksi) {
+        
         laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi));
         kuuntelija.getSuuntaKentta().setText("");
         kuuntelija.getSijaintiKentta().setText("");
@@ -37,18 +39,6 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         this.add(alakentta);
         this.add(kommenttikentta);
     }
-    
-    private int haeKoko(int laivanIndeksi) {
-        int koko = 4;
-            
-        if (laivanIndeksi > 1 && laivanIndeksi < 4) {
-            koko = 3;
-        }
-        else if (laivanIndeksi == 4) {
-            koko = 2;
-        }
-        return koko;
-    }    
     
 
     private JPanel ylakentta(int laivanIndeksi) {
@@ -115,5 +105,9 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         kommenttikentta.add(new JPanel());
         
         return kommenttikentta;
+    }
+    
+    private int haeKoko(int laivanIndeksi) {
+        return new LaivanKoonMaarittaja().maaritaKoko(laivanIndeksi);
     }
 }

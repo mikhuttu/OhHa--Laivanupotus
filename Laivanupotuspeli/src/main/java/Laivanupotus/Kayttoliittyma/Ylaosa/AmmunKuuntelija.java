@@ -1,12 +1,13 @@
 package Laivanupotus.Kayttoliittyma.Ylaosa;
 
-import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import Laivanupotus.Sovelluslogiikka.Pelaaja;
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
+import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
+import Laivanupotus.Tyokalut.SijainninMaarittaja;
 
 public class AmmunKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
@@ -29,7 +30,7 @@ public class AmmunKuuntelija implements ActionListener {
         Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
         sijaintiKentta.setText(null);
         
-        Pelaaja pelaaja = (Pelaaja) this.kayttoliittyma.getPeli().getPelaaja();
+        Kayttaja pelaaja = (Kayttaja) this.kayttoliittyma.getPeli().getPelaaja();
         
         try {
             boolean osuiko = pelaaja.suoritaVuoro(this.kayttoliittyma.getPeli().getTietokone().getPelilauta(), sijainti);

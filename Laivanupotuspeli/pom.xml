@@ -43,6 +43,8 @@
                     <includes>
                         
                         <include>Laivanupotus.Sovelluslogiikka/*.class</include>
+                        <include>Laivanupotus.Sovelluslogiikka.Tyokalut.LaivanKoonMaarittaja.class</include>
+                        <include>Laivanupotus.Sovelluslogiikka.Tyokalut.SijainninMaarittaja.class</include>
                     </includes>
                 </instrumentation>
             </configuration>
@@ -56,11 +58,31 @@
             <configuration>
                 <targetClasses>
                     
-                    <param>Laivanupotus.*</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Kayttaja</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Laiva</param>
+                    <param>Laivanupotus.Sovelluslogiikka.LaivojenLuoja</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Peli</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Pelilauta</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Ruutu</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Sijainti</param>
+                    <param>Laivanupotus.Sovelluslogiikka.Tietokone</param>
+                    
+                    <param>Laivanupotus.Tyokalut.LaivanKoonMaarittaja</param>
+                    <param>Laivanupotus.Tyokalut.SijainninMaarittaja</param>
                 </targetClasses>
                 <targetTests>
                     
-                    <param>Laivanupotus.*</param>
+                    <param>Laivanupotus.Sovelluslogiikka.KayttajaTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.LaivaTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.LaivojenLuojaTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.PeliTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.PelilautaTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.RuutuTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.SijaintiTest</param>
+                    <param>Laivanupotus.Sovelluslogiikka.TietokoneTest</param>
+                    
+                    <param>Laivanupotus.Tyokalut.LaivanKoonMaarittajaTest</param>
+                    <param>Laivanupotus.Tyokalut.SijainninMaarittajaTest</param>
                 </targetTests>
             </configuration>
         </plugin>

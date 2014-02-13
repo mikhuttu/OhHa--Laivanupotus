@@ -1,12 +1,14 @@
 package Laivanupotus.Kayttoliittyma.Ylaosa;
 
-import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
-import Laivanupotus.Ohjaus.LaivojenLuoja;
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
+import Laivanupotus.Sovelluslogiikka.LaivojenLuoja;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
+import Laivanupotus.Tyokalut.SijainninMaarittaja;
 import Laivanupotus.Tyokalut.Suunta;
+
 
 public class LuoLaivanKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;

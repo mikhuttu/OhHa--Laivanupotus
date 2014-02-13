@@ -11,12 +11,11 @@ import Laivanupotus.Kayttoliittyma.Aloitusnakyma.AloitusNakyma;
 import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
-import Laivanupotus.Ohjaus.LaivojenLuoja;
+import Laivanupotus.Sovelluslogiikka.LaivojenLuoja;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
-import Laivanupotus.Tyokalut.Lukija;
 
 public class Kayttoliittyma implements Runnable {
 
@@ -49,7 +48,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     public void aloitaPeli(Aly aly) {
-        this.peli = new Peli(aly, new Lukija());
+        this.peli = new Peli(aly);
         luoTietokoneenLaivat();
         frame.getContentPane().remove(0);
         luoPaaKomponentit();
@@ -168,7 +167,9 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private void tietokoneenVuoro() {
-        boolean osuiko = this.peli.suoritaVuoro(this.peli.getTietokone());
+        Tietokone tietokone = (Tietokone) this.peli.getTietokone();
+        boolean osuiko = tietokone.suoritaVuoro(this.peli.getPelaaja().getPelilauta());
+        
         piirraPelilauta(this.peli.getPelaaja());
         
         if (osuiko) {

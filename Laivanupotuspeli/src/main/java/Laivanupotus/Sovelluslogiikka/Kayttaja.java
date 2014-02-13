@@ -1,17 +1,22 @@
 package Laivanupotus.Sovelluslogiikka;
 
 /**
- * Kayttaja on abstrakti luokka, jonka metodit sekä Pelaaja että Tietokone toteuttavat.
+ * Kayttaja on abstrakti luokka, joka kuvaa pelin pelaajaa, mutta myös tietokonetta.
+ * Tietokone perii Kayttaja -luokan ja sillä on tämän luokan metodien lisäksi tekoäly, jota se käyttää ammuttavien sijaintien määrittämiseen.
  * Käyttäjä tietää, kuinka monta kertaan vastustajan laivoihin on osuttu (max. 12, sillä silloin ne kaikkin on jo tuhottu).
  */
-public abstract class Kayttaja {
+
+public class Kayttaja {
+    private final Pelilauta pelilauta;
     private int vastustajaanOsuneet;
-    
-    public abstract boolean ammu(Pelilauta vastustajanLauta, Sijainti sijainti);
-    public abstract Pelilauta getPelilauta();
     
     public Kayttaja() {
         this.vastustajaanOsuneet = 0;
+        this.pelilauta = new Pelilauta();
+    }
+    
+    public Pelilauta getPelilauta() {
+        return this.pelilauta;
     }
     
     public int getOsuneet() {
@@ -20,5 +25,49 @@ public abstract class Kayttaja {
     
     public void kasvataVastustajaanOsuneet() {
         this.vastustajaanOsuneet++;
+    }
+    
+    /**
+    * Kayttaja suorittaa vuoronsa ampumalla vastustajan pelilautaan.
+    * Mikäli ampuessa osutaan vastustajan johonkin laivaan, Kayttaja-luokassa määritettyä arvoa
+    * "vastustajaanOsuneet" kasvatetaan ja palautetaan tieto siitä että osuttiin (jotta saadaan
+    * jatkaa myös seuraavalla vuorolla, sillä laivanupotus toimii näin).
+    * 
+    * @param vastustajanLauta
+    * @param sijainti
+    * @return
+    * @throws IllegalArgumentException Ampuminen epäonnistuu, koska sijaintiin on jo ammuttu, tai se on null.
+    */
+        
+    public boolean suoritaVuoro(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+        
+        if (ammu(vastustajanLauta, sijainti)) {
+            kasvataVastustajaanOsuneet();
+            return true;
+        }
+        return false;
+    }
+    
+    
+    /**
+     * Metodissa vastustajan pelilaudalla oleva sijainti muutetaan ammutuksi (mikäli siihen ei ole jo
+     * ammuttu jolloin palautetaan virheilmoitus eteenpäin).
+     * 
+     * Metodi palauttaa "true" mikäli ampuessa osuttiin vastustajan johonkin laivaan, muuten "false".
+     * 
+     * @param vastustajanLauta
+     * @param sijainti
+     * @return
+     * @throws IllegalArgumentException 
+     */
+    
+    private boolean ammu(Pelilauta vastustajanLauta, Sijainti sijainti) throws IllegalArgumentException {
+        if (sijainti == null || vastustajanLauta.onkoRuutuunAmmuttu(sijainti)) {
+            throw new IllegalArgumentException();
+        }
+        
+        vastustajanLauta.muutaAmmutuksi(sijainti);
+        
+        return vastustajanLauta.osuikoLaivaan(sijainti);
     }
 }

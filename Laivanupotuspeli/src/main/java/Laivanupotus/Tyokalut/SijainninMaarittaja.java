@@ -1,5 +1,4 @@
-
-package Laivanupotus.Kayttoliittyma.Ylaosa;
+package Laivanupotus.Tyokalut;
 
 import javax.swing.JTextField;
 import Laivanupotus.Sovelluslogiikka.Sijainti;

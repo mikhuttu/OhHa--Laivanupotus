@@ -1,4 +1,4 @@
-package Laivanupotus.Ohjaus;
+package Laivanupotus.Kayttoliittyma.Alaosa;
 
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Laiva;
@@ -6,7 +6,6 @@ import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
 import Laivanupotus.Sovelluslogiikka.Sijainti;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
 import java.util.ArrayList;
 
 public class PelilaudanPiirtaja {
@@ -16,27 +15,11 @@ public class PelilaudanPiirtaja {
         this.kayttaja = kayttaja;
     }
     
-//    public void piirraPelilautaAlkuperainen() {
-//        int koko = this.kayttaja.getPelilauta().getKoko();
-//        ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
-//        
-//        for (int y = 0; y < koko; y++) {
-//            String seuraavaRivi = "";
-//            for (int x = 0; x < koko; x++) {
-//                seuraavaRivi += seuraavaMerkki(new Sijainti(x,y), laivojenSijainnit);
-//            }
-//            System.out.println(seuraavaRivi);
-//        }
-//        System.out.println();
-//    }
-    
-
     private ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
         Pelilauta pelilauta = this.kayttaja.getPelilauta();
         return pelilauta.haeLaivojenOsienSijainnit();
     }
-    
-    
+        
     public char palautaSeuraavaMerkki(Sijainti sijainti) {
         
         ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
@@ -61,14 +44,10 @@ public class PelilaudanPiirtaja {
             if (ruudussaOnLaiva(sijainti, laivojenSijainnit)) {
                 tulostettava = 'X';
                     
-                try {
-                    if(onkoSijainnissaOlevaLaivaTuhottu(sijainti)) {
-                        tulostettava = 'L';
-                    }
+                if(onkoSijainnissaOlevaLaivaTuhottu(sijainti)) {
+                    tulostettava = 'L';
                 }
-                catch (IllegalArgumentException e) {
-                    System.out.println("Virhetilanne. Sijainti ei kuulunut millekään käyttäjän laivalle.");
-                }
+
             }
         }
         
