@@ -90,3 +90,4 @@
 -5h
 -Koodia refaktoroitu ja muutamista luokista "hankkiduttu eroon". Nyky‰‰n ei mm. ole olemassa pelaaja-luokkaa en‰‰ ollenkaan.
 -Aihem‰‰rittely, testit, javadoc ja luokkakaavio tehty vastaamaan nykytilannetta.
+-Kolme nykytilaa vastaavaa sekvenssikaaviota piirretty (joista yksi toisaalta ei viel‰ toteutettu).
