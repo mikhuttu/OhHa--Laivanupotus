@@ -16,7 +16,6 @@ import Laivanupotus.Sovelluslogiikka.Tietokone;
 
 public class AlaOsanKomponentit extends JPanel {
     private final GraafinenPelilauta vasen;
-//    private PiirtoAlusta keski;
     private final GraafinenPelilauta oikea;
     
     public AlaOsanKomponentit(Kayttoliittyma kayttoliittyma) {
@@ -57,5 +56,9 @@ public class AlaOsanKomponentit extends JPanel {
                  nappula.setEnabled(paasy);
              }
          }
+    }
+    
+    public void estaPaasyTietokoneenLautaan() {
+        vaihdaLaudanPainikkeisiinPaasy(oikea, false);
     }
 }

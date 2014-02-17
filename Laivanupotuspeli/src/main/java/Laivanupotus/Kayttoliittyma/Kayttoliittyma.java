@@ -272,8 +272,15 @@ public class Kayttoliittyma implements Runnable {
         else {
             paivitaKommentti("HÄVISIT :P");
         }
+        
+        AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
+        komponentit.estaPaasyAmmuNappulaan();
+        
         paivitaYlaOsa();
         ylaosa.update(ylaosa.getGraphics());
+        
+        alaosa.estaPaasyTietokoneenLautaan();
+        frame.pack();
         
         // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
     }
