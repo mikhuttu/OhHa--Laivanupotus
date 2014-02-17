@@ -151,7 +151,7 @@ public class Pelilauta {
      * @throws IllegalArgumentException 
      */
     
-    public Ruutu haeRuutu(Sijainti sijainti) throws IllegalArgumentException {
+    public Ruutu haeRuutu(Sijainti sijainti) {
         int x = sijainti.getX();
         int y = sijainti.getY();
         

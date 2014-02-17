@@ -36,7 +36,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Laivanupotus");
-        frame.setPreferredSize(new Dimension(640,480));
+        frame.setPreferredSize(new Dimension(912,404));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         frame.getContentPane().setLayout(new BorderLayout());
@@ -100,7 +100,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private void luoAlaOsanKomponentit() {
-        this.alaosa = new AlaOsanKomponentit(this.peli);
+        this.alaosa = new AlaOsanKomponentit(this);
         alaosa.luo();
         frame.getContentPane().add(alaosa, BorderLayout.CENTER);
     }
@@ -117,6 +117,7 @@ public class Kayttoliittyma implements Runnable {
         piirraPelilauta(this.peli.getPelaaja());
         
         if (laivoja >= 4) {
+            vaihdaPainikkeisiinPaasy();
             luoAmpumisKomponentit();
             return;
         }
@@ -135,6 +136,10 @@ public class Kayttoliittyma implements Runnable {
         alaosa.piirra(kayttaja);
         alaosa.update(alaosa.getGraphics());
     }
+    
+    private void vaihdaPainikkeisiinPaasy() {
+        this.alaosa.vaihdaPainikkeisiinPaasyPaittain();
+    }    
     
     /*
     * Yläosa vaihdetaan AmpumisKomponenteiksi ja luodaan ko. komponentit.
@@ -182,6 +187,8 @@ public class Kayttoliittyma implements Runnable {
      * @param osuiko - kuvaa osuttiinko ampuessa laivaan vai ei
      */
     public void pelaajaAmpui(boolean osuiko) {
+        paivitaSijainti("");
+        paivitaKommentti("");
         piirraPelilauta(this.peli.getTietokone());
         if (osuiko) {
             osuttiinLaivaan();
@@ -280,6 +287,12 @@ public class Kayttoliittyma implements Runnable {
         ylaosa.kommenttiPaivitys(kommentti);
         paivitaYlaOsa();
     }
+    
+    public void paivitaSijainti(String sijainti) {
+        ylaosa.sijaintiPaivitys(sijainti);
+        paivitaYlaOsa();
+    }    
+    
     
     /**
      * Odota 0,4s.

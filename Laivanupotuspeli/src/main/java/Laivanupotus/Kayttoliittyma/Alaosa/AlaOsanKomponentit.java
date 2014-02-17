@@ -1,10 +1,12 @@
 package Laivanupotus.Kayttoliittyma.Alaosa;
 
 import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
-import Laivanupotus.Sovelluslogiikka.Peli;
 
 /**
  * Alaosan toiminnallisuuden kehittäminen on täysin kesken, joten en viitsi sen metodeja varten alkaa Javadociakaan kirjoittamaan.
@@ -13,18 +15,17 @@ import Laivanupotus.Sovelluslogiikka.Peli;
 */
 
 public class AlaOsanKomponentit extends JPanel {
-    private final PiirtoAlusta vasen;
+    private final GraafinenPelilauta vasen;
 //    private PiirtoAlusta keski;
-    private final PiirtoAlusta oikea;
+    private final GraafinenPelilauta oikea;
     
-    public AlaOsanKomponentit(Peli peli) {
+    public AlaOsanKomponentit(Kayttoliittyma kayttoliittyma) {
         this.setLayout(new GridLayout(1,3));
-        this.vasen = new PiirtoAlusta(peli.getPelaaja());
-//        this.keski = new PiirtoAlusta();
-        this.oikea = new PiirtoAlusta(peli.getTietokone());
-        
+        this.vasen = new GraafinenPelilauta(kayttoliittyma, kayttoliittyma.getPeli().getPelaaja());
+        this.oikea = new GraafinenPelilauta(kayttoliittyma, kayttoliittyma.getPeli().getTietokone());
+
         this.add(vasen);
-//        this.add(keski);
+        this.add(new JLabel());
         this.add(oikea);
     }
     
@@ -40,5 +41,21 @@ public class AlaOsanKomponentit extends JPanel {
         else {
             oikea.repaint();
         }
+    }
+    
+    public void vaihdaPainikkeisiinPaasyPaittain() {
+        vaihdaLaudanPainikkeisiinPaasy(vasen, false);
+        vaihdaLaudanPainikkeisiinPaasy(oikea, true);
+    }
+    
+    private void vaihdaLaudanPainikkeisiinPaasy(GraafinenPelilauta lauta, boolean paasy) {
+         for (int i = 0; i < lauta.getKoko(); i++) {
+             JPanel rivi = (JPanel) lauta.getComponent(i);
+             
+             for (int j = 0; j < lauta.getKoko(); j++) {
+                 JButton nappula = (JButton) rivi.getComponent(j);
+                 nappula.setEnabled(paasy);
+             }
+         }
     }
 }

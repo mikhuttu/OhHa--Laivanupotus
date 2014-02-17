@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 public abstract class YlaOsanKomponentit extends JPanel {
     
     protected JTextField kommentti;
+    protected JTextField sijainti;
     
     public JPanel getPanel() {
         return this;
@@ -18,5 +19,9 @@ public abstract class YlaOsanKomponentit extends JPanel {
     
     public void kommenttiPaivitys(String paivitys) {
         this.kommentti.setText(paivitys);
+    }
+    
+    public void sijaintiPaivitys(String paivitys) {
+        this.sijainti.setText(paivitys);
     }
 }

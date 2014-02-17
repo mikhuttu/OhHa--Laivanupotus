@@ -87,8 +87,8 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
 
         JLabel laivanSijainti = new JLabel("Laivan sijainti: ");
         
-        JTextField sijainti = new JTextField();
-        sijainti.setEnabled(true);              // testauksen takia true
+        sijainti = new JTextField();
+        sijainti.setEnabled(false);
 
         kuuntelija.tuoSijaintiKentta(sijainti);
         

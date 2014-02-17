@@ -91,3 +91,9 @@
 -Koodia refaktoroitu ja muutamista luokista "hankkiduttu eroon". Nyky‰‰n ei mm. ole olemassa pelaaja-luokkaa en‰‰ ollenkaan.
 -Aihem‰‰rittely, testit, javadoc ja luokkakaavio tehty vastaamaan nykytilannetta.
 -Kolme nykytilaa vastaavaa sekvenssikaaviota piirretty (joista yksi toisaalta ei viel‰ toteutettu).
+
+17.2.2014
+-2h
+-Alaosankomponentit toteutettu uudella tavalla JButtoneja k‰ytt‰en.
+-Peliss‰ on viel‰ muutama pieni bugi kommentti- ja sijaintikenttien p‰ivitt‰misen suhteen, jotka voisit fixata.
+-T‰m‰n j‰lkeen toteutettava viel‰ lopetusn‰kym‰ ja peli on valmis.

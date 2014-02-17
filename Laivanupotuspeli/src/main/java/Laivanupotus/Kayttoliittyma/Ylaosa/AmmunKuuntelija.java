@@ -30,7 +30,7 @@ public class AmmunKuuntelija implements ActionListener {
         Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
         sijaintiKentta.setText(null);
         
-        Kayttaja pelaaja = (Kayttaja) this.kayttoliittyma.getPeli().getPelaaja();
+        Kayttaja pelaaja = this.kayttoliittyma.getPeli().getPelaaja();
         
         try {
             boolean osuiko = pelaaja.suoritaVuoro(this.kayttoliittyma.getPeli().getTietokone().getPelilauta(), sijainti);

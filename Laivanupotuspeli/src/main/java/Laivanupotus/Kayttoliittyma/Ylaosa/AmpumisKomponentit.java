@@ -39,8 +39,8 @@ public class AmpumisKomponentit extends YlaOsanKomponentit {
     private JPanel alakentta() {
         JPanel alakentta = new JPanel(new GridLayout(1,3));
         
-        JTextField sijainti = new JTextField();
-        sijainti.setEnabled(true);              // testauksen vuoksi
+        sijainti = new JTextField();
+        sijainti.setEnabled(false);
         
         JButton ammu = new JButton("AMMU");
         ammu.addActionListener(kuuntelija);
