@@ -96,7 +96,7 @@ public class Kayttoliittyma implements Runnable {
         LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
         komponentit.luo(laivanIndeksi);
         
-        paivitaYlaOsa();
+        poistaVanhaYlaOsaJaLaitaTilalleUusi();
     }
     
     private void luoAlaOsanKomponentit() {
@@ -124,8 +124,6 @@ public class Kayttoliittyma implements Runnable {
         
         LaivojenAsetusKomponentit komponentit = (LaivojenAsetusKomponentit) ylaosa;
         komponentit.seuraava(laivoja + 1);
-
-        paivitaYlaOsa();
     }
     
     /*
@@ -150,8 +148,7 @@ public class Kayttoliittyma implements Runnable {
         
         AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
         komponentit.luo();
-        paivitaYlaOsa();
-        frame.pack();
+        poistaVanhaYlaOsaJaLaitaTilalleUusi();
     }
     
     /**
@@ -159,7 +156,7 @@ public class Kayttoliittyma implements Runnable {
      * Samalla vanha JPanel -olio poistetaan indeksistä 0, mikäli sellainen siellä jo on.
      */
     
-    private void paivitaYlaOsa() {
+    private void poistaVanhaYlaOsaJaLaitaTilalleUusi() {
         JPanel paivitetty = ylaosa;
         
         if (frame.getContentPane().getComponentCount() > 0) {
@@ -167,6 +164,7 @@ public class Kayttoliittyma implements Runnable {
         }
         
         frame.getContentPane().add(paivitetty, BorderLayout.NORTH, 0);
+        frame.pack();
     }
     
     
@@ -187,8 +185,9 @@ public class Kayttoliittyma implements Runnable {
      * @param osuiko - kuvaa osuttiinko ampuessa laivaan vai ei
      */
     public void pelaajaAmpui(boolean osuiko) {
-        paivitaSijainti("");
         paivitaKommentti("");
+        paivitaYlaOsanGrafiikat();
+        
         piirraPelilauta(this.peli.getTietokone());
         if (osuiko) {
             osuttiinLaivaan();
@@ -219,6 +218,9 @@ public class Kayttoliittyma implements Runnable {
      */
     
     private void eiOsuttuLaivaan() {
+        paivitaSijainti("");
+        paivitaYlaOsanGrafiikat();
+                
         seuraavaVuoro(this.peli.getTietokone());
     }
     
@@ -233,7 +235,6 @@ public class Kayttoliittyma implements Runnable {
         nuku();
         
         if (kayttaja.getClass() == Tietokone.class) {
-            paivitaKommentti("(Tietokoneen vuoro...)");
             tietokoneenVuoro();
         }
         else {
@@ -276,11 +277,8 @@ public class Kayttoliittyma implements Runnable {
         AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
         komponentit.estaPaasyAmmuNappulaan();
         
-        paivitaYlaOsa();
-        ylaosa.update(ylaosa.getGraphics());
-        
-        alaosa.estaPaasyTietokoneenLautaan();
-        frame.pack();
+        poistaVanhaYlaOsaJaLaitaTilalleUusi();
+        paivitaYlaOsanGrafiikat();
         
         // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
     }
@@ -292,22 +290,24 @@ public class Kayttoliittyma implements Runnable {
     
     public void paivitaKommentti(String kommentti) {
         ylaosa.kommenttiPaivitys(kommentti);
-        paivitaYlaOsa();
     }
     
     public void paivitaSijainti(String sijainti) {
         ylaosa.sijaintiPaivitys(sijainti);
-        paivitaYlaOsa();
-    }    
+    }
+    
+    private void paivitaYlaOsanGrafiikat() {
+        ylaosa.update(ylaosa.getGraphics());
+    }
     
     
     /**
-     * Odota 0,4s.
+     * Odota 0,5s.
      */
     
     private void nuku() {
         try {
-            Thread.sleep(400);
+            Thread.sleep(500);
         }
         catch (InterruptedException ie) {
         }

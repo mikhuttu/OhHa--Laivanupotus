@@ -97,3 +97,8 @@
 -Alaosankomponentit toteutettu uudella tavalla JButtoneja käyttäen.
 -Pelissä on vielä muutama pieni bugi kommentti- ja sijaintikenttien päivittämisen suhteen, jotka voisit fixata.
 -Tämän jälkeen toteutettava vielä lopetusnäkymä ja peli on valmis.
+
+18.2.2014
+-1h
+-Kommentti- ja sijaintikenttien päivitys toimii halutulla tavalla.
+-Pelistä löytynyt bugi ampumiseen liittyen. Dokumentoitu luokan "AmmunKuuntelija" alle.

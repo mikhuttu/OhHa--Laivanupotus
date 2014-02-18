@@ -25,10 +25,13 @@ public class AmmunKuuntelija implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        
+         // bugi: joskus peli luulee että ammu-nappulaa on painettu 2 kertaa ja jättää tietokoneen vuoron suorittamatta
+         // toisella kerralla luonnollisesti ilmoitus: "Ruutuun on jo ammuttu. Valitse toinen ruutu."
+        
         nappula.setEnabled(false);
 
         Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
-        sijaintiKentta.setText(null);
         
         Kayttaja pelaaja = this.kayttoliittyma.getPeli().getPelaaja();
         
