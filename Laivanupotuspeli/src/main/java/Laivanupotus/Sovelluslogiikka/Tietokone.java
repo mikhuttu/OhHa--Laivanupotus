@@ -29,7 +29,7 @@ public class Tietokone extends Kayttaja {
      * @throws IllegalArgumentException 
      */
     
-    public boolean suoritaVuoro(Pelilauta vastustajanLauta) throws IllegalArgumentException {
+    public boolean suoritaVuoro(Pelilauta vastustajanLauta) {
         Sijainti sijainti = maaritaSijainti(vastustajanLauta);
         return super.suoritaVuoro(vastustajanLauta, sijainti);
     }

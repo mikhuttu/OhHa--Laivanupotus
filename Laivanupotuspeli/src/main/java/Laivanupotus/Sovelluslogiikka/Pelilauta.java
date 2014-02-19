@@ -129,7 +129,7 @@ public class Pelilauta {
      * @throws IllegalArgumentException 
      */
     
-    public boolean onkoRuutuunAmmuttu(Sijainti verrattava) throws IllegalArgumentException {
+    public boolean onkoRuutuunAmmuttu(Sijainti verrattava) {
         Ruutu ruutu = haeRuutu(verrattava);
         return ruutu.onkoAmmuttu();
     }

@@ -1,7 +1,6 @@
 package Laivanupotus.Kayttoliittyma.Alaosa;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -62,14 +61,8 @@ public class GraafinenPelilauta extends JPanel {
         return this.koko;
     }
     
-    @Override
-    protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        piirra(graphics);
-    }
     
-    
-    public void piirra(Graphics graphics) {
+    public void varitaNappulat() {
         Pelilauta pelilauta = kayttaja.getPelilauta();
         
         for (int j = 0; j < koko; j++) {
@@ -79,12 +72,12 @@ public class GraafinenPelilauta extends JPanel {
                 JButton nappula = haeNappula(ruutu.getSijainti());
                 
                 char merkki = haeMerkki(ruutu.getSijainti());
-                piirra(graphics, nappula, merkki);
+                varita(nappula, merkki);
             }
         }
     }
         
-    private void piirra(Graphics graphics, JButton nappula, char merkki) {
+    private void varita(JButton nappula, char merkki) {
         
         if (merkki == '~') {
             nappula.setBackground(Color.WHITE);

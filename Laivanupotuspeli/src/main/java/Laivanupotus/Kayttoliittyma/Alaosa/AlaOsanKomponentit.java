@@ -35,10 +35,10 @@ public class AlaOsanKomponentit extends JPanel {
     
     public void piirra(Kayttaja kayttaja) {
         if (kayttaja.getClass() != Tietokone.class) {
-            vasen.repaint();
+            vasen.varitaNappulat();
         }
         else {
-            oikea.repaint();
+            oikea.varitaNappulat();
         }
     }
     
