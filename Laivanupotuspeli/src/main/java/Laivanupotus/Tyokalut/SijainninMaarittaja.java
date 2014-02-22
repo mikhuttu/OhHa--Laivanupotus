@@ -19,12 +19,17 @@ public class SijainninMaarittaja {
         }
         
         String teksti = sijaintiKentta.getText();
+        return maaritaSijainti(teksti);
+    }
+    
+    public Sijainti maaritaSijainti(String sijaintiKentta) {
+        
         String x = "";
         String y = "";
         boolean pilkku = false;
         
-        for (int i = 0; i < teksti.length(); i++) {
-            char merkki = teksti.charAt(i);
+        for (int i = 0; i < sijaintiKentta.length(); i++) {
+            char merkki = sijaintiKentta.charAt(i);
 
             try {
                 Integer.parseInt("" + merkki);

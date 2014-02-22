@@ -9,6 +9,7 @@ import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
+import Laivanupotus.Tyokalut.SijainninMaarittaja;
 import Laivanupotus.Tyokalut.Sijainti;
 
 
@@ -28,10 +29,10 @@ public class GraafinenPelilauta extends JPanel {
             painettavissa = true;
         }
         
-        luoPainikkeet(kayttoliittyma);
+        luoPainikkeet(kayttoliittyma, kayttaja);
     }
     
-    private void luoPainikkeet(Kayttoliittyma kayttoliittyma) {
+    private void luoPainikkeet(Kayttoliittyma kayttoliittyma, Kayttaja kayttaja) {
         
         for (int j = 0; j < koko; j++) {
             
@@ -39,13 +40,13 @@ public class GraafinenPelilauta extends JPanel {
             
             for (int i = 0; i < koko; i++) {    
                 String sijainti = haeSijaintiText(i,j);
-                PelilaudanNappulanKuuntelija kuuntelija = new PelilaudanNappulanKuuntelija(kayttoliittyma, sijainti);
                 
                 JButton nappula = new JButton();
                 nappula.setBackground(Color.WHITE);
-                
-                nappula.addActionListener(kuuntelija);
                 nappula.setEnabled(painettavissa);
+                
+                PelilaudanNappulanKuuntelija kuuntelija = new PelilaudanNappulanKuuntelija(kayttoliittyma, kayttaja, sijainti);
+                nappula.addActionListener(kuuntelija);
                 
                 rivi.add(nappula);
             }
@@ -83,7 +84,7 @@ public class GraafinenPelilauta extends JPanel {
             nappula.setBackground(Color.WHITE);
         }
         else if (merkki == 'O') {
-            nappula.setBackground(Color.BLACK);
+            nappula.setBackground(Color.BLUE);
         }
         else if (merkki == 'x') {
             nappula.setBackground(Color.CYAN);
@@ -92,7 +93,7 @@ public class GraafinenPelilauta extends JPanel {
             nappula.setBackground(Color.RED);
         }
         else {  // merkki == 'L'
-            nappula.setBackground(Color.BLUE);
+            nappula.setBackground(Color.BLACK);
         }
     }
     
@@ -104,5 +105,16 @@ public class GraafinenPelilauta extends JPanel {
     private JButton haeNappula(Sijainti sijainti) {
         JPanel rivi = (JPanel) this.getComponent(sijainti.getY());
         return (JButton) rivi.getComponent(sijainti.getX());
+    }
+    
+    public void varitaRuutu(String sijaintiKentta) {
+        varitaNappulat();
+        
+        Sijainti sijainti = new SijainninMaarittaja().maaritaSijainti(sijaintiKentta);
+        JButton nappula = haeNappula(sijainti);
+        
+        if (nappula.getBackground() == Color.WHITE) {
+            nappula.setBackground(Color.PINK);    
+        }
     }
 }

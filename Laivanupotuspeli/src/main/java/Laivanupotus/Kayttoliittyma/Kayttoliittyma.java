@@ -18,6 +18,7 @@ import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Peli;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
+import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  * Kayttoliittyma tuntee käyttöliittymän pääkomponentit, joita ovat aloitusnäkymä, ala- ja yläosat sekä lopetusnäkymä (jota
@@ -311,6 +312,10 @@ public class Kayttoliittyma implements Runnable {
     
     public void paivitaSijainti(String sijainti) {
         ylaosa.sijaintiPaivitys(sijainti);
+    }
+    
+    public void ruutuValittu(String sijaintiKentta) {
+        alaosa.ruutuValittu(sijaintiKentta);
     }
     
     private void paivitaYlaOsanGrafiikat() {
