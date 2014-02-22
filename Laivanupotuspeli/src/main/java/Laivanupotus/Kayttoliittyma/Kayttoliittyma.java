@@ -6,8 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import Laivanupotus.Main;
 import Laivanupotus.Kayttoliittyma.Alaosa.AlaOsanKomponentit;
 import Laivanupotus.Kayttoliittyma.Aloitusnakyma.AloitusNakyma;
+import Laivanupotus.Kayttoliittyma.ValintaPalkki.ValintaPalkki;
 import Laivanupotus.Kayttoliittyma.Ylaosa.LaivojenAsetusKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.AmpumisKomponentit;
 import Laivanupotus.Kayttoliittyma.Ylaosa.YlaOsanKomponentit;
@@ -30,6 +32,7 @@ public class Kayttoliittyma implements Runnable {
     private JFrame frame;
     private AloitusNakyma aloitusnakyma;
     private AlaOsanKomponentit alaosa;
+    private ValintaPalkki valintapalkki;
     private YlaOsanKomponentit ylaosa;
     
     
@@ -41,12 +44,19 @@ public class Kayttoliittyma implements Runnable {
         
         frame.getContentPane().setLayout(new BorderLayout());
         
+        luoMenuKomponentit();
         luoAloitusNakyma();
-        
         
         frame.pack();
         frame.setVisible(true);
     }
+    
+    private void luoMenuKomponentit() {
+        valintapalkki = new ValintaPalkki(this);
+        frame.setJMenuBar(valintapalkki);
+    }
+    
+
     
     private void luoAloitusNakyma() {
         this.aloitusnakyma = new AloitusNakyma(this);
@@ -232,12 +242,12 @@ public class Kayttoliittyma implements Runnable {
      */
     
     private void seuraavaVuoro(Kayttaja kayttaja) {
-        nuku();
         
         if (kayttaja.getClass() == Tietokone.class) {
             tietokoneenVuoro();
         }
         else {
+            nuku(500);
             paivitaKommentti("Valitse ammuttava ruutu oik. pelilaudalta: ");    // pelaaja saa jatkaa / pelaajan vuoro alkaa
         }
     }
@@ -249,6 +259,8 @@ public class Kayttoliittyma implements Runnable {
     
     private void tietokoneenVuoro() {
         Tietokone tietokone = (Tietokone) this.peli.getTietokone();
+        nuku(tietokone.getAly());
+        
         boolean osuiko = tietokone.suoritaVuoro(this.peli.getPelaaja().getPelilauta());
         
         piirraPelilauta(this.peli.getPelaaja());
@@ -274,13 +286,18 @@ public class Kayttoliittyma implements Runnable {
             paivitaKommentti("HÄVISIT :P");
         }
         
-        AmpumisKomponentit komponentit = (AmpumisKomponentit) ylaosa;
-        komponentit.estaPaasyAmmuNappulaan();
-        
-        poistaVanhaYlaOsaJaLaitaTilalleUusi();
-        paivitaYlaOsanGrafiikat();
-        
-        // laita peli päättymään jotenkin fiksusti. Uusi näkymä ja mahdollisuus aloittaa uusi peli?
+        alaosa.estaPaasyTietokoneenLautaan();
+    }
+    
+    public void aloitaUusiPeli() {
+        lopetaPeli();
+        nuku(1000);
+        Main.aloita();
+    }
+    
+    public void lopetaPeli() {
+        valintapalkki.tuhoaOhjeidenKuuntelija();
+        frame.dispose();
     }
     
     /**
@@ -302,14 +319,22 @@ public class Kayttoliittyma implements Runnable {
     
     
     /**
-     * Odota 0,5s.
+     * Odota 0,1 * n (s).
      */
     
-    private void nuku() {
+    private void nuku(int n) {
         try {
-            Thread.sleep(500);
+            Thread.sleep(n);
         }
         catch (InterruptedException ie) {
         }
+    }
+    
+    private void nuku(Aly aly) {
+        if (aly == Aly.IMPOSSIBLE) {
+            nuku(150);
+            return;
+        }
+        nuku (500);
     }
 }

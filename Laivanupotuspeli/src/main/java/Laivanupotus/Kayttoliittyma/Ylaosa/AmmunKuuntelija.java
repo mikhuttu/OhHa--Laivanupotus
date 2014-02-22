@@ -24,12 +24,7 @@ public class AmmunKuuntelija implements ActionListener {
     }
     
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        
-         // bugi: osuiko saa arvon false, joten "pelaaja.suoritaVuoro" toimii.
-         // try-haaran metodista "kayttoliittyma.pelaajaAmpui(osuiko)" saatetaan päätyä catch- haaraan suorittamatta metodia loppuun.
-         // ko. metodi palauttaa IllegalArgumentException ennen kuin tietokone pystyy ampumaan
-        
+    public void actionPerformed(ActionEvent ae) { 
         nappula.setEnabled(false);
         
         Sijainti sijainti = new SijainninMaarittaja().palautaSijainti(sijaintiKentta);
@@ -44,12 +39,14 @@ public class AmmunKuuntelija implements ActionListener {
             String virheIlmoitus = "Valitse ensin ruutu johon ampua.";
             
             if (sijainti != null) {
-                virheIlmoitus = "Ruutuun on jo ammuttu. Valitse toinen ruutu.";     // palauttaa tämän myös jos sijainti ei koordinaatistossa. 
-                                                                                    // "mahdoton tilanne"   
+                virheIlmoitus = "Ruutuun on jo ammuttu. Valitse toinen ruutu.";
             }
             
             kayttoliittyma.paivitaKommentti(virheIlmoitus);
         }
-        nappula.setEnabled(true);
+        
+        if (kayttoliittyma.getPeli().jatketaanko()) {
+            nappula.setEnabled(true);    
+        }
     }
 }

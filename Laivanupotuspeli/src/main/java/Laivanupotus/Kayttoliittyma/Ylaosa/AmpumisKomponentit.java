@@ -65,10 +65,4 @@ public class AmpumisKomponentit extends YlaOsanKomponentit {
         
         return kommenttikentta;
     }
-    
-    public void estaPaasyAmmuNappulaan() {
-        JPanel komponentti = (JPanel) this.getComponent(1);
-        JButton ammu = (JButton) komponentti.getComponent(1);
-        ammu.setEnabled(false);
-    }
 }

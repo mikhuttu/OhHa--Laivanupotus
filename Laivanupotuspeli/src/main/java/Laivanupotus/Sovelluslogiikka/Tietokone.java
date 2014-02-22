@@ -50,4 +50,8 @@ public class Tietokone extends Kayttaja {
 
         return alykkyys.maaritaSijainti(vastustajanLauta);
     }
+    
+    public Aly getAly() {
+        return this.aly;
+    }
 }
