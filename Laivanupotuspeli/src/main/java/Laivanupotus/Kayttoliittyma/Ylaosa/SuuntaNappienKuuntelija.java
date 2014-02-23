@@ -4,20 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
 /**
  * Luokka suorittaa tekstikentän, johon on valittu asetettavan laivan suunta, sisällön päivittämisen.
  */
 
 public class SuuntaNappienKuuntelija implements ActionListener {
-    private final JTextField suuntaKentta;
-    private final JButton alas;
-    private final JButton oikealle;
+    private JTextField suuntaKentta;
+    private JButton alas;
+    private Kayttoliittyma kayttoliittyma;
     
-    public SuuntaNappienKuuntelija(JTextField suuntaKentta, JButton alas, JButton oikealle) {
+    public SuuntaNappienKuuntelija(Kayttoliittyma kayttoliittyma) {
+        this.kayttoliittyma = kayttoliittyma;
+    }
+    
+    public void tuoKomponentit(JTextField suuntaKentta, JButton alas) {
         this.suuntaKentta = suuntaKentta;
         this.alas = alas;
-        this.oikealle = oikealle;
+    }
+    
+    public String suuntaKenttaString() {
+        return this.suuntaKentta.getText();
     }
     
     @Override
@@ -28,5 +36,6 @@ public class SuuntaNappienKuuntelija implements ActionListener {
         else {
             suuntaKentta.setText("OIKEALLE");
         }
+        kayttoliittyma.LaivojenAsetusKomponenttejaKlikattu();
     }
 }

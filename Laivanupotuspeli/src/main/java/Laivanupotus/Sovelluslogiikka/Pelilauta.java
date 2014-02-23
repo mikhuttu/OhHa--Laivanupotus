@@ -70,7 +70,7 @@ public class Pelilauta {
      * @param laiva
      */
     
-    private boolean voidaankoAsettaa(Laiva laiva) {
+    public boolean voidaankoAsettaa(Laiva laiva) {
         return !laivatMenevatPaallekain(laiva) && !laivaMeneeRuudukonYli(laiva);
     }
     

@@ -23,5 +23,8 @@ public class PelilaudanNappulanKuuntelija implements ActionListener {
         if (kayttaja.getClass() != Kayttaja.class) {
             kayttoliittyma.ruutuValittu(sijainti);    
         }
+        else {
+            kayttoliittyma.LaivojenAsetusKomponenttejaKlikattu();
+        }
     }
 }

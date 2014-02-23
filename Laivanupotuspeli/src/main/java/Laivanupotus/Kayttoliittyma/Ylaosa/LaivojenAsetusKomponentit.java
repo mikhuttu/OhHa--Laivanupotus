@@ -17,19 +17,21 @@ import Laivanupotus.Tyokalut.LaivanKoonMaarittaja;
  */
 
 public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
-    private LuoLaivanKuuntelija kuuntelija;
+    private LuoLaivanKuuntelija luoLaivanK;
+    private SuuntaNappienKuuntelija suuntaNappienK;
     private JLabel laivanKoko;
     
     public LaivojenAsetusKomponentit(Kayttoliittyma kayttoliittyma) {
-        this.kuuntelija = new LuoLaivanKuuntelija(kayttoliittyma);
+        this.luoLaivanK = new LuoLaivanKuuntelija(kayttoliittyma);
+        this.suuntaNappienK = new SuuntaNappienKuuntelija(kayttoliittyma);
         this.setLayout(new GridLayout(4,1));
-    }    
+    }
     
     public JPanel seuraava(int laivanIndeksi) {
         
         laivanKoko.setText(" " + laivanIndeksi + ". laivan koko: " + haeKoko(laivanIndeksi - 1));
-        kuuntelija.getSuuntaKentta().setText("");
-        kuuntelija.getSijaintiKentta().setText("");
+        luoLaivanK.getSuuntaKentta().setText("");
+        luoLaivanK.getSijaintiKentta().setText("");
         kommentti.setText("Valitse " + laivanIndeksi + ". laivan sijainti vas. pelilaudalta.");
         return this;
     }
@@ -65,14 +67,14 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         
         JTextField suunta = new JTextField();
         suunta.setEnabled(false);
-        this.kuuntelija.tuoSuuntaKentta(suunta);
+        this.luoLaivanK.tuoSuuntaKentta(suunta);
         
         JButton alasNappi = new JButton("ALAS");
         JButton oikealleNappi = new JButton("OIKEALLE");
 
-        SuuntaNappienKuuntelija suunnanKuuntelija = new SuuntaNappienKuuntelija(suunta, alasNappi, oikealleNappi);
-        alasNappi.addActionListener(suunnanKuuntelija);
-        oikealleNappi.addActionListener(suunnanKuuntelija);
+        suuntaNappienK.tuoKomponentit(suunta, alasNappi);
+        alasNappi.addActionListener(suuntaNappienK);
+        oikealleNappi.addActionListener(suuntaNappienK);
         
         keskikentta.add(laivanSuunta);
         keskikentta.add(suunta);
@@ -90,10 +92,10 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         sijainti = new JTextField();
         sijainti.setEnabled(false);
 
-        kuuntelija.tuoSijaintiKentta(sijainti);
+        luoLaivanK.tuoSijaintiKentta(sijainti);
         
         JButton luoLaiva = new JButton("LUO LAIVA");
-        luoLaiva.addActionListener(kuuntelija);
+        luoLaiva.addActionListener(luoLaivanK);
         
         alakentta.add(laivanSijainti);
         alakentta.add(sijainti);
@@ -101,6 +103,7 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
         alakentta.add(luoLaiva);
         
         return alakentta;
+        
     }
     
     private JPanel kommenttikentta(int laivanIndeksi) {
@@ -117,5 +120,9 @@ public class LaivojenAsetusKomponentit extends YlaOsanKomponentit {
     
     private int haeKoko(int laivanIndeksi) {
         return new LaivanKoonMaarittaja().maaritaKoko(laivanIndeksi);
+    }
+    
+    public SuuntaNappienKuuntelija getSuuntaNappienKuuntelija() {
+        return this.suuntaNappienK;
     }
 }

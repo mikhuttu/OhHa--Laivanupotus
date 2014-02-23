@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
-import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  * Alaosan toiminnallisuuden kehittäminen on täysin kesken, joten en viitsi sen metodeja varten alkaa Javadociakaan kirjoittamaan.
@@ -66,4 +65,10 @@ public class AlaOsanKomponentit extends JPanel {
     public void ruutuValittu(String sijaintiKentta) {
         oikea.varitaRuutu(sijaintiKentta);
     }
+    
+    public void laivanAsettaminen(String sijaintiKenttaText, String suuntaKenttaText) {
+        vasen.laivanAsettaminen(sijaintiKenttaText, suuntaKenttaText);
+    }
+    
+
 }

@@ -24,4 +24,8 @@ public abstract class YlaOsanKomponentit extends JPanel {
     public void sijaintiPaivitys(String paivitys) {
         this.sijainti.setText(paivitys);
     }
+    
+    public String getSijaintiString() {
+        return this.sijainti.getText();
+    }
 }

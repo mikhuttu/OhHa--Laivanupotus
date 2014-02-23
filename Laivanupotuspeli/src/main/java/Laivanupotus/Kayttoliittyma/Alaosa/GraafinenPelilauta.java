@@ -6,11 +6,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
+import Laivanupotus.Sovelluslogiikka.Laiva;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
+import Laivanupotus.Tyokalut.LaivanKoonMaarittaja;
 import Laivanupotus.Tyokalut.SijainninMaarittaja;
 import Laivanupotus.Tyokalut.Sijainti;
+import Laivanupotus.Tyokalut.Suunta;
 
 
 public class GraafinenPelilauta extends JPanel {
@@ -108,13 +111,45 @@ public class GraafinenPelilauta extends JPanel {
     }
     
     public void varitaRuutu(String sijaintiKentta) {
-        varitaNappulat();
-        
         Sijainti sijainti = new SijainninMaarittaja().maaritaSijainti(sijaintiKentta);
+        varitaNappulat();
+        varitaRuutu(sijainti);
+    }
+    
+    private void varitaRuutu(Sijainti sijainti) {
         JButton nappula = haeNappula(sijainti);
         
         if (nappula.getBackground() == Color.WHITE) {
             nappula.setBackground(Color.PINK);    
+        }
+    }
+    
+    public void laivanAsettaminen(String sijaintiKentta, String suuntaKentta) {
+        Laiva laiva = maaritaLaiva(sijaintiKentta, suuntaKentta, kayttaja.getPelilauta().getLaivat().size());
+        varitaRuudut(laiva);
+    }
+    
+    public Laiva maaritaLaiva(String sijaintiKenttaText, String suuntaKenttaText, int laivoja) {
+        int laivanKoko = new LaivanKoonMaarittaja().maaritaKoko(laivoja);
+        Sijainti sijainti = new SijainninMaarittaja().maaritaSijainti(sijaintiKenttaText);
+        Suunta suunta = Suunta.ALAS;
+        
+        if (suuntaKenttaText.equals("OIKEALLE")) {
+            suunta = Suunta.OIKEALLE;
+        }
+        
+        return new Laiva(sijainti, suunta, laivanKoko);
+    }
+    
+    private void varitaRuudut(Laiva laiva) {
+        varitaNappulat();
+        
+        if (kayttaja.getPelilauta().voidaankoAsettaa(laiva)) {
+        
+            for (int i = 0; i < laiva.getKoko(); i++) {
+                Sijainti sijainti = laiva.haeLaivanOsanSijainti(i);
+                varitaRuutu(sijainti);
+            }
         }
     }
 }
