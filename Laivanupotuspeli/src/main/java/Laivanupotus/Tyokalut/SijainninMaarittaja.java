@@ -5,15 +5,12 @@ import javax.swing.JTextField;
 /**
  * SijainninMaarittajaa käytetään yleisluokkana eri käyttöliittymäkomponenteista.
  * 
- * Sen tarkoituksena on palauttaa tekstikentän sisältöä (muotoa 'x,y') vastaava sijainti.
- * 
- * Jos sisältö ei ole kyseistä muotoa, ohjelma kaatuu, mutta jatkossa sijaintia ei voi tekstikenttään kirjoittaa itse, joten
- * sillä ei niinkään väliä.
+ * Sen tarkoituksena on palauttaa String-arvoa (x,y) vastaava sijainti.
  */
 
 public class SijainninMaarittaja {
     
-    public Sijainti palautaSijainti(JTextField sijaintiKentta) {    // sijainti muotoa 'x,y'
+    public Sijainti palautaSijainti(JTextField sijaintiKentta) {
         if (sijaintiKentta.getText().equals("")) {
             return null;
         }

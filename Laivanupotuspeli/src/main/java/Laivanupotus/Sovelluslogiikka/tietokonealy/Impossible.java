@@ -10,7 +10,6 @@ import Laivanupotus.Tyokalut.Sijainti;
  * "Mahdoton vaikeustaso", joka toimii siten että mikäli tietokoneen älykkyys on Aly.IMPOSSIBLE, tietokone määrittää
  * ammuttavan sijainnin siten että se on aina jonkun vastustajan laudalla olevan laivan osan sijainti.
  * 
- * Pelin nopeuttamiseksi metodi on tehty jo itse tarkistamaan, onko sijaintia vastaavaan ruutuun ammuttu.
  */
 
 public class Impossible implements Alykkyys {

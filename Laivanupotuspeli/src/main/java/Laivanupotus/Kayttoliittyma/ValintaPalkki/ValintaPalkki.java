@@ -5,6 +5,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import Laivanupotus.Kayttoliittyma.Kayttoliittyma;
 
+/**
+ * Tämä luokka (yhdessä kolmen siihen kuuluvan kuuntelijan kanssa) toteuttaa käyttöliittymässä olevan valintapalkin toiminnan.
+ */
+
 public class ValintaPalkki extends JMenuBar {
     private OhjeidenKuuntelija ohjeidenKuuntelija;
     

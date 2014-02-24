@@ -13,7 +13,6 @@ import javax.swing.JButton;
 
 public class NapinKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
-    private JButton easy;
     private JButton hard;
     private JButton impossible;
     
@@ -21,8 +20,7 @@ public class NapinKuuntelija implements ActionListener {
         this.kayttoliittyma = kayttoliittyma;
     }
     
-    public void tuoKomponentit(JButton easy, JButton hard, JButton impossible) {
-        this.easy = easy;
+    public void tuoKomponentit(JButton hard, JButton impossible) {
         this.hard = hard;
         this.impossible = impossible;
     }

@@ -5,7 +5,9 @@ import javax.swing.JTextField;
 
 /**
  * Koska sekä AmpumisKomponenteilla että LaivanAsetusKomponenteilla on oma kommenttikenttä, tämä luokka hallitsee
- * niiden päivittämisen. 
+ * niiden päivittämisen.
+ * 
+ * Ehkä toteutuksena vähän turhan sekava, mutta säästää ainakin tilaa jos jotain..
  */
 
 public abstract class YlaOsanKomponentit extends JPanel {

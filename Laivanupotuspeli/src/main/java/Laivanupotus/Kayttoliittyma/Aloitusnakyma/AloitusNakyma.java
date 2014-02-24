@@ -37,10 +37,9 @@ public class AloitusNakyma extends JPanel {
         
         easy.addActionListener(kuuntelija);
         hard.addActionListener(kuuntelija);
-        hard.setEnabled(false);
         impossible.addActionListener(kuuntelija);
         
-        kuuntelija.tuoKomponentit(easy, hard, impossible);
+        kuuntelija.tuoKomponentit(hard, impossible);
         
         nappulat.add(easy);
         nappulat.add(hard);

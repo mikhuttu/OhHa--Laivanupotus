@@ -1,0 +1,7 @@
+Ohjelman rakenne on sellainen että käyttöliittymä ohjeistaa pelin toimintaa yhdessä sen eri komponenttien kanssa.
+Käyttöliittymä tuntee käytännössä ainoastaan "Peli" -olion, joka tuntee kaksi eri käyttäjää: Kayttaja -ja Tietokone-oliot.
+Molemmilla näistä on pelilauta, tietokoneella on lisäksi tekoäly.
+Pelilaudalla on laivoja ja ruutuja. Näistä molemmat tuntevat oman sijaintinsa.
+
+Käyttöliittymän ja Sovelluslogiikan luokkien lisäksi ohjelmassa on muutamia yleisiä luokkia työkaluina, jotka toimivat esimerkiksi
+yleismetodeina, joihin voidaan päästä käsiksi muualta tarvittaessa. Tällaisia ovat mm. LaivanKoonMaarittaja ja SijainninMaarittaja.

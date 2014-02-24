@@ -58,7 +58,7 @@ public class Pelilauta {
         }
         else {
             throw new IllegalArgumentException ();
-        } 
+        }
     }
     
     private void lisaaLaiva(Laiva laiva) {
@@ -144,11 +144,8 @@ public class Pelilauta {
     }
     
     /**
-     * Metodi palauttaa sijaintia vastaavan ruudun (toimii näin koska ruudut asetettu alussa vaakasuuntaan).
-     * Ei pitäisi koskaan palauttaa virheilmoitusta, mutta siihen silti varauduttu.
-     * 
+     * Metodi palauttaa sijaintia vastaavan ruudun.
      * @param sijainti
-     * @throws IllegalArgumentException 
      */
     
     public Ruutu haeRuutu(Sijainti sijainti) {

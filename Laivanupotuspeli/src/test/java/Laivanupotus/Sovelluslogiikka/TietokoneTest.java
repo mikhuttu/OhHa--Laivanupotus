@@ -1,5 +1,6 @@
 package Laivanupotus.Sovelluslogiikka;
 
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
@@ -14,6 +15,12 @@ public class TietokoneTest {
     public void setUp() {
         tietokone = new Tietokone(Aly.EASY);
         sijainti = new Sijainti(1,2);
+    }
+    
+    @Test
+    public void getAlyPalauttaaAlyn() {
+        Tietokone kone = (Tietokone) tietokone;
+        assertEquals(Aly.EASY, kone.getAly());
     }
     
     @Test (expected = IllegalArgumentException.class) 

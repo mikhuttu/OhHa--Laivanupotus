@@ -13,6 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.WindowConstants;
 
+/**
+ * OhjeidenKuuntelija toimii kuuntelijana valintapalkissa olevalle "Ohjeet" JMenu -painikkeelle.
+ * Tämän luokan tarkoituksena on luoda uusi JFrame -olio, johon pelin käyttöohjeet tulostetaan, kun nappia painetaan.
+ */
+
 public class OhjeidenKuuntelija implements MenuListener {
     private Scanner lukija;
     private JFrame ohjeNaytto;

@@ -21,6 +21,12 @@ public class GraafinenPelilauta extends JPanel {
     private final int koko = 6;
     private boolean painettavissa;
 
+    /**
+     * GraafinenPelilauta sisältää pelilaudalla olevat painikeet ja hoitaa näiden värittämisen.
+     * 
+     * @param kayttoliittyma
+     * @param kayttaja 
+     */
     public GraafinenPelilauta(Kayttoliittyma kayttoliittyma, Kayttaja kayttaja) {
         this.setLayout(new GridLayout(koko, koko));
         this.kayttaja = kayttaja;

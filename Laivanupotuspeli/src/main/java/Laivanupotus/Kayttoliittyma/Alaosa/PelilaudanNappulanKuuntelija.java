@@ -10,6 +10,15 @@ public class PelilaudanNappulanKuuntelija implements ActionListener {
     private Kayttaja kayttaja;
     private String sijainti;
     
+    /**
+     * Luokka kuuntelee GraafisellaPelilaudalla olevien JButton olioiden painalluksia.
+     * Riippuen siitä onko painettu nappula kayttajan vai tietokoneen pelilaudalla (liittyy pelin tilanteeseen:
+     * laivojen asettaminen vai ampuminen?), palautetaan käyttöliittymälle siitä eri tieto.
+     * 
+     * @param kayttoliittyma
+     * @param kayttaja
+     * @param sijainti 
+     */
     public PelilaudanNappulanKuuntelija(Kayttoliittyma kayttoliittyma, Kayttaja kayttaja, String sijainti) {
         this.kayttoliittyma = kayttoliittyma;
         this.kayttaja = kayttaja;

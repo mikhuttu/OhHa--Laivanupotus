@@ -8,6 +8,10 @@ public class Main {
         aloita();
     }
     
+    /**
+     * aloita() metodia kutsutaan käyttöliittymästä, kun uusi peli halutaan aloittaa manuaalisesti valintapalkin kautta.
+     */
+    
     public static void aloita() {
         SwingUtilities.invokeLater(new Kayttoliittyma());
     }

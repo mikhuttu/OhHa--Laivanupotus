@@ -1,9 +1,6 @@
 package Laivanupotus.Sovelluslogiikka;
 
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Alykkyys;
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Easy;
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Aly;
-import Laivanupotus.Sovelluslogiikka.tietokonealy.Impossible;
+import Laivanupotus.Sovelluslogiikka.tietokonealy.*;
 import Laivanupotus.Tyokalut.Sijainti;
 
 /**
@@ -20,13 +17,16 @@ public class Tietokone extends Kayttaja {
         this.aly = aly;
     }
     
+    public Aly getAly() {
+        return this.aly;
+    }
+    
     /**
      * Vuoron suoritus tapahtuu siten että määritetään ensin ammuttava sijainti (jonkun algoritmin avulla), jonka
      * jälkeen kutsutaan yliluokan (Kayttaja) suoritaVuoro metodia.
      * 
      * @param vastustajanLauta
      * @return Kayttaja.suoritaVuoro();
-     * @throws IllegalArgumentException 
      */
     
     public boolean suoritaVuoro(Pelilauta vastustajanLauta) {
@@ -44,14 +44,14 @@ public class Tietokone extends Kayttaja {
     private Sijainti maaritaSijainti(Pelilauta vastustajanLauta) {
         Alykkyys alykkyys = new Easy();
         
-        if (this.aly == Aly.IMPOSSIBLE) {
+        if (this.aly == Aly.HARD) {
+            alykkyys = new Hard();
+        }
+        
+        else if (this.aly == Aly.IMPOSSIBLE) {
             alykkyys = new Impossible();
         }
 
         return alykkyys.maaritaSijainti(vastustajanLauta);
-    }
-    
-    public Aly getAly() {
-        return this.aly;
     }
 }

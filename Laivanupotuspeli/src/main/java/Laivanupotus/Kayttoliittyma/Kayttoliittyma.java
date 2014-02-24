@@ -51,12 +51,11 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
     
+    
     private void luoMenuKomponentit() {
         valintapalkki = new ValintaPalkki(this);
         frame.setJMenuBar(valintapalkki);
     }
-    
-
     
     private void luoAloitusNakyma() {
         this.aloitusnakyma = new AloitusNakyma(this);
@@ -177,7 +176,6 @@ public class Kayttoliittyma implements Runnable {
         frame.pack();
     }
     
-    
     /**
      * Luodaan tietokoneen laivat ja asetetaan ne tietokoneen pelilaudalle.
      * Laivat eivät tule pelaajalle näkyviin.
@@ -194,6 +192,7 @@ public class Kayttoliittyma implements Runnable {
      * 
      * @param osuiko - kuvaa osuttiinko ampuessa laivaan vai ei
      */
+    
     public void pelaajaAmpui(boolean osuiko) {
         paivitaKommentti("");
         paivitaYlaOsanGrafiikat();
@@ -235,7 +234,7 @@ public class Kayttoliittyma implements Runnable {
     }
     
     /**
-     * nuku -metodi pyytää odottamaan 0,4s ennen suorituksen jatkumista.
+     * nuku -metodia pyydetään odottamaan 0,5s ennen suorituksen jatkumista.
      * Seuraavaksi tarkistetaan onko vuoron saaja pelaaja vai tietokone. Jos se on tietokone, suoritetaan tietokoneenVuoro().
      * 
      * @param kayttaja 
@@ -278,6 +277,12 @@ public class Kayttoliittyma implements Runnable {
         }
     }
     
+    /**
+     * Riippuen siitä voittiko pelaaja vai ei, tulostettaan kommentiksi eri teksti.
+     * Lopuksi estetään pääsy tietokoneen pelilautaan (jotta sinne ei voi enää ampua).
+     * @param voitettiinko 
+     */
+    
     private void peliPaattyi(boolean voitettiinko) {
         if (voitettiinko) {
             paivitaKommentti("VOITIT PELIN!!!");
@@ -289,21 +294,27 @@ public class Kayttoliittyma implements Runnable {
         alaosa.estaPaasyTietokoneenLautaan();
     }
     
+    /**
+     * Mikäli pelaaja painaa valintapalkissa olevaa "Aloita peli" -painiketta, aloitetaan uusi peli.
+     */
+    
     public void aloitaUusiPeli() {
         lopetaPeli();
         nuku(1000);
         Main.aloita();
     }
     
+    /**
+     * Pelin lopettaminen manuaalisesti valintapalkin kautta.
+     * Aluksi tuhotaan ohjeiden kuuntelija, ja erityisesti, sen luoma JFrame -olio.
+     * Sen jälkeen tuhotaan tämä frame.
+     */
+    
     public void lopetaPeli() {
         valintapalkki.tuhoaOhjeidenKuuntelija();
         frame.dispose();
     }
     
-    /**
-     * Päivitetään YlaOsanKomponentit -luokan määrittämää kommenttia.
-     * @param kommentti 
-     */
     
     public void paivitaKommentti(String kommentti) {
         ylaosa.kommenttiPaivitys(kommentti);
@@ -313,9 +324,23 @@ public class Kayttoliittyma implements Runnable {
         ylaosa.sijaintiPaivitys(sijainti);
     }
     
+    /**
+     * Annetaan AlaOsanKomponenteille tieto siitä, mikä on tämänhetkinen sijaintikentän arvo ja kerrotaan komponenteille, että
+     * ruutua on klikattu.
+     * Liittyy tietokoneen pelilaudalla olevan ruudun valitsemiseen kun se värjätään.
+     * @param sijaintiKentta 
+     */
+    
     public void ruutuValittu(String sijaintiKentta) {
         alaosa.ruutuValittu(sijaintiKentta);
     }
+    
+    /**
+     * Kun pelin alussa käyttäjä asettaa pelilaudalleen laivoja ja valitsee jonkun ruudun, tämä metodi suoritetaan.
+     * Jos sekä sijaintikentän että suuntakentän arvot eivät ole tyhjät, pyydetään alaosaa suorittamaan laivojenAsettaminen
+     * -metodi.
+     * Liittyy laivan värjäämiseen ennen sen asetusta.
+     */
     
     public void LaivojenAsetusKomponenttejaKlikattu() {
         String sijaintiKenttaText = ylaosa.getSijaintiString();
@@ -332,9 +357,8 @@ public class Kayttoliittyma implements Runnable {
         ylaosa.update(ylaosa.getGraphics());
     }
     
-    
     /**
-     * Odota 0,1 * n (s).
+     * Odota n/1000 (s).
      */
     
     private void nuku(int n) {
@@ -345,6 +369,10 @@ public class Kayttoliittyma implements Runnable {
         }
     }
     
+    /**
+     * Kun valittu vaikeusaste impossible, vastustaja tuhoaa laivat pikapikaa!
+     * @param aly 
+     */
     private void nuku(Aly aly) {
         if (aly == Aly.IMPOSSIBLE) {
             nuku(150);

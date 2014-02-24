@@ -8,6 +8,13 @@ import Laivanupotus.Sovelluslogiikka.Ruutu;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
 import Laivanupotus.Tyokalut.Sijainti;
 
+/**
+ *  Tämän luokan tarkoitus oli alun perin piirtää tekstikäyttöliittymälle pelilaudat, mutta päädyin pitämään sen mukana,
+ *  sillä sen avulla sain graafiseen käyttöliittymään siirtyessä määritettyä helposti sen, minkä värinen JButton -olion,
+ *  joka vastaa jotakin pelilaudan ruutua, pitäisi olla.
+ * 
+ *  Luokka siis palauttaa merkin (char -arvon), jota GraafinenPelilauta hyödyntää.
+ */
 
 public class PelilaudanPiirtaja {
     Kayttaja kayttaja;
@@ -27,6 +34,14 @@ public class PelilaudanPiirtaja {
         return seuraavaMerkki(sijainti, laivojenSijainnit);
     }    
     
+    /**
+     * Selvittää mikä on se merkki, mikä liittyy pelilaudalla olevaan ruutuun jolla on Sijainti sijainti, ja
+     * palauttaa sen.
+     * 
+     * @param sijainti
+     * @param laivojenSijainnit
+     * @return 
+     */
     private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
         Pelilauta pelilauta = kayttaja.getPelilauta();
         

@@ -9,6 +9,11 @@ import Laivanupotus.Sovelluslogiikka.Kayttaja;
 import Laivanupotus.Tyokalut.SijainninMaarittaja;
 import Laivanupotus.Tyokalut.Sijainti;
 
+/**
+ * Luokka toimii "AMMU" nappulan kuuntelijana ja sen tarkoituksena on "viestittää" käyttöliittymälle
+ * tieto siitä että nappulaa on painettu.
+ */
+
 public class AmmunKuuntelija implements ActionListener {
     private Kayttoliittyma kayttoliittyma;
     private JTextField sijaintiKentta;
@@ -23,6 +28,11 @@ public class AmmunKuuntelija implements ActionListener {
         this.nappula = nappula;
     }
     
+    /**
+     * Mikäli keskeytystä ei Kayttaja olion suoritaVuoro metodin aikana tule, kayttoliittymälle kerrotaan että pelaaja ampui.
+     * Jos tulee, pelaaja saa jatkaa sillä hän ei ollut valinnut ammuttavaa ruutua, tai yritti ampua jo ammuttuun ruutuun.
+     * @param ae  
+     */
     @Override
     public void actionPerformed(ActionEvent ae) { 
         nappula.setEnabled(false);
