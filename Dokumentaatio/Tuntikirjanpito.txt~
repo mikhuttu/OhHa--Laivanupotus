@@ -102,3 +102,31 @@
 -1h
 -Kommentti- ja sijaintikenttien päivitys toimii halutulla tavalla.
 -Pelistä löytynyt bugi ampumiseen liittyen. Dokumentoitu luokan "AmmunKuuntelija" alle.
+
+19.2.2014
+-1h
+-Lassin kanssa korjattiin vähän bugeja.
+
+22.2.2014
+-4h
+-Valintapalkki luotu, johon asetettu komponentit uuden pelin aloittamista ja pelin lopettamista varten
+-Lisäksi asetettu toinen komponentti, jonka tarkoitus on tulostaa pelin käyttöohjeet.
+-Ohjeiden tulostaminen toimii melko hyvin. Ainoa ongelma sen kanssa on se että käyttöliittymä näyttää napin olevan painettu ennen kuin painaa jotain muuta kohtaa näytöllä.
+
+23.2.2014
+-2h
+-Ruutujen valitseminen toimii nyt käyttäjäystävällisemmin. Sijaintipalkki ylhäällä on täysin turha, mutta siitä ei ole hankkiuduttu eroon, koska se ei haittaakaan mitään.
+
+24.2.2014
+-1h
+-Muutamia tekstidokumentteja päivitetty/kirjoitettu lopullista palautusta varten.
+-Javadoc päivetty, samoin luokkakaavio.
+
+Mitä uupuu?
+-Hard -mode
+-Ehkä ton "Ohjeet" bugin korjaus
+-Javadoc uusien toiminnallisuuksien osalta
+-Luokkakaavion päivitys
+-Ehkä joku uus sekvenssikaavio
+-Testien checkaaminen läpi
+-Pieni testausdokumentaatio ?

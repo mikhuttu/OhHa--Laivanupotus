@@ -1,4 +1,4 @@
-package Laivanupotus.Kayttoliittyma.Alaosa;
+package Laivanupotus.Tyokalut;
 
 import java.util.ArrayList;
 import Laivanupotus.Sovelluslogiikka.Kayttaja;
@@ -6,7 +6,6 @@ import Laivanupotus.Sovelluslogiikka.Laiva;
 import Laivanupotus.Sovelluslogiikka.Pelilauta;
 import Laivanupotus.Sovelluslogiikka.Ruutu;
 import Laivanupotus.Sovelluslogiikka.Tietokone;
-import Laivanupotus.Tyokalut.Sijainti;
 
 /**
  *  Tämän luokan tarkoitus oli alun perin piirtää tekstikäyttöliittymälle pelilaudat, mutta päädyin pitämään sen mukana,
@@ -22,15 +21,10 @@ public class PelilaudanPiirtaja {
     public PelilaudanPiirtaja(Kayttaja kayttaja) {
         this.kayttaja = kayttaja;
     }
-    
-    private ArrayList<Sijainti> haeLaivojenOsienSijainnit() {
-        Pelilauta pelilauta = this.kayttaja.getPelilauta();
-        return pelilauta.haeLaivojenOsienSijainnit();
-    }
-        
+
     public char palautaSeuraavaMerkki(Sijainti sijainti) {
         
-        ArrayList<Sijainti> laivojenSijainnit = haeLaivojenOsienSijainnit();
+        ArrayList<Sijainti> laivojenSijainnit = kayttaja.getPelilauta().haeLaivojenOsienSijainnit();
         return seuraavaMerkki(sijainti, laivojenSijainnit);
     }    
     
@@ -43,9 +37,8 @@ public class PelilaudanPiirtaja {
      * @return 
      */
     private char seuraavaMerkki(Sijainti sijainti, ArrayList<Sijainti> laivojenSijainnit) {
-        Pelilauta pelilauta = kayttaja.getPelilauta();
         
-        Ruutu ruutu = pelilauta.haeRuutu(sijainti);
+        Ruutu ruutu = kayttaja.getPelilauta().haeRuutu(sijainti);
         char tulostettava = '~';
 
         if (!tulostuksessaTietokoneenLauta()) {
@@ -71,6 +64,10 @@ public class PelilaudanPiirtaja {
     }
     
     private boolean tulostuksessaTietokoneenLauta() {
+        if (kayttaja == null) {     // halutaan nähdä pelaajan lauta Hard-moden kautta.
+            return true;
+        }
+        
         return kayttaja.getClass() == Tietokone.class;
     }
     
@@ -84,7 +81,7 @@ public class PelilaudanPiirtaja {
     }
     
     private boolean onkoSijainnissaOlevaLaivaTuhottu(Sijainti sijainti) throws IllegalArgumentException {
-        Pelilauta pelilauta = this.kayttaja.getPelilauta();
+        Pelilauta pelilauta = kayttaja.getPelilauta();
         
         for (Laiva laiva : pelilauta.getLaivat()) {
             if (laiva.osuiko(sijainti)) {

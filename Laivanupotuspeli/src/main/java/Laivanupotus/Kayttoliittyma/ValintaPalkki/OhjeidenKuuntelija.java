@@ -46,7 +46,7 @@ public class OhjeidenKuuntelija implements MenuListener {
         
         if (!ohjeNaytto.isVisible()) {
             ohjeNaytto = new JFrame("Käyttöohjeet");
-            ohjeNaytto.setPreferredSize(new Dimension(600, 180));
+            ohjeNaytto.setPreferredSize(new Dimension(1040, 220));
             ohjeNaytto.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             
             tulostaOhjeet(ohjeNaytto.getContentPane());

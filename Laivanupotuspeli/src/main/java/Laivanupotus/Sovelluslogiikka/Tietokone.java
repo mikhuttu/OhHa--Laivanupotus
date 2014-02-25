@@ -12,9 +12,25 @@ import Laivanupotus.Tyokalut.Sijainti;
 
 public class Tietokone extends Kayttaja {
     private final Aly aly;
+    private Alykkyys alykkyys;
     
     public Tietokone(Aly aly) {
         this.aly = aly;
+        alustaAlykkyys();
+    }
+    
+    private void alustaAlykkyys() {
+        if (this.aly == Aly.EASY) {
+            alykkyys = new Easy();
+        }
+        
+        else if (this.aly == Aly.HARD) {
+            alykkyys = new Hard();
+        }
+        
+        else {
+            alykkyys = new Impossible();
+        }
     }
     
     public Aly getAly() {
@@ -42,16 +58,6 @@ public class Tietokone extends Kayttaja {
      */
     
     private Sijainti maaritaSijainti(Pelilauta vastustajanLauta) {
-        Alykkyys alykkyys = new Easy();
-        
-        if (this.aly == Aly.HARD) {
-            alykkyys = new Hard();
-        }
-        
-        else if (this.aly == Aly.IMPOSSIBLE) {
-            alykkyys = new Impossible();
-        }
-
         return alykkyys.maaritaSijainti(vastustajanLauta);
     }
 }

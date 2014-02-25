@@ -33,6 +33,7 @@ public class AloitusNakyma extends JPanel {
         
         JButton easy = new JButton("EASY");
         JButton hard = new JButton("HARD");
+        hard.setEnabled(false);
         JButton impossible = new JButton("IMPOSSIBLE");
         
         easy.addActionListener(kuuntelija);

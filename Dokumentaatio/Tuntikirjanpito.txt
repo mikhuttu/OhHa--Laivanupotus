@@ -117,14 +117,17 @@
 -2h
 -Ruutujen valitseminen toimii nyt k‰ytt‰j‰yst‰v‰llisemmin. Sijaintipalkki ylh‰‰ll‰ on t‰ysin turha, mutta siit‰ ei ole hankkiuduttu eroon, koska se ei haittaakaan mit‰‰n.
 
-
 24.2.2014
 -1h
 -Muutamia tekstidokumentteja p‰ivitetty/kirjoitettu lopullista palautusta varten.
 -Javadoc p‰ivetty, samoin luokkakaavio.
 
+25.2.2014
+-2h
+-Hard -vaikeusasteen toteutusta yritetty, mutta osoittautui yksinkertaisesti liian haastavaksi varsinkin yritt‰m‰ll‰ni hajautusmenetelm‰ll‰.
+ Pelipuu olisi varmaan toiminut, mutta sellaisten ohjelmointia ei ole viel‰ opeteltu.
+
 Mit‰ uupuu?
--Hard -mode
 -Ehk‰ ton "Ohjeet" bugin korjaus
 -Javadoc uusien toiminnallisuuksien osalta
 -Luokkakaavion p‰ivitys

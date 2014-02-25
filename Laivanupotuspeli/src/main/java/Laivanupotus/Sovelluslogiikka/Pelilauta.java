@@ -182,7 +182,7 @@ public class Pelilauta {
         
         for (int i = 0; i < this.laivat.size(); i++) {
             Laiva laiva = this.laivat.get(i);
-            
+              
             for (int j = 0; j < laiva.getKoko(); j++) {     
                 laivojenSijainnit.add(laiva.haeLaivanOsanSijainti(j));
             }

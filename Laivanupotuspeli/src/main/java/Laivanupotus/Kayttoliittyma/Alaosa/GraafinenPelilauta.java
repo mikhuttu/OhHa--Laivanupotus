@@ -1,5 +1,6 @@
 package Laivanupotus.Kayttoliittyma.Alaosa;
 
+import Laivanupotus.Tyokalut.PelilaudanPiirtaja;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
