@@ -1,0 +1,132 @@
+15.1.2014
+-6h
+-Githubin ja Git Bashin kanssa sekoilu.
+-Alustavan projektin toiminnalisuuden suunnitteleminen.
+-Luokkien Laiva, Sijainti ja enum Suunta ohjelmointi.
+
+16.1.2014
+-5h
+-Alustava määrittelyvaiheen luokkakaavio
+-Luokat Pelilauta, Ruutu ja Pelaaja lisätty Sovelluslogiikkaan.
+--Varsinkin Pelaajan osalta toiminnallisuudet vielä kesken.
+-"Ohjaus-pakkaus" luotu ja sinne on lisätty luokat Tulostaja ja Peli.
+
+22.1.2014
+-3h
+-Tulostaja-luokka poistettu
+-Uusia toiminnallisuuksia sovelluslogiikkaan.
+-Tekstikäyttöliittymän suunnittelu ja aloitus.
+
+23.1.2014
+-5h
+-Laivojen lisääminen pelilaudalle toteutettu.
+-Luokkien toiminnallisuuksia muutettu jonkin verran.
+-Testit korjattu toimimaan uusien toiminnallisuuksien mukaan.
+
+25.1.2014
+-1h
+-Pelilaudan tulostaminen tekstikäyttöliittymällä toteutettu.
+
+26.1.2014
+-2h
+-Vuoropohjaisuuden toteuttaminen aloitettu.
+-Peliä voi nyt pelata siten että voi ampua omalla pelilaudalla oleviin pisteisiin ja peli päättyy kun omat laivat on tuhottu.
+
+28.1.2014
+-1h
+-Koodia muokattu paremmin luettavaksi ja pelilaudan tulostusalgoritmiä parannettu toimimaan nopeammin.
+-Muutamia uusia testejä kirjoitettu.
+-Ohjaus-pakkauksen testausta yritetty, mutta huomasin että siinä ei ole oikeastaan mitään järkeä, koska niistä monien toiminta riippuvaista syötteen lukemisesta.
+
+1.2.2014
+-6h
+-Käyttöliittymä -luokkaa muokattu siten että suuri osa toiminnallisuudesta delegoitu muualle.
+-Peli -luokkaa muokattu siten että Peli ei enää pyydä "Pelaajaa" suorittamaan vuoroa. Sen sijaan, se kysyy abstractin luokan "Kayttaja" toteuttamaa oliota suorittamaan vuoronsa.
+-Pelaaja ja Tietokone toteuttavat abstraktin luokan "Kayttaja". Tietokone tietää "Pelaajan" (ja sitä kautta Pelilautansa) ja sille on määritetty "Äly".
+-Pakkaus "Sovelluslogiikka.Tietokonealy" kehitetty, jonne on lisätty kaksi erilaista "Alykkyyttä" - "Arpoja" sekä "Cheater".
+
+2.2.2014
+-5h
+-Uusia toiminnallisuuksia lisätty siten että peli näyttäisi toimivan juuri niin kuin sen tekstikäyttöliittymällä pitääkin!
+
+-Kaikki testaus uusia muutoksia varten vielä tekemättä. Seuraavana vuorossa testit ja sen jälkeen graafinen käyttöliittymä. Lopuksi mahdollisuus vielä luoda uusi vaikeusaste kahden muun rinnalle.
+
+4.2.2014
+-5h
+-Mielekkäät testit uusien toiminnallisuuksien pohjalle kirjoitettu.
+-Javadocin aloitus
+
+5.2.2014
+-1h
+-Javadocia eteenpäin
+-Luokkakaavio päivitetty vastaamaan nykytilannetta
+
+6.2.2014
+-4h
+-Graafisen käyttöliittymän toteutus aloitettu ja muutama käyttöliittymäluokka luotu
+-Kolme sekvenssikaaviota piirretty
+
+8.2.2014
+-2h
+-Käyttöliittymän yläkomponentti alkaa tulla pikkuhiljaa valmiiksi. Ongelmana vielä yläkomponentin vaihto ilman bugeja, kun 4 laivaa on pelilaudalle asetettu.
+
+9.2.2014
+-5h
+-Yläkomponentin vaihto-ongelmasta päästy eroon pienellä ohjelmointikikalla - poistamalla komponentti aina juuri ennen uuden asettamista, jonka jälkeen kutsuttu frame.pack().
+-AmpumisKomponentit on nyt myös toteutettu toimimaan niin kuin pitääkin.
+-Seuraavana vuorossa vuoropohjaisuus ja pelilautojen tulostaminen osaksi käyttöliittymää.
+
+10.2.2014
+-2h
+-Peli vaikuttaa bugittomalta ja se toimii sekä Easy että Impossible -vaikeusasteilla.
+-Käyttöliittymään tulee lisätä vielä graafiset pelilaudat (ja koodata niiden toiminnallisuus) sekä luoda lopetusnäkymä pelin päättymisen jälkeen
+-Näiden jälkeen tarkoituksena kirjoittaa ainakin vielä oikea tekoäly
+
+11.2.2014
+-3h
+-Graafiset pelilaudat on nyt käyttöliittymään lisätty. Niistä puuttuu vielä kuuntelijat, ja ne ovat muutenkin aika "heikohkon" näköiset.
+
+13.2.2014
+-5h
+-Koodia refaktoroitu ja muutamista luokista "hankkiduttu eroon". Nykyään ei mm. ole olemassa pelaaja-luokkaa enää ollenkaan.
+-Aihemäärittely, testit, javadoc ja luokkakaavio tehty vastaamaan nykytilannetta.
+-Kolme nykytilaa vastaavaa sekvenssikaaviota piirretty (joista yksi toisaalta ei vielä toteutettu).
+
+17.2.2014
+-2h
+-Alaosankomponentit toteutettu uudella tavalla JButtoneja käyttäen.
+-Pelissä on vielä muutama pieni bugi kommentti- ja sijaintikenttien päivittämisen suhteen, jotka voisit fixata.
+-Tämän jälkeen toteutettava vielä lopetusnäkymä ja peli on valmis.
+
+18.2.2014
+-1h
+-Kommentti- ja sijaintikenttien päivitys toimii halutulla tavalla.
+-Pelistä löytynyt bugi ampumiseen liittyen. Dokumentoitu luokan "AmmunKuuntelija" alle.
+
+19.2.2014
+-1h
+-Lassin kanssa korjattiin vähän bugeja.
+
+22.2.2014
+-4h
+-Valintapalkki luotu, johon asetettu komponentit uuden pelin aloittamista ja pelin lopettamista varten
+-Lisäksi asetettu toinen komponentti, jonka tarkoitus on tulostaa pelin käyttöohjeet.
+-Ohjeiden tulostaminen toimii melko hyvin. Ainoa ongelma sen kanssa on se että käyttöliittymä näyttää napin olevan painettu ennen kuin painaa jotain muuta kohtaa näytöllä.
+
+23.2.2014
+-2h
+-Ruutujen valitseminen toimii nyt käyttäjäystävällisemmin. Sijaintipalkki ylhäällä on täysin turha, mutta siitä ei ole hankkiuduttu eroon, koska se ei haittaakaan mitään.
+
+24.2.2014
+-1h
+-Muutamia tekstidokumentteja päivitetty/kirjoitettu lopullista palautusta varten.
+-Javadoc päivetty, samoin luokkakaavio.
+
+25.2.2014
+-2h
+-Hard -vaikeusasteen toteutusta yritetty, mutta osoittautui yksinkertaisesti liian haastavaksi varsinkin yrittämälläni hajautusmenetelmällä.
+ Pelipuu olisi varmaan toiminut, mutta sellaisten ohjelmointia ei ole vielä opeteltu.
+
+27.2.2014
+-2h
+-Ohjelman valmisteleminen palautusta varten.

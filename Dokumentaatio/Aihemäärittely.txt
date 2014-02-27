@@ -1,0 +1,37 @@
+Aihe: Laivanupotus
+------------------
+Vuoropohjainen peli, jossa kaksi pelaajaa - käyttäjä ja tietokone.
+Pelin alussa käyttäjälle annetaan mahdollisuus asettaa omalle pelialueelleen 4 erikokoista laivaa. Laivat voivat
+olla joko pysty- tai vaakasuunnassa. (Sama operaatio tehdään tietokoneen laivoille sattumanvaraisesti.)
+Pelaajan laivat tulevat pelikentälle näkyviin mustina neliöinä, ja ne muuttuvat punaisiksi, jos tietokone osuu niihin, ja
+sinisiksi mikäli ne on tuhottu.
+
+Peli menee eteenpäin siten että pelaaja klikkaa graafisella pelilaudalla olevaa JButton -nappulaa, johon haluaa ampua.
+Tällöin asetetaan "ammuttava sijainti" kenttään JButton nappulaa vastaava koordinaatti. Ampuminen tapahtuu painamalla
+tämän jälkeen "AMMU" painiketta.
+Mikäli ammuttavassa sijainnissa on laiva, se väritetään uudelleen punaiseksi, ja jos ei ole, vaaleansiniseksi (näyttäen että
+siihen ruutuun on jo ammuttu).
+
+Vuoropohjaisuus toteutetaan siten että mikäli pelaaja osuu ampuessaan laivaan, pelivuoro päättyy. Jos ei osu, alkaa tietokoneen
+vuoro, joka kestää niin kauan kuin tietokone osuu peräkkäin pelaajan pelilaudalla oleviin laivoihin. Tietokoneen vuoron päätyttyä
+pelaajalle annetaan mahdollisuus ampua uudestaan.
+
+Peli jatkuu näin eteenpäin siihen saakka, kunnes toisen laivat on täysin tuhottu. *koska laivoja aina saman verran ja
+ne ovat aina samankokoisia, yksi int-muuttuja riittää määrittämään onko laivat tuhottu vai ei.*
+Kun peli on päättynyt, kysytään pelaajalta haluaako hän aloittaa uuden pelin.
+
+
+
+Käyttäjät: Pelaaja, tietokone <actor>
+
+Käyttäjien toiminnot:
+1. Aseta laiva
+-Laivaa ei voi asettaa toisen päälle tai siten että se menee ulos pelikentältä
+-Tietokone asettaa laivat sattumanvaraisesti pelikentälle
+
+2. Ammu
+-Ampuminen ei onnistu mikäli yritetään ampua jo ammuttuun ruutuun tai ammuttava sijainti ei ole valittu.
+
+3. Valitse ammuttava sijainti
+-Pelaaja klikkaa vastustajan pelilaudalla olevaa JButton -oliota (, jonka kuuntelija päivittää sijaintikentän sisällön).
+-Tietokone valitsee ammuttavan sijainnin riippuen tekoälystään.
