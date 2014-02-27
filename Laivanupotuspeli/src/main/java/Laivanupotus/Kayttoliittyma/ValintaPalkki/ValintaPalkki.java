@@ -18,6 +18,7 @@ public class ValintaPalkki extends JMenuBar {
         this.add(tiedosto);
         
         JMenu ohjeet = new JMenu("Ohjeet");
+        
         this.ohjeidenKuuntelija = new OhjeidenKuuntelija(ohjeet);
         ohjeet.addMenuListener(ohjeidenKuuntelija);
         this.add(ohjeet);

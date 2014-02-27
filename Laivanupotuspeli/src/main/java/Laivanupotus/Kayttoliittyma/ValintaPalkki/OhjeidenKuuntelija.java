@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JTextArea;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.WindowConstants;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 /**
  * OhjeidenKuuntelija toimii kuuntelijana valintapalkissa olevalle "Ohjeet" JMenu -painikkeelle.
