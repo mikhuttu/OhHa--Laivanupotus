@@ -1,0 +1,11 @@
+﻿Pelissä on tarkoituksena asettaa ensin omalle pelilaudalle 4 laivaa, jonka jälkeen aletaan ampua toisella
+pelilaudalla olevia tietokoneen laivoja, jotka tietokone on asettanut sinne sattumanvaraisesti.
+
+Mikäli laivaan osuu, saa uuden vuoron. Sama pätee myös tietokonepelaajalle.
+
+Kun toinen pelaajista onnistuu tuhoamaan kaikki vastustajansa laivat, peli päättyy.
+
+
+Huomautus:
+Pelissä piti olla mukana tekoälyllä toteutettu Hard-mode, mutta oma osaamisentaso ei siihen yksinkertaisesti riittänyt, vaikka pitkälle suunnittelussa pääsinkin.
+Hard-moden koodia on n. 200 riviä olemassa luokassa /Sovelluslogiikka/tietokonealy/Hard.java.

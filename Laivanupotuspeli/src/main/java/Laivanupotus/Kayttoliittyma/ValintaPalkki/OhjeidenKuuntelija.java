@@ -31,7 +31,7 @@ public class OhjeidenKuuntelija implements MenuListener {
     
     private void luoLukija() {
         try {
-            lukija = new Scanner(new File("src/Käyttöohjeet.txt"), "UTF-8");
+            lukija = new Scanner(new File("src/Kayttoohjeet.txt"), "UTF-8");
         }
         catch (FileNotFoundException e) {}
     }
