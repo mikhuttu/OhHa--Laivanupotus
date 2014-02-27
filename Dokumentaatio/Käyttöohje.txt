@@ -1,3 +1,0 @@
-Pelin sisällä on mahdollisuus lukea ohjeet pelin pelaamista varten, joten tarkempi dokumentointi tänne ei ole tarpeen.
-
-Pelin (eli jar-tiedoston) avaaminen onnistuu mm. Ubuntun terminalia käyttäen.
